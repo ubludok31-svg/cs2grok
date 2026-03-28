@@ -3,82 +3,80 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Stream Case Game v10</title>
+  <title>Stream Case Game v12</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div class="bg-fx" aria-hidden="true">
+    <div class="glow glow-1"></div>
+    <div class="glow glow-2"></div>
     <div class="spark spark-1"></div>
     <div class="spark spark-2"></div>
     <div class="spark spark-3"></div>
-    <div class="juice juice-1"></div>
-    <div class="juice juice-2"></div>
   </div>
 
   <div class="app-shell">
     <header class="topbar">
-      <div class="hero-copy">
-        <div class="eyebrow">ZALIVA.PL</div>
-        <h1>
-          <span class="hero-line-1">ZALIVA.PL — ВЫБИРАЙ КЕЙС И ПИШИ В ЧАТ</span>
-          <span class="hero-line-2">ЗАХОДИ В ОПИСАНИЕ ПРОФИЛЯ</span>
+      <div class="brand-copy">
+        <div class="brand-kicker">ZALIVA.PL</div>
+        <h1 class="brand-title">
+          <span class="brand-line">ZALIVA.PL — ХОЧЕШЬ ПРИЗЫ ПО 🇵🇱 🇪🇺 ?</span>
+          <span class="brand-line">ЗАХОДИ В ОПИСАНИЕ ПРОФИЛЯ</span>
         </h1>
       </div>
       <div class="topbar-actions">
-        <button id="openAdminBtn" class="ghost-btn">Админ-панель</button>
+        <button id="openAdminBtn" class="ghost-btn admin-btn" type="button">Админ-панель</button>
       </div>
     </header>
 
     <section class="round-panel" id="roundPanel">
-      <div class="round-main round-main-centered">
-        <div class="round-badge" id="stageTypeBadge">Обычный раунд</div>
-        <div class="round-title-wrap round-title-wrap-centered">
+      <div class="round-header-center">
+        <div class="stage-badge" id="stageTypeBadge">Обычный этап</div>
+        <div class="round-title-block">
           <h2 id="currentStageTitle">Раунд 1</h2>
-          <span id="stageCounter" class="stage-counter">1 / 7</span>
+          <div id="stageCounter" class="stage-counter">1 / 7</div>
         </div>
-        <p id="stageDescription" class="round-subtitle">Обычный этап · Выбирай кейс по номеру · Призовой вкус — пиши в чат.</p>
+        <p id="stageDescription" class="stage-description">Обычный этап · Выбирай кейс по номеру · Призовой вкус — пиши в чат.</p>
       </div>
 
-      <div class="round-controls">
-        <button id="newGameBtn" class="ghost-btn">Новая игра</button>
-        <button id="finishStageBtn" class="ghost-btn">Завершить этап</button>
-        <button id="prevStageBtn" class="ghost-btn">Назад</button>
-        <button id="nextStageBtn">Следующий этап</button>
+      <div class="stage-tools-row">
+        <label class="stage-jump">
+          <span>Этап</span>
+          <select id="stageJumpSelect"></select>
+        </label>
+        <div class="round-controls">
+          <button id="newGameBtn" class="ghost-btn small-btn" type="button">Новая игра</button>
+          <button id="finishStageBtn" class="ghost-btn small-btn" type="button">Завершить этап</button>
+          <button id="prevStageBtn" class="ghost-btn small-btn" type="button">Назад</button>
+          <button id="nextStageBtn" class="small-btn" type="button">Следующий этап</button>
+        </div>
       </div>
     </section>
 
-    <section class="stage-strip" id="stageStrip"></section>
+    <section id="stageStrip" class="stage-strip" aria-label="Список этапов"></section>
 
     <section class="viewer-panel">
       <div class="viewer-panel-head">
-        <div>
-          <h3>Что может выпасть в этом раунде?</h3>
-          <p id="poolNote">Для получения промика нужно собрать 2 очка в течение одного раунда.</p>
-        </div>
+        <h3>Что может выпасть в этом раунде?</h3>
+        <p id="poolNote" class="pool-note">Для получения промика нужно собрать 2 очка в течение одного раунда.</p>
       </div>
       <div id="poolPreview" class="pool-preview"></div>
     </section>
 
     <main class="cases-section">
-      <div class="section-head compact-head">
-        <div>
-          <h3>Кейсы</h3>
-          <p>Открытые кейсы остаются открытыми до обновления страницы. После обновления страницы снова закрываются только кейсы, а настройки админки остаются сохранёнными.</p>
-        </div>
-      </div>
       <div id="casesGrid" class="cases-grid"></div>
     </main>
   </div>
 
   <div id="rouletteModal" class="modal hidden" aria-hidden="true">
-    <div class="modal-backdrop" id="closeRouletteBackdrop"></div>
-    <div class="modal-content modal-content-wide">
+    <div id="closeRouletteBackdrop" class="modal-backdrop"></div>
+    <div class="modal-content roulette-modal-content">
       <div class="modal-header">
         <div>
           <h3 id="modalTitle">Открытие кейса</h3>
-          <p id="modalHint">Предмет выбирается случайно из наполнения этого кейса.</p>
+          <p id="modalHint">Нажми пробел, чтобы сразу докрутить до результата.</p>
         </div>
-        <button id="closeModalBtn" class="icon-btn" aria-label="Закрыть">✕</button>
+        <button id="closeModalBtn" class="icon-btn" type="button" aria-label="Закрыть">✕</button>
       </div>
 
       <div class="roulette-wrapper">
@@ -87,24 +85,25 @@
       </div>
 
       <div id="resultCard" class="result-card hidden"></div>
+
       <div class="modal-actions">
-        <button id="resultCloseBtn">Закрыть</button>
+        <button id="resultCloseBtn" type="button">Закрыть</button>
       </div>
     </div>
   </div>
 
   <div id="adminModal" class="modal hidden" aria-hidden="true">
-    <div class="modal-backdrop" id="closeAdminBackdrop"></div>
+    <div id="closeAdminBackdrop" class="modal-backdrop"></div>
     <div class="modal-content admin-modal-content">
       <div class="modal-header admin-header">
         <div>
           <h3>Админ-панель</h3>
-          <p id="adminHint">Здесь сохраняется всё наполнение этапов. После обновления страницы сбрасываются только открытые кейсы, а не настройки.</p>
+          <p>После обновления страницы сбрасываются только открытые кейсы. Все настройки этапов и предметов сохраняются.</p>
         </div>
         <div class="modal-header-actions">
-          <button id="importConfigBtn" class="ghost-btn">Импорт config.json</button>
-          <button id="saveConfigBtn" class="ghost-btn">Скачать config.json</button>
-          <button id="closeAdminBtn" class="icon-btn" aria-label="Закрыть">✕</button>
+          <button id="importConfigBtn" class="ghost-btn" type="button">Импорт config.json</button>
+          <button id="saveConfigBtn" class="ghost-btn" type="button">Скачать config.json</button>
+          <button id="closeAdminBtn" class="icon-btn" type="button" aria-label="Закрыть">✕</button>
         </div>
       </div>
 
@@ -113,31 +112,26 @@
         <button id="extraTabBtn" class="tab-btn" type="button">Экстра-этапы</button>
       </div>
 
-      <section class="editor-section embedded-editor">
+      <section class="editor-section">
         <div class="editor-toolbar">
           <label>
-            Этап:
+            Этап
             <select id="stageSelector"></select>
           </label>
           <label>
-            Кейс:
+            Кейс
             <select id="caseSelector"></select>
           </label>
-          <label class="force-pick-wrap">
-            Следующее выпадение:
+          <label>
+            Следующее выпадение
             <select id="forcePickSelector"></select>
           </label>
-          <button id="addItemBtn">Добавить предмет</button>
-          <button id="copyToAllBtn" class="ghost-btn">Кейс → во все кейсы этапа</button>
-          <button id="copyStageTypeBtn" class="ghost-btn">Этап → во все этапы этого типа</button>
-          <button id="resetCurrentStageBtn" class="ghost-btn">Закрыть кейсы этапа</button>
-          <button id="resetAllStagesBtn" class="ghost-btn danger">Сбросить всю игру</button>
+          <button id="addItemBtn" type="button">Добавить предмет</button>
+          <button id="copyToAllBtn" class="ghost-btn" type="button">Кейс → во все кейсы этапа</button>
+          <button id="copyStageTypeBtn" class="ghost-btn" type="button">Этап → во все этапы этого типа</button>
+          <button id="resetCurrentStageBtn" class="ghost-btn" type="button">Закрыть кейсы этапа</button>
+          <button id="resetAllStagesBtn" class="ghost-btn danger" type="button">Сбросить всю игру</button>
         </div>
-
-        <div class="admin-note">
-          Выбери предмет в поле «Следующее выпадение», если хочешь вручную задать, что выпадет в следующем открытии. После одного открытия принудительный выбор автоматически сбрасывается обратно на случайный режим.
-        </div>
-
         <div id="itemsEditor" class="items-editor"></div>
       </section>
     </div>
@@ -148,14 +142,11 @@
   <template id="caseCardTemplate">
     <button class="case-card" type="button">
       <div class="case-badge"></div>
-      <div class="case-visual" aria-hidden="true">
-        <div class="case-glow"></div>
-        <div class="case-handle"></div>
+      <div class="case-box" aria-hidden="true">
         <div class="case-lid"></div>
         <div class="case-body"></div>
-        <div class="case-side case-side-left"></div>
-        <div class="case-side case-side-right"></div>
         <div class="case-lock"></div>
+        <div class="case-handle"></div>
       </div>
       <div class="case-name"></div>
       <div class="case-meta"></div>
@@ -178,7 +169,7 @@
           <input data-field="file" type="file" accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp" />
         </label>
         <label>
-          Шанс / вес
+          Вес
           <input data-field="weight" type="number" min="1" step="1" value="1" />
         </label>
         <label>
@@ -197,9 +188,9 @@
           Подпись для зрителей
           <select data-field="effect">
             <option value="empty">Пустой вкус</option>
-            <option value="plus">Плюс одно очко</option>
-            <option value="auto">Авто плюс 1 — плюс одно очко</option>
-            <option value="bomb">Бомба — сброс всех очков</option>
+            <option value="plus">Призовой вкус</option>
+            <option value="auto">АВТО +1</option>
+            <option value="bomb">Бомба</option>
           </select>
         </label>
       </div>
