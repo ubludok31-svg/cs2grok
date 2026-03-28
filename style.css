@@ -30,9 +30,9 @@ body {
 }
 body.extra-theme {
   background:
-    radial-gradient(circle at 14% 0%, rgba(255, 211, 128, 0.16), transparent 18%),
-    radial-gradient(circle at 85% 5%, rgba(255, 189, 74, 0.14), transparent 18%),
-    linear-gradient(180deg, #191001, #281804 36%, #0b1524 100%);
+    radial-gradient(circle at 14% 0%, rgba(255, 211, 128, 0.18), transparent 18%),
+    radial-gradient(circle at 85% 5%, rgba(255, 189, 74, 0.15), transparent 18%),
+    linear-gradient(180deg, #211505, #2f1b06 36%, #0b1524 100%);
 }
 button, input, select { font: inherit; }
 button {
@@ -75,11 +75,7 @@ label { display: grid; gap: 6px; font-size: 13px; color: var(--muted); }
 .glow-a { width: 240px; height: 240px; left: -50px; top: -40px; background: rgba(86, 145, 255, 0.28); }
 .glow-b { width: 260px; height: 260px; right: -60px; top: 20%; background: rgba(251, 195, 83, 0.18); }
 
-.app {
-  max-width: 1360px;
-  margin: 0 auto;
-  padding: 20px;
-}
+.app { max-width: 1360px; margin: 0 auto; padding: 20px; }
 .panel {
   background: var(--panel);
   border: 1px solid var(--line);
@@ -89,30 +85,33 @@ label { display: grid; gap: 6px; font-size: 13px; color: var(--muted); }
 }
 .topbar {
   padding: 18px 20px;
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr auto;
   gap: 16px;
   align-items: center;
-  justify-content: space-between;
 }
-.brand-wrap { text-align: center; flex: 1; }
+.brand-wrap { text-align: center; min-width: 0; }
 .brand-title {
   margin: 0;
-  font-size: clamp(24px, 3vw, 34px);
-  letter-spacing: 0.06em;
+  font-size: clamp(20px, 2.5vw, 30px);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
 }
 .brand-subtitle {
-  margin: 6px 0 0;
-  color: var(--muted);
-  font-weight: 700;
+  margin: 8px 0 0;
+  color: #fff1b6;
+  font-size: clamp(16px, 2vw, 22px);
+  font-weight: 900;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
 }
 .hero {
   margin-top: 16px;
   padding: 22px 24px 18px;
-  display: grid;
-  gap: 14px;
-  justify-items: center;
-  text-align: center;
+  position: relative;
+  min-height: 168px;
 }
+.hero-copy { text-align: center; }
 .stage-badge {
   display: inline-flex;
   align-items: center;
@@ -136,18 +135,22 @@ body.extra-theme .stage-badge {
   margin: 12px 0 6px;
   font-size: clamp(34px, 5vw, 56px);
   line-height: 1;
+  text-align: center;
 }
 .stage-description {
   margin: 0;
   color: #d6e4ff;
   font-size: clamp(15px, 2.1vw, 20px);
   font-weight: 800;
+  text-align: center;
 }
 .hero-controls {
+  position: absolute;
+  right: 20px;
+  bottom: 16px;
   display: flex;
   gap: 8px;
-  flex-wrap: wrap;
-  justify-content: center;
+  flex-wrap: nowrap;
 }
 .stage-panel { margin-top: 14px; padding: 16px 18px 18px; }
 .stage-panel-head { display: flex; justify-content: flex-end; margin-bottom: 12px; }
@@ -183,45 +186,40 @@ body.extra-theme .stage-chip.is-active { border-color: rgba(255, 217, 124, 0.7);
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 14px;
+  align-items: start;
 }
 .pool-card {
+  width: 100%;
+  max-width: 180px;
+  justify-self: center;
   background: linear-gradient(180deg, rgba(18, 29, 46, 0.98), rgba(12, 20, 33, 0.98));
   border: 1px solid var(--line);
   border-radius: 20px;
   padding: 12px;
-  min-height: 220px;
+  min-height: 174px;
   display: grid;
-  grid-template-rows: 1fr auto auto auto;
+  grid-template-rows: auto auto auto auto;
   gap: 8px;
 }
 .pool-art {
   border-radius: 16px;
-  min-height: 120px;
+  aspect-ratio: 1 / 1;
   background: linear-gradient(135deg, rgba(67, 98, 156, 0.55), rgba(22, 33, 55, 0.92));
   background-size: cover;
   background-position: center;
   border: 1px solid rgba(255,255,255,0.08);
 }
-.pool-name {
-  font-weight: 900;
-  text-align: center;
-  font-size: 18px;
-}
-.pool-rarity {
-  text-align: center;
-  font-size: 13px;
-  color: var(--muted);
-  font-weight: 800;
-}
+.pool-name { font-weight: 900; text-align: center; font-size: 17px; line-height: 1.15; }
+.pool-rarity { text-align: center; font-size: 12px; color: var(--muted); font-weight: 800; min-height: 16px; }
 .pool-effect {
   text-align: center;
   font-weight: 900;
-  font-size: 16px;
-  padding: 7px 10px;
+  font-size: 15px;
+  padding: 7px 8px;
   border-radius: 999px;
   background: rgba(255,255,255,0.06);
 }
-.pool-card.effect-plus .pool-effect { color: #ffe6a2; text-shadow: 0 0 12px rgba(255, 206, 92, 0.5); border: 1px solid rgba(255, 207, 115, 0.45); }
+.pool-card.effect-plus .pool-effect { color: #ffe6a2; text-shadow: 0 0 14px rgba(255, 206, 92, 0.6); border: 1px solid rgba(255, 207, 115, 0.55); }
 .pool-card.effect-auto .pool-effect { color: #fff0b7; border: 1px solid rgba(255, 232, 154, 0.38); }
 .pool-card.effect-bomb .pool-effect { color: #ff9ca5; border: 1px solid rgba(255, 120, 136, 0.34); }
 .pool-card.effect-empty .pool-effect { color: #d7e3ff; }
@@ -235,11 +233,7 @@ body.extra-theme .stage-chip.is-active { border-color: rgba(255, 217, 124, 0.7);
 .rarity-rare { box-shadow: inset 0 0 0 1px rgba(242,201,111,0.44); }
 
 .cases-panel { margin-top: 16px; padding: 18px; }
-.cases-grid {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 16px;
-}
+.cases-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
 .case-card {
   background: linear-gradient(180deg, rgba(17, 28, 44, 0.98), rgba(10, 18, 30, 0.98));
   border: 1px solid var(--line);
@@ -295,12 +289,7 @@ body.extra-theme .stage-chip.is-active { border-color: rgba(255, 217, 124, 0.7);
 }
 .spin-box { overflow: hidden; }
 .admin-box { overflow: auto; }
-.modal-top {
-  display: flex;
-  justify-content: space-between;
-  gap: 12px;
-  align-items: flex-start;
-}
+.modal-top { display: flex; justify-content: space-between; gap: 12px; align-items: flex-start; }
 .modal-top h3 { margin: 0; font-size: 24px; }
 .modal-top p { margin: 6px 0 0; color: var(--muted); }
 .top-actions { display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
@@ -387,12 +376,7 @@ body.extra-theme .stage-chip.is-active { border-color: rgba(255, 217, 124, 0.7);
 .result-card.effect-auto { box-shadow: 0 0 0 1px rgba(255,240,184,0.22), 0 0 80px rgba(255,236,168,0.18); }
 .result-card.effect-bomb { box-shadow: 0 0 0 1px rgba(255,125,141,0.22), 0 0 70px rgba(255,100,120,0.14); }
 .result-card.effect-empty { box-shadow: 0 0 0 1px rgba(180,206,255,0.18), 0 0 50px rgba(108,152,255,0.1); }
-.result-inner {
-  display: grid;
-  grid-template-columns: minmax(260px, 340px) 1fr;
-  gap: 18px;
-  align-items: center;
-}
+.result-inner { display: grid; grid-template-columns: minmax(260px, 340px) 1fr; gap: 18px; align-items: center; }
 .result-art {
   min-height: 300px;
   border-radius: 20px;
@@ -418,20 +402,24 @@ body.extra-theme .stage-chip.is-active { border-color: rgba(255, 217, 124, 0.7);
 
 @media (max-width: 1180px) {
   .stage-strip { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-  .pool-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-  .admin-toolbar { grid-template-columns: repeat(3, minmax(160px, 1fr)); }
-}
-@media (max-width: 900px) {
-  .cases-grid, .pool-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .admin-toolbar { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .editor-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .admin-toolbar { grid-template-columns: repeat(2, minmax(160px, 1fr)); }
-  .result-inner { grid-template-columns: 1fr; }
 }
+
+@media (max-width: 920px) {
+  .topbar { grid-template-columns: 1fr; }
+  .hero { min-height: auto; padding-bottom: 74px; }
+  .hero-controls { left: 16px; right: 16px; bottom: 16px; justify-content: center; flex-wrap: wrap; }
+  .pool-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .cases-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .result-inner { grid-template-columns: 1fr; }
+  .stage-strip { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
 @media (max-width: 640px) {
   .app { padding: 14px; }
-  .topbar { flex-direction: column; }
-  .hero-controls { width: 100%; }
-  .hero-controls button { flex: 1 1 calc(50% - 8px); }
-  .stage-strip, .cases-grid, .pool-grid, .editor-grid, .admin-toolbar { grid-template-columns: 1fr; }
-  .sticky-subtop, .sticky-subtop-2 { position: static; }
+  .pool-grid, .cases-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .pool-card { max-width: none; }
+  .stage-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .admin-toolbar, .editor-grid { grid-template-columns: 1fr; }
 }

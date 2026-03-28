@@ -1,15 +1,17 @@
 const STAGE_DEFS = [
-  { id: 'round1', type: 'regular', label: 'Раунд 1', short: 'R1', description: 'Обычный этап · Выбирай кейс по номеру и призовой вкус · Пиши в чат.' },
-  { id: 'round2', type: 'regular', label: 'Раунд 2', short: 'R2', description: 'Обычный этап · Выбирай кейс по номеру и призовой вкус · Пиши в чат.' },
-  { id: 'extra1', type: 'extra', label: 'Экстра Раунд 1', short: 'EX1', description: 'Экстра этап · Выбирай кейс по номеру и призовой вкус · Пиши в чат.' },
-  { id: 'round3', type: 'regular', label: 'Раунд 3', short: 'R3', description: 'Обычный этап · Выбирай кейс по номеру и призовой вкус · Пиши в чат.' },
-  { id: 'round4', type: 'regular', label: 'Раунд 4', short: 'R4', description: 'Обычный этап · Выбирай кейс по номеру и призовой вкус · Пиши в чат.' },
-  { id: 'round5', type: 'regular', label: 'Раунд 5', short: 'R5', description: 'Обычный этап · Выбирай кейс по номеру и призовой вкус · Пиши в чат.' },
-  { id: 'extra2', type: 'extra', label: 'Экстра Раунд 2', short: 'EX2', description: 'Экстра этап · Выбирай кейс по номеру и призовой вкус · Пиши в чат.' },
+  { id: 'round1', type: 'regular', label: 'Раунд 1', short: 'R1', description: 'Обычный этап · Выбирай кейс по номеру и призовой вкус · Пиши в чат и получай промик.' },
+  { id: 'round2', type: 'regular', label: 'Раунд 2', short: 'R2', description: 'Обычный этап · Выбирай кейс по номеру и призовой вкус · Пиши в чат и получай промик.' },
+  { id: 'extra1', type: 'extra', label: 'Экстра Раунд 1', short: 'EX1', description: 'Экстра этап · Выбирай кейс по номеру и призовой вкус · Пиши в чат и получай промик.' },
+  { id: 'round3', type: 'regular', label: 'Раунд 3', short: 'R3', description: 'Обычный этап · Выбирай кейс по номеру и призовой вкус · Пиши в чат и получай промик.' },
+  { id: 'round4', type: 'regular', label: 'Раунд 4', short: 'R4', description: 'Обычный этап · Выбирай кейс по номеру и призовой вкус · Пиши в чат и получай промик.' },
+  { id: 'round5', type: 'regular', label: 'Раунд 5', short: 'R5', description: 'Обычный этап · Выбирай кейс по номеру и призовой вкус · Пиши в чат и получай промик.' },
+  { id: 'extra2', type: 'extra', label: 'Экстра Раунд 2', short: 'EX2', description: 'Экстра этап · Выбирай кейс по номеру и призовой вкус · Пиши в чат и получай промик.' },
 ];
 
-const STORAGE_CONFIG = 'stream-case-game-v16-config';
-const STORAGE_SESSION = 'stream-case-game-v16-session';
+const STORAGE_CONFIG = 'stream-case-game-v17-config';
+const STORAGE_SESSION = 'stream-case-game-v17-session';
+const MIGRATE_CONFIG_KEYS = ['stream-case-game-v16-config', 'stream-case-game-v15-config', 'stream-case-game-v14-config'];
+const MIGRATE_SESSION_KEYS = ['stream-case-game-v16-session', 'stream-case-game-v15-session', 'stream-case-game-v14-session'];
 
 const rarityLabels = {
   consumer: 'Белая',
@@ -23,7 +25,7 @@ const rarityLabels = {
 
 const effectLabels = {
   empty: 'Пустой вкус',
-  plus: 'Призовой вкус',
+  plus: 'ПРИЗОВОЙ ВКУС',
   auto: 'ПЛЮС ОДНО ОЧКО',
   bomb: 'СБРОС ВСЕХ ОЧКОВ',
 };
@@ -37,12 +39,11 @@ const resultHeadlines = {
 
 let config = loadConfig();
 let session = loadSession();
-let adminType = 'regular';
+let adminType = getCurrentStage().type;
 let adminStageId = config.currentStageId;
 let adminCaseId = 1;
 let spinState = null;
 let audioCtx = null;
-const raf = window.requestAnimationFrame ? window.requestAnimationFrame.bind(window) : (cb) => setTimeout(cb, 16);
 
 const el = {
   body: document.body,
@@ -112,7 +113,7 @@ function bindEvents() {
   el.forcePickSelector.addEventListener('change', () => {
     const stage = getStage(adminStageId);
     if (!stage) return;
-    stage.forceNext = el.forcePickSelector.value || '';
+    stage.forceNext = String(el.forcePickSelector.value || '');
     saveConfig();
   });
 
@@ -127,7 +128,7 @@ function bindEvents() {
 
   el.stageJumpSelect.addEventListener('change', () => setCurrentStage(el.stageJumpSelect.value));
   el.newGameBtn.addEventListener('click', newGame);
-  el.finishStageBtn.addEventListener('click', finishStage);
+  el.finishStageBtn.addEventListener('click', () => finishStage(true));
   el.prevStageBtn.addEventListener('click', prevStage);
   el.nextStageBtn.addEventListener('click', nextStage);
 
@@ -164,8 +165,8 @@ function renderHeader() {
   el.stageBadge.textContent = stage.type === 'extra' ? 'ЭКСТРА ЭТАП' : 'ОБЫЧНЫЙ ЭТАП';
   el.stageTitle.textContent = stage.label;
   el.stageDescription.textContent = stage.description;
-  el.stageJumpSelect.innerHTML = config.stages.map((s) => `<option value="${s.id}" ${s.id === config.currentStageId ? 'selected' : ''}>${escapeHtml(s.label)}</option>`).join('');
-  const idx = STAGE_DEFS.findIndex((s) => s.id === config.currentStageId);
+  el.stageJumpSelect.innerHTML = STAGE_DEFS.map((stageDef) => `<option value="${stageDef.id}" ${stageDef.id === config.currentStageId ? 'selected' : ''}>${escapeHtml(stageDef.label)}</option>`).join('');
+  const idx = stageIndex(config.currentStageId);
   el.prevStageBtn.disabled = idx <= 0;
   el.nextStageBtn.disabled = idx >= STAGE_DEFS.length - 1;
   el.finishStageBtn.textContent = session.finished.includes(stage.id) ? 'Этап завершён' : 'Завершить этап';
@@ -173,18 +174,18 @@ function renderHeader() {
 
 function renderStageStrip() {
   el.stageStrip.innerHTML = '';
-  config.stages.forEach((stage) => {
+  STAGE_DEFS.forEach((def) => {
     const button = document.createElement('button');
     button.type = 'button';
     button.className = 'stage-chip';
-    if (stage.id === config.currentStageId) button.classList.add('is-active');
-    if (session.finished.includes(stage.id)) button.classList.add('is-finished');
+    if (def.id === config.currentStageId) button.classList.add('is-active');
+    if (session.finished.includes(def.id)) button.classList.add('is-finished');
     button.innerHTML = `
-      <div class="stage-chip-top">${escapeHtml(stage.type === 'extra' ? 'Экстра' : 'Обычный')}</div>
-      <div class="stage-chip-title">${escapeHtml(stage.short)} · ${escapeHtml(stage.label)}</div>
-      <div class="stage-chip-meta">${session.finished.includes(stage.id) ? 'завершён' : 'в процессе'}</div>
+      <div class="stage-chip-top">${escapeHtml(def.type === 'extra' ? 'Экстра' : 'Обычный')}</div>
+      <div class="stage-chip-title">${escapeHtml(def.short)} · ${escapeHtml(def.label)}</div>
+      <div class="stage-chip-meta">${session.finished.includes(def.id) ? 'завершён' : 'в процессе'}</div>
     `;
-    button.addEventListener('click', () => setCurrentStage(stage.id));
+    button.addEventListener('click', () => setCurrentStage(def.id));
     el.stageStrip.appendChild(button);
   });
 }
@@ -195,10 +196,11 @@ function renderPool() {
   items.forEach((item) => {
     const card = document.createElement('div');
     card.className = `pool-card effect-${item.effect} rarity-${item.rarity}`;
+    const subtitle = maybeRarityText(item);
     card.innerHTML = `
       <div class="pool-art"></div>
       <div class="pool-name">${escapeHtml(item.name)}</div>
-      <div class="pool-rarity">${escapeHtml(rarityLabels[item.rarity] || '')}</div>
+      <div class="pool-rarity">${escapeHtml(subtitle)}</div>
       <div class="pool-effect">${escapeHtml(effectLabels[item.effect])}</div>
     `;
     setBg(card.querySelector('.pool-art'), item.image);
@@ -230,21 +232,17 @@ function renderCases() {
 }
 
 function renderAdmin() {
-  el.regularTabBtn.classList.toggle('active', adminType === 'regular');
-  el.extraTabBtn.classList.toggle('active', adminType === 'extra');
-  let visibleStages = config.stages.filter((s) => s.type === adminType);
+  const visibleStages = config.stages.filter((s) => s.type === adminType);
   if (!visibleStages.some((s) => s.id === adminStageId)) adminStageId = visibleStages[0]?.id || config.currentStageId;
   const stage = getStage(adminStageId);
   if (!stage) return;
   if (!stage.cases.some((c) => c.id === adminCaseId)) adminCaseId = 1;
 
+  el.regularTabBtn.classList.toggle('active', adminType === 'regular');
+  el.extraTabBtn.classList.toggle('active', adminType === 'extra');
   el.stageSelector.innerHTML = visibleStages.map((s) => `<option value="${s.id}" ${s.id === adminStageId ? 'selected' : ''}>${escapeHtml(s.label)}</option>`).join('');
   el.caseSelector.innerHTML = stage.cases.map((c) => `<option value="${c.id}" ${c.id === adminCaseId ? 'selected' : ''}>${c.id}. ${escapeHtml(c.name)}</option>`).join('');
-  const previewItems = getPreviewItems(stage);
-  el.forcePickSelector.innerHTML = `<option value="">Случайно по шансам</option>` + previewItems.map((item) => {
-    const sig = itemSignature(item);
-    return `<option value="${escapeHtml(sig)}" ${stage.forceNext === sig ? 'selected' : ''}>${escapeHtml(item.name)} — ${escapeHtml(effectLabels[item.effect])}</option>`;
-  }).join('');
+  updateForcePickOptions();
   renderItemsEditor();
 }
 
@@ -259,9 +257,7 @@ function renderItemsEditor() {
     const thumb = card.querySelector('.editor-thumb');
     const nameCopy = card.querySelector('.editor-preview-name');
     const effectCopy = card.querySelector('.editor-preview-effect');
-    setBg(thumb, item.image);
-    nameCopy.textContent = item.name;
-    effectCopy.textContent = effectLabels[item.effect];
+    syncEditorPreview(item, thumb, nameCopy, effectCopy);
 
     card.querySelectorAll('[data-field]').forEach((field) => {
       const key = field.dataset.field;
@@ -270,16 +266,15 @@ function renderItemsEditor() {
           const file = field.files?.[0];
           if (!file) return;
           item.image = await fileToDataUrl(file);
-          setBg(thumb, item.image);
+          syncEditorPreview(item, thumb, nameCopy, effectCopy);
           saveConfig();
-          nameCopy.textContent = item.name;
-          effectCopy.textContent = effectLabels[item.effect];
           renderPool();
           renderCases();
           updateForcePickOptions();
         });
         return;
       }
+
       field.value = String(item[key] ?? '');
       const eventName = field.tagName === 'SELECT' ? 'change' : 'input';
       field.addEventListener(eventName, () => {
@@ -287,9 +282,7 @@ function renderItemsEditor() {
         else if (key === 'rarity') item.rarity = normalizeRarity(field.value);
         else if (key === 'effect') item.effect = normalizeEffect(field.value);
         else item[key] = field.value;
-        setBg(thumb, item.image);
-        nameCopy.textContent = item.name;
-        effectCopy.textContent = effectLabels[item.effect];
+        syncEditorPreview(item, thumb, nameCopy, effectCopy);
         saveConfig();
         renderPool();
         renderCases();
@@ -310,6 +303,12 @@ function renderItemsEditor() {
 
     el.itemsEditor.appendChild(card);
   });
+}
+
+function syncEditorPreview(item, thumb, nameCopy, effectCopy) {
+  setBg(thumb, item.image);
+  nameCopy.textContent = item.name;
+  effectCopy.textContent = effectLabels[item.effect];
 }
 
 function updateForcePickOptions() {
@@ -336,13 +335,13 @@ function toggleAdmin(open) {
 }
 
 function onCaseClick(caseId) {
-  if (spinState) return;
+  if (spinState && spinState.active) return;
   const stage = getCurrentStage();
   const box = getCase(stage, caseId);
-  const opened = getOpened(stage.id)[String(caseId)];
-  if (opened) {
+  const already = getOpened(stage.id)[String(caseId)];
+  if (already) {
     openSpinModal(stage.label + ' · ' + box.name);
-    showResult(opened, true);
+    showResult(already, true);
     return;
   }
   startSpin(stage, box);
@@ -350,17 +349,19 @@ function onCaseClick(caseId) {
 
 function startSpin(stage, box) {
   const winner = resolveWinner(stage, box);
-  const items = buildTrackItems(box.items, winner);
+  const winnerIndex = 24;
+  const items = buildTrackItems(box.items, winner, winnerIndex);
   spinState = {
     active: true,
     stageId: stage.id,
     caseId: box.id,
-    winner,
-    skipped: false,
+    winner: cloneItem(winner),
+    winnerIndex,
+    targetX: 0,
     timer: null,
     fallbackTimer: null,
-    targetX: 0,
   };
+
   openSpinModal(stage.label + ' · ' + box.name);
   el.resultCard.className = 'result-card hidden';
   el.resultCard.innerHTML = '';
@@ -369,26 +370,29 @@ function startSpin(stage, box) {
   populateTrack(items);
   playSound('spin');
 
-  raf(() => {
-    const container = el.rouletteTrack.parentElement;
-    const itemWidth = 184;
-    const gap = 14;
-    const winnerIndex = 24;
-    const center = (container.clientWidth || 900) / 2;
-    const offset = winnerIndex * (itemWidth + gap) - center + itemWidth / 2;
-    spinState.targetX = offset;
-    el.rouletteTrack.style.transition = 'transform 3.2s cubic-bezier(0.08, 0.8, 0.18, 1)';
-    el.rouletteTrack.style.transform = `translateX(-${offset}px)`;
-    spinState.timer = setTimeout(finalizeSpin, 3250);
-    spinState.fallbackTimer = setTimeout(finalizeSpin, 3800);
+  requestAnimationFrame(() => {
+    const nodes = [...el.rouletteTrack.querySelectorAll('.roulette-item')];
+    const winnerNode = nodes[winnerIndex];
+    const wrap = el.rouletteTrack.parentElement;
+    if (!winnerNode || !wrap) return finalizeSpin();
+    const gap = Number.parseFloat(getComputedStyle(el.rouletteTrack).gap || '14') || 14;
+    const itemWidth = winnerNode.getBoundingClientRect().width;
+    const trackPaddingLeft = Number.parseFloat(getComputedStyle(el.rouletteTrack).paddingLeft || '24') || 24;
+    const center = wrap.clientWidth / 2;
+    const offset = trackPaddingLeft + winnerIndex * (itemWidth + gap) - center + itemWidth / 2;
+    spinState.targetX = Math.max(0, offset);
+    el.rouletteTrack.style.transition = 'transform 4.4s cubic-bezier(0.08, 0.78, 0.18, 1)';
+    el.rouletteTrack.style.transform = `translateX(-${spinState.targetX}px)`;
+    clearTimeout(spinState.timer);
+    clearTimeout(spinState.fallbackTimer);
+    spinState.timer = setTimeout(finalizeSpin, 4440);
+    spinState.fallbackTimer = setTimeout(finalizeSpin, 4900);
   });
 }
 
-function buildTrackItems(sourceItems, winner) {
+function buildTrackItems(sourceItems, winner, winnerIndex) {
   const arr = [];
-  for (let i = 0; i < 32; i += 1) {
-    arr.push(i === 24 ? cloneItem(winner) : weightedPick(sourceItems));
-  }
+  for (let i = 0; i < 32; i += 1) arr.push(i === winnerIndex ? cloneItem(winner) : weightedPick(sourceItems));
   return arr;
 }
 
@@ -413,22 +417,22 @@ function skipSpin() {
   if (!spinState) return;
   clearTimeout(spinState.timer);
   clearTimeout(spinState.fallbackTimer);
-  el.rouletteTrack.style.transition = 'transform 0.15s ease-out';
+  el.rouletteTrack.style.transition = 'transform 0.18s ease-out';
   el.rouletteTrack.style.transform = `translateX(-${spinState.targetX}px)`;
-  spinState.timer = setTimeout(finalizeSpin, 170);
+  spinState.timer = setTimeout(finalizeSpin, 200);
 }
 
 function finalizeSpin() {
-  if (!spinState || !spinState.active) return;
+  if (!spinState) return;
   clearTimeout(spinState.timer);
   clearTimeout(spinState.fallbackTimer);
   const current = spinState;
-  const winner = cloneItem(current.winner);
-  spinState.active = false;
-  getOpened(current.stageId)[String(current.caseId)] = winner;
+  if (!current.active) return;
+  current.active = false;
+  getOpened(current.stageId)[String(current.caseId)] = cloneItem(current.winner);
   saveSession();
   renderCases();
-  showResult(winner, false);
+  showResult(current.winner, false);
 }
 
 function showResult(item, wasOpened) {
@@ -475,10 +479,10 @@ function closeSpinModal() {
   el.spinModal.classList.add('hidden');
   el.spinModal.setAttribute('aria-hidden', 'true');
   el.rouletteTrack.style.transition = 'none';
+  el.rouletteTrack.style.transform = 'translateX(0px)';
 }
 
 function setCurrentStage(stageId) {
-  if (spinState && spinState.active) return;
   const stage = getStage(stageId);
   if (!stage) return;
   config.currentStageId = stage.id;
@@ -490,35 +494,37 @@ function setCurrentStage(stageId) {
 }
 
 function prevStage() {
-  if (spinState && spinState.active) return;
-  const idx = STAGE_DEFS.findIndex((s) => s.id === config.currentStageId);
+  const idx = stageIndex(config.currentStageId);
   if (idx > 0) setCurrentStage(STAGE_DEFS[idx - 1].id);
 }
 
 function nextStage() {
-  if (spinState && spinState.active) return;
-  const idx = STAGE_DEFS.findIndex((s) => s.id === config.currentStageId);
+  const idx = stageIndex(config.currentStageId);
   if (idx < STAGE_DEFS.length - 1) {
-    finishStage(false);
+    markStageFinished(config.currentStageId);
     setCurrentStage(STAGE_DEFS[idx + 1].id);
   }
 }
 
-function finishStage(showAlert = true) {
-  const stageId = config.currentStageId;
-  if (!session.finished.includes(stageId)) session.finished.push(stageId);
-  saveSession();
+function finishStage(showAlert) {
+  markStageFinished(config.currentStageId);
   renderHeader();
   renderStageStrip();
   if (showAlert) alert('Этап отмечен как завершённый.');
 }
 
+function markStageFinished(stageId) {
+  if (!session.finished.includes(stageId)) session.finished.push(stageId);
+  saveSession();
+}
+
 function newGame() {
+  localStorage.removeItem(STORAGE_SESSION);
   session = makeSession();
   config.currentStageId = STAGE_DEFS[0].id;
-  saveSession();
   saveConfig();
-  try { location.reload(); } catch { renderAll(); }
+  saveSession();
+  location.reload();
 }
 
 function addItem() {
@@ -578,6 +584,9 @@ function importConfig(event) {
   if (!file) return;
   file.text().then((text) => {
     config = normalizeConfig(JSON.parse(text));
+    adminType = getCurrentStage().type;
+    adminStageId = config.currentStageId;
+    adminCaseId = 1;
     saveConfig();
     renderAll();
   }).catch(() => alert('Не удалось импортировать config.json')).finally(() => {
@@ -632,8 +641,12 @@ function weightedPick(items) {
   return cloneItem(list[list.length - 1]);
 }
 
+function stageIndex(stageId) {
+  return STAGE_DEFS.findIndex((s) => s.id === stageId);
+}
+
 function getCurrentStage() {
-  return getStage(config.currentStageId);
+  return getStage(config.currentStageId) || config.stages[0];
 }
 
 function getStage(id) {
@@ -654,29 +667,34 @@ function getOpened(stageId) {
 }
 
 function loadConfig() {
-  try {
-    const parsed = JSON.parse(localStorage.getItem(STORAGE_CONFIG) || 'null');
-    return normalizeConfig(parsed);
-  } catch {
-    return makeConfig();
+  const candidates = [localStorage.getItem(STORAGE_CONFIG), ...MIGRATE_CONFIG_KEYS.map((key) => localStorage.getItem(key))];
+  for (const rawText of candidates) {
+    if (!rawText) continue;
+    try { return normalizeConfig(JSON.parse(rawText)); } catch {}
   }
+  return makeConfig();
 }
 
 function loadSession() {
-  try {
-    const parsed = JSON.parse(localStorage.getItem(STORAGE_SESSION) || 'null');
-    return normalizeSession(parsed);
-  } catch {
-    return makeSession();
+  const candidates = [localStorage.getItem(STORAGE_SESSION), ...MIGRATE_SESSION_KEYS.map((key) => localStorage.getItem(key))];
+  for (const rawText of candidates) {
+    if (!rawText) continue;
+    try { return normalizeSession(JSON.parse(rawText)); } catch {}
   }
+  return makeSession();
 }
 
 function saveConfig() {
-  localStorage.setItem(STORAGE_CONFIG, JSON.stringify(config));
+  try {
+    localStorage.setItem(STORAGE_CONFIG, JSON.stringify(config));
+  } catch (error) {
+    console.error(error);
+    alert('Не удалось сохранить настройки. Попробуй уменьшить размер загруженных фото.');
+  }
 }
 
 function saveSession() {
-  localStorage.setItem(STORAGE_SESSION, JSON.stringify(session));
+  try { localStorage.setItem(STORAGE_SESSION, JSON.stringify(session)); } catch (error) { console.error(error); }
 }
 
 function makeConfig() {
@@ -779,10 +797,11 @@ function defaultItem(name, effect = 'empty', rarity = 'consumer') {
 }
 
 function cloneItem(item) {
+  const image = typeof item?.image === 'string' && item.image.trim() ? item.image : placeholderImage(item?.name || 'Предмет', item?.effect || 'empty');
   return {
     id: String(item?.id || makeId()),
     name: String(item?.name || 'Предмет'),
-    image: String(item?.image || placeholderImage('Предмет', 'empty')),
+    image,
     weight: Math.max(1, Number(item?.weight) || 1),
     rarity: normalizeRarity(item?.rarity),
     effect: normalizeEffect(item?.effect),
@@ -797,13 +816,25 @@ function normalizeEffect(value) {
   return effectLabels[value] ? value : 'empty';
 }
 
+function maybeRarityText(item) {
+  const label = rarityLabels[item.rarity] || '';
+  if (!label) return '';
+  const lowerName = String(item.name || '').toLowerCase();
+  if (lowerName.includes(label.toLowerCase())) return '';
+  return label;
+}
+
 function itemSignature(item) {
   return [item.name, item.image, item.rarity, item.effect, item.weight].join('::');
 }
 
 function setBg(node, image) {
   if (!node) return;
-  node.style.backgroundImage = image ? `linear-gradient(135deg, rgba(50, 76, 120, 0.1), rgba(20, 30, 47, 0.3)), url("${escapeAttr(image)}")` : 'linear-gradient(135deg, rgba(67,98,156,0.55), rgba(22,33,55,0.92))';
+  if (image) {
+    node.style.backgroundImage = `linear-gradient(135deg, rgba(50, 76, 120, 0.12), rgba(20, 30, 47, 0.28)), url("${escapeAttr(image)}")`;
+  } else {
+    node.style.backgroundImage = 'linear-gradient(135deg, rgba(67,98,156,0.55), rgba(22,33,55,0.92))';
+  }
 }
 
 function placeholderImage(text, effect) {
@@ -818,12 +849,27 @@ function placeholderImage(text, effect) {
         </linearGradient>
       </defs>
       <rect width="512" height="512" rx="40" fill="url(#g)" />
-      <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="${fg}" font-family="Arial, sans-serif" font-size="54" font-weight="900">${escapeSvg(text.slice(0, 14))}</text>
+      <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="${fg}" font-family="Arial, sans-serif" font-size="54" font-weight="900">${escapeSvg(String(text).slice(0, 14))}</text>
     </svg>`;
   return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
 }
 
-function fileToDataUrl(file) {
+async function fileToDataUrl(file) {
+  if (typeof createImageBitmap === 'function' && file.type.startsWith('image/')) {
+    try {
+      const bitmap = await createImageBitmap(file);
+      const maxSide = 700;
+      const scale = Math.min(1, maxSide / Math.max(bitmap.width, bitmap.height));
+      const width = Math.max(1, Math.round(bitmap.width * scale));
+      const height = Math.max(1, Math.round(bitmap.height * scale));
+      const canvas = document.createElement('canvas');
+      canvas.width = width;
+      canvas.height = height;
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(bitmap, 0, 0, width, height);
+      return canvas.toDataURL('image/jpeg', 0.82);
+    } catch {}
+  }
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.onload = () => resolve(String(reader.result || ''));
@@ -876,7 +922,5 @@ function playSound(kind) {
       osc.start(now + index * 0.06);
       osc.stop(now + index * 0.06 + len + 0.02);
     });
-  } catch {
-    // no-op
-  }
+  } catch {}
 }
