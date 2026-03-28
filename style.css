@@ -62,7 +62,7 @@ label { display: grid; gap: 6px; font-size: 13px; color: var(--muted); }
   color: var(--text);
 }
 .icon-btn { width: 42px; height: 42px; padding: 0; display: grid; place-items: center; }
-.mini-btn { white-space: nowrap; padding: 9px 12px; font-size: 12px; }
+.mini-btn { white-space: nowrap; padding: 8px 10px; font-size: 11px; }
 .danger { border-color: rgba(239,96,109,0.42); }
 
 .bg-layer { position: fixed; inset: 0; pointer-events: none; overflow: hidden; }
@@ -84,11 +84,14 @@ label { display: grid; gap: 6px; font-size: 13px; color: var(--muted); }
   backdrop-filter: blur(12px);
 }
 .topbar {
-  padding: 18px 20px;
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 16px;
-  align-items: center;
+  position: relative;
+  padding: 18px 170px 18px 20px;
+}
+.topbar #openAdminBtn {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
 }
 .brand-wrap { text-align: center; min-width: 0; }
 .brand-title {
@@ -108,8 +111,9 @@ label { display: grid; gap: 6px; font-size: 13px; color: var(--muted); }
 .hero {
   margin-top: 16px;
   padding: 22px 24px 18px;
-  position: relative;
   min-height: 168px;
+  display: grid;
+  gap: 14px;
 }
 .hero-copy { text-align: center; }
 .stage-badge {
@@ -145,12 +149,11 @@ body.extra-theme .stage-badge {
   text-align: center;
 }
 .hero-controls {
-  position: absolute;
-  right: 20px;
-  bottom: 16px;
   display: flex;
   gap: 8px;
   flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
 }
 .stage-panel { margin-top: 14px; padding: 16px 18px 18px; }
 .stage-panel-head { display: flex; justify-content: flex-end; margin-bottom: 12px; }
@@ -407,9 +410,10 @@ body.extra-theme .stage-chip.is-active { border-color: rgba(255, 217, 124, 0.7);
 }
 
 @media (max-width: 920px) {
-  .topbar { grid-template-columns: 1fr; }
-  .hero { min-height: auto; padding-bottom: 74px; }
-  .hero-controls { left: 16px; right: 16px; bottom: 16px; justify-content: center; flex-wrap: wrap; }
+  .topbar { padding: 18px 20px 72px; }
+  .topbar #openAdminBtn { right: 50%; top: auto; bottom: 18px; transform: translateX(50%); }
+  .hero { min-height: auto; }
+  .hero-controls { justify-content: center; flex-wrap: wrap; }
   .pool-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .cases-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .result-inner { grid-template-columns: 1fr; }

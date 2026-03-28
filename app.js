@@ -10,6 +10,8 @@ const STAGE_DEFS = [
 
 const STORAGE_CONFIG = 'stream-case-game-v17-config';
 const STORAGE_SESSION = 'stream-case-game-v17-session';
+const DB_NAME = 'stream-case-game-v18-db';
+const DB_STORE = 'kv';
 const MIGRATE_CONFIG_KEYS = ['stream-case-game-v16-config', 'stream-case-game-v15-config', 'stream-case-game-v14-config'];
 const MIGRATE_SESSION_KEYS = ['stream-case-game-v16-session', 'stream-case-game-v15-session', 'stream-case-game-v14-session'];
 
@@ -86,9 +88,25 @@ const el = {
 
 init();
 
-function init() {
+async function init() {
   bindEvents();
+  await hydrateState();
   renderAll();
+}
+
+async function hydrateState() {
+  try {
+    const [dbConfig, dbSession] = await Promise.all([idbGet(STORAGE_CONFIG), idbGet(STORAGE_SESSION)]);
+    if (dbConfig) config = normalizeConfig(dbConfig);
+    else await idbSet(STORAGE_CONFIG, config);
+    if (dbSession) session = normalizeSession(dbSession);
+    else await idbSet(STORAGE_SESSION, session);
+  } catch (error) {
+    console.error(error);
+  }
+  adminType = getCurrentStage().type;
+  adminStageId = config.currentStageId;
+  adminCaseId = 1;
 }
 
 function bindEvents() {
@@ -685,16 +703,24 @@ function loadSession() {
 }
 
 function saveConfig() {
-  try {
-    localStorage.setItem(STORAGE_CONFIG, JSON.stringify(config));
-  } catch (error) {
-    console.error(error);
-    alert('Не удалось сохранить настройки. Попробуй уменьшить размер загруженных фото.');
-  }
+  persistState(STORAGE_CONFIG, config);
 }
 
 function saveSession() {
-  try { localStorage.setItem(STORAGE_SESSION, JSON.stringify(session)); } catch (error) { console.error(error); }
+  persistState(STORAGE_SESSION, session);
+}
+
+async function persistState(key, value) {
+  try {
+    await idbSet(key, value);
+  } catch (error) {
+    console.error(error);
+  }
+  try {
+    localStorage.setItem(key, JSON.stringify(value));
+  } catch (error) {
+    // ignore quota errors; IndexedDB remains the primary storage for images
+  }
 }
 
 function makeConfig() {
@@ -858,7 +884,7 @@ async function fileToDataUrl(file) {
   if (typeof createImageBitmap === 'function' && file.type.startsWith('image/')) {
     try {
       const bitmap = await createImageBitmap(file);
-      const maxSide = 700;
+      const maxSide = 480;
       const scale = Math.min(1, maxSide / Math.max(bitmap.width, bitmap.height));
       const width = Math.max(1, Math.round(bitmap.width * scale));
       const height = Math.max(1, Math.round(bitmap.height * scale));
@@ -867,7 +893,7 @@ async function fileToDataUrl(file) {
       canvas.height = height;
       const ctx = canvas.getContext('2d');
       ctx.drawImage(bitmap, 0, 0, width, height);
-      return canvas.toDataURL('image/jpeg', 0.82);
+      return canvas.toDataURL('image/jpeg', 0.72);
     } catch {}
   }
   return new Promise((resolve, reject) => {
@@ -875,6 +901,45 @@ async function fileToDataUrl(file) {
     reader.onload = () => resolve(String(reader.result || ''));
     reader.onerror = reject;
     reader.readAsDataURL(file);
+  });
+}
+
+
+function idbOpen() {
+  return new Promise((resolve, reject) => {
+    const request = indexedDB.open(DB_NAME, 1);
+    request.onupgradeneeded = () => {
+      const db = request.result;
+      if (!db.objectStoreNames.contains(DB_STORE)) db.createObjectStore(DB_STORE);
+    };
+    request.onsuccess = () => resolve(request.result);
+    request.onerror = () => reject(request.error);
+  });
+}
+
+async function idbGet(key) {
+  if (!('indexedDB' in window)) return null;
+  const db = await idbOpen();
+  return new Promise((resolve, reject) => {
+    const tx = db.transaction(DB_STORE, 'readonly');
+    const store = tx.objectStore(DB_STORE);
+    const request = store.get(key);
+    request.onsuccess = () => resolve(request.result ?? null);
+    request.onerror = () => reject(request.error);
+    tx.oncomplete = () => db.close();
+  });
+}
+
+async function idbSet(key, value) {
+  if (!('indexedDB' in window)) return;
+  const db = await idbOpen();
+  return new Promise((resolve, reject) => {
+    const tx = db.transaction(DB_STORE, 'readwrite');
+    const store = tx.objectStore(DB_STORE);
+    store.put(value, key);
+    tx.oncomplete = () => { db.close(); resolve(); };
+    tx.onerror = () => reject(tx.error);
+    tx.onabort = () => reject(tx.error);
   });
 }
 
