@@ -1,0 +1,15 @@
+{
+  "name": "stream_case_game_v15",
+  "version": "1.0.0",
+  "description": "Загрузи в корень GitHub-репозитория файлы: - index.html - style.css - app.js - config.json",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "jsdom": "^24.1.3"
+  }
+}
