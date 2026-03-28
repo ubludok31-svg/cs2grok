@@ -1,5 +1,5 @@
-const PRIMARY_STORAGE_KEY = 'stream-case-game-v9';
-const LEGACY_STORAGE_KEYS = ['stream-case-game-v8', 'stream-case-game-v7', 'stream-case-game-v6'];
+const PRIMARY_STORAGE_KEY = 'stream-case-game-v11';
+const LEGACY_STORAGE_KEYS = ['stream-case-game-v10', 'stream-case-game-v9', 'stream-case-game-v8', 'stream-case-game-v7', 'stream-case-game-v6'];
 const STAGE_DEFS = [
   {
     id: 'round1',
@@ -104,7 +104,8 @@ function itemSignature(item) {
 
 function previewSignature(item) {
   const normalizedName = String(item.name).trim().toLowerCase();
-  return normalizedName || String(item.image || '').trim().toLowerCase();
+  const normalizedEffect = String(item.effect || '').trim().toLowerCase();
+  return `${normalizedName}__${normalizedEffect}` || String(item.image || '').trim().toLowerCase();
 }
 
 function makeDefaultItems(stageType) {
@@ -500,6 +501,13 @@ function renderStageStrip() {
       <div class="stage-chip-title">${escapeHtml(stage.shortLabel)} · ${escapeHtml(stage.label)}</div>
       <div class="stage-chip-meta">${stage.type === 'extra' ? 'Экстра' : 'Обычный'} · ${appState.finishedStageIds.includes(stage.id) ? 'завершён' : 'в процессе'}</div>
     `;
+    chip.addEventListener('click', () => {
+      appState.currentStageId = stage.id;
+      ensureStageOpenMap(appState.currentStageId);
+      saveState();
+      syncAdminSelectionWithCurrentStage();
+      renderAll();
+    });
     stageStrip.appendChild(chip);
   });
 }
@@ -511,6 +519,11 @@ function renderPoolPreview() {
 
   poolNote.textContent = 'Для получения промика нужно собрать 2 очка в течение одного раунда.';
 
+  if (!items.length) {
+    poolPreview.innerHTML = '<div class="pool-empty">Добавь предметы в админ-панели, чтобы зрители видели, что может выпасть в этом раунде.</div>'
+    return;
+  }
+
   items.forEach((item) => {
     const card = document.createElement('div');
     card.className = `pool-pill rarity-${normalizeRarity(item.rarity)}`;
@@ -518,8 +531,8 @@ function renderPoolPreview() {
       <div class="pool-thumb"></div>
       <div class="pool-info">
         <strong>${escapeHtml(item.name)}</strong>
-        <span class="pool-effect">${escapeHtml(effectLabelMap[item.effect])}</span>
-        <span class="pool-rarity">${escapeHtml(rarityLabelMap[item.rarity] || item.rarity)}</span>
+        <span class="pool-effect effect-${item.effect}">${escapeHtml(effectLabelMap[item.effect])}</span>
+        <span class="pool-rarity">Редкость: ${escapeHtml(rarityLabelMap[item.rarity] || item.rarity)}</span>
       </div>
     `;
     setArtBackground(card.querySelector('.pool-thumb'), item.image);
@@ -857,7 +870,7 @@ function runSpin(stage, caseData) {
 
 function showResult(item, alreadyOpened) {
   const rarity = normalizeRarity(item.rarity);
-  resultCard.className = `result-card ${alreadyOpened ? 'is-opened-result' : ''} effect-${item.effect}`;
+  resultCard.className = `result-card ${alreadyOpened ? 'is-opened-result' : ''} effect-${item.effect}`.trim();
   resultCard.classList.remove('hidden');
   resultCard.innerHTML = `
     <div class="result-card-inner rarity-${rarity}">
@@ -865,7 +878,7 @@ function showResult(item, alreadyOpened) {
       <div class="result-copy">
         <div class="result-headline">${escapeHtml(alreadyOpened ? 'УЖЕ ОТКРЫТ' : effectHeadlineMap[item.effect])}</div>
         <h3>${escapeHtml(item.name)}</h3>
-        <p class="item-rarity large">${escapeHtml(effectLabelMap[item.effect])}</p>
+        <p class="item-rarity large result-effect-text effect-${item.effect}">${escapeHtml(effectLabelMap[item.effect])}</p>
         <p class="item-rarity large">Редкость: ${escapeHtml(rarityLabelMap[rarity] || rarity)}</p>
       </div>
     </div>
