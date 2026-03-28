@@ -3,79 +3,73 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Stream Case Game v15</title>
+  <title>Stream Case Game v16</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="bg-fx" aria-hidden="true">
-    <div class="orb orb-a"></div>
-    <div class="orb orb-b"></div>
-    <div class="shine shine-a"></div>
-    <div class="shine shine-b"></div>
+  <div class="bg-layer" aria-hidden="true">
+    <div class="glow glow-a"></div>
+    <div class="glow glow-b"></div>
   </div>
 
-  <div class="app-shell">
+  <div class="app">
     <header class="topbar panel">
-      <div class="brand-block">
-        <h1 class="brand-title">
-          <span class="brand-line">ZALIVA.PL — ХОЧЕШЬ ЖИЖОБУ И РАЗКИ ПО ВСЕЙ 🇵🇱 🇪🇺 ?</span>
-          <span class="brand-line brand-line-sub">ЗАХОДИ В ОПИСАНИЕ ПРОФИЛЯ</span>
-        </h1>
+      <div class="brand-wrap">
+        <h1 class="brand-title">ZALIVA.PL</h1>
+        <p class="brand-subtitle">Выбирай кейс и пиши в чат</p>
       </div>
-      <button id="openAdminBtn" class="ghost-btn admin-btn" type="button">Админ-панель</button>
+      <button id="openAdminBtn" class="ghost-btn" type="button">Админ-панель</button>
     </header>
 
-    <section class="round-panel panel">
-      <div class="round-hero">
-        <div id="stageTypeBadge" class="stage-badge">Обычный этап</div>
-        <h2 id="currentStageTitle" class="round-title">Раунд 1</h2>
+    <section class="hero panel">
+      <div class="hero-copy">
+        <div id="stageBadge" class="stage-badge">ОБЫЧНЫЙ ЭТАП</div>
+        <h2 id="stageTitle" class="stage-title">Раунд 1</h2>
         <p id="stageDescription" class="stage-description">Обычный этап · Выбирай кейс по номеру и призовой вкус · Пиши в чат.</p>
       </div>
-
-      <div class="toolbar-row">
-        <div class="stage-jump-wrap">
-          <label class="toolbar-label">
-            <span>Быстрый выбор этапа</span>
-            <select id="stageJumpSelect"></select>
-          </label>
-        </div>
-
-        <div class="toolbar-buttons">
-          <button id="newGameBtn" class="ghost-btn mini-btn" type="button">Новая игра</button>
-          <button id="finishStageBtn" class="ghost-btn mini-btn" type="button">Завершить этап</button>
-          <button id="prevStageBtn" class="ghost-btn mini-btn" type="button">Назад</button>
-          <button id="nextStageBtn" class="mini-btn" type="button">Следующий этап</button>
-        </div>
+      <div class="hero-controls">
+        <button id="newGameBtn" class="ghost-btn mini-btn" type="button">Новая игра</button>
+        <button id="finishStageBtn" class="ghost-btn mini-btn" type="button">Завершить этап</button>
+        <button id="prevStageBtn" class="ghost-btn mini-btn" type="button">Назад</button>
+        <button id="nextStageBtn" class="mini-btn" type="button">Следующий этап</button>
       </div>
     </section>
 
-    <section id="stageStrip" class="stage-strip"></section>
+    <section class="panel stage-panel">
+      <div class="stage-panel-head">
+        <label class="jump-label">
+          <span>Быстрый выбор этапа</span>
+          <select id="stageJumpSelect"></select>
+        </label>
+      </div>
+      <div id="stageStrip" class="stage-strip"></div>
+    </section>
 
-    <section class="pool-panel panel">
+    <section class="panel pool-panel">
       <div class="pool-head">
         <h3>Что может выпасть в этом раунде?</h3>
         <p class="pool-note">Для получения промика нужно собрать 2 очка в течение одного раунда.</p>
       </div>
-      <div id="poolPreview" class="pool-preview"></div>
+      <div id="poolPreview" class="pool-grid"></div>
     </section>
 
-    <section class="cases-panel panel">
+    <section class="panel cases-panel">
       <div id="casesGrid" class="cases-grid"></div>
     </section>
   </div>
 
-  <div id="rouletteModal" class="modal hidden" aria-hidden="true">
-    <div id="closeRouletteBackdrop" class="modal-backdrop"></div>
-    <div class="modal-content roulette-content panel">
-      <div class="modal-header">
+  <div id="spinModal" class="modal hidden" aria-hidden="true">
+    <div class="modal-backdrop" data-close-spin="1"></div>
+    <div class="modal-box panel spin-box">
+      <div class="modal-top">
         <div>
-          <h3 id="modalTitle">Открытие кейса</h3>
-          <p id="modalHint">Пробел, крестик или кнопка ниже сразу докручивают до результата.</p>
+          <h3 id="spinTitle">Открытие кейса</h3>
+          <p id="spinHint">Пробел или кнопка ниже — сразу показать результат.</p>
         </div>
-        <button id="closeModalBtn" class="icon-btn" type="button" aria-label="Закрыть">✕</button>
+        <button id="closeSpinBtn" class="icon-btn ghost-btn" type="button" aria-label="Закрыть">✕</button>
       </div>
 
-      <div class="roulette-shell">
+      <div class="roulette-wrap">
         <div class="roulette-pointer"></div>
         <div id="rouletteTrack" class="roulette-track"></div>
       </div>
@@ -83,32 +77,32 @@
       <div id="resultCard" class="result-card hidden"></div>
 
       <div class="modal-actions">
-        <button id="resultCloseBtn" type="button">Закрыть</button>
+        <button id="skipSpinBtn" type="button">Закрыть</button>
       </div>
     </div>
   </div>
 
   <div id="adminModal" class="modal hidden" aria-hidden="true">
-    <div id="closeAdminBackdrop" class="modal-backdrop"></div>
-    <div class="modal-content admin-content panel">
-      <div class="modal-header admin-header">
+    <div class="modal-backdrop" data-close-admin="1"></div>
+    <div class="modal-box panel admin-box">
+      <div class="modal-top sticky-top">
         <div>
           <h3>Админ-панель</h3>
-          <p>После обновления страницы закрываются только уже открытые кейсы. Настройки этапов и предметов сохраняются.</p>
+          <p>Настройки этапов сохраняются. После обновления страницы закрываются только уже открытые кейсы.</p>
         </div>
-        <div class="admin-actions-top">
+        <div class="top-actions">
           <button id="importConfigBtn" class="ghost-btn" type="button">Импорт config.json</button>
           <button id="saveConfigBtn" class="ghost-btn" type="button">Скачать config.json</button>
-          <button id="closeAdminBtn" class="icon-btn" type="button" aria-label="Закрыть">✕</button>
+          <button id="closeAdminBtn" class="icon-btn ghost-btn" type="button" aria-label="Закрыть">✕</button>
         </div>
       </div>
 
-      <div class="admin-tabs">
+      <div class="admin-tabs sticky-subtop">
         <button id="regularTabBtn" class="tab-btn active" type="button">Обычные этапы</button>
         <button id="extraTabBtn" class="tab-btn" type="button">Экстра-этапы</button>
       </div>
 
-      <div class="admin-toolbar">
+      <div class="admin-toolbar sticky-subtop-2">
         <label>
           Этап
           <select id="stageSelector"></select>
@@ -134,20 +128,19 @@
 
   <input id="configInput" type="file" accept="application/json" hidden />
 
-  <template id="caseCardTemplate">
+  <template id="caseTemplate">
     <button class="case-card" type="button">
-      <div class="case-topline">
-        <span class="case-status">ЗАКРЫТ</span>
-        <span class="case-number"></span>
+      <div class="case-top">
+        <span class="case-state">ЗАКРЫТ</span>
+        <span class="case-num">#1</span>
       </div>
-      <div class="case-icon" aria-hidden="true">
-        <div class="case-handle"></div>
+      <div class="case-icon">
         <div class="case-lid"></div>
         <div class="case-body"></div>
         <div class="case-lock"></div>
       </div>
-      <div class="case-title"></div>
-      <div class="case-caption"></div>
+      <div class="case-name"></div>
+      <div class="case-text"></div>
     </button>
   </template>
 
@@ -192,10 +185,10 @@
           </select>
         </label>
       </div>
-      <div class="editor-footer">
+      <div class="editor-foot">
         <div class="editor-preview">
           <div class="editor-thumb"></div>
-          <div class="editor-preview-copy">
+          <div>
             <div class="editor-preview-name"></div>
             <div class="editor-preview-effect"></div>
           </div>

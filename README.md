@@ -1,9 +1,9 @@
-# Stream Case Game v15
+# Stream Case Game v16
 
-Загрузи в корень GitHub-репозитория файлы:
+Загрузи в корень GitHub репозитория файлы:
 - index.html
 - style.css
 - app.js
 - config.json
 
-Потом открой GitHub Pages и нажми Ctrl + F5.
+После этого в GitHub Pages обновится сайт.

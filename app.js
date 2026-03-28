@@ -1,22 +1,17 @@
-const REGULAR_DESC = 'Обычный этап · Выбирай кейс по номеру и призовой вкус · Пиши в чат.';
-const EXTRA_DESC = 'Экстра этап · Выбирай кейс по номеру и призовой вкус · Пиши в чат.';
-
-const STAGES = [
-  { id: 'round-1', type: 'regular', label: 'Раунд 1', short: 'R1', description: REGULAR_DESC },
-  { id: 'round-2', type: 'regular', label: 'Раунд 2', short: 'R2', description: REGULAR_DESC },
-  { id: 'extra-1', type: 'extra', label: 'Экстра Раунд 1', short: 'EX1', description: EXTRA_DESC },
-  { id: 'round-3', type: 'regular', label: 'Раунд 3', short: 'R3', description: REGULAR_DESC },
-  { id: 'round-4', type: 'regular', label: 'Раунд 4', short: 'R4', description: REGULAR_DESC },
-  { id: 'round-5', type: 'regular', label: 'Раунд 5', short: 'R5', description: REGULAR_DESC },
-  { id: 'extra-2', type: 'extra', label: 'Экстра Раунд 2', short: 'EX2', description: EXTRA_DESC },
+const STAGE_DEFS = [
+  { id: 'round1', type: 'regular', label: 'Раунд 1', short: 'R1', description: 'Обычный этап · Выбирай кейс по номеру и призовой вкус · Пиши в чат.' },
+  { id: 'round2', type: 'regular', label: 'Раунд 2', short: 'R2', description: 'Обычный этап · Выбирай кейс по номеру и призовой вкус · Пиши в чат.' },
+  { id: 'extra1', type: 'extra', label: 'Экстра Раунд 1', short: 'EX1', description: 'Экстра этап · Выбирай кейс по номеру и призовой вкус · Пиши в чат.' },
+  { id: 'round3', type: 'regular', label: 'Раунд 3', short: 'R3', description: 'Обычный этап · Выбирай кейс по номеру и призовой вкус · Пиши в чат.' },
+  { id: 'round4', type: 'regular', label: 'Раунд 4', short: 'R4', description: 'Обычный этап · Выбирай кейс по номеру и призовой вкус · Пиши в чат.' },
+  { id: 'round5', type: 'regular', label: 'Раунд 5', short: 'R5', description: 'Обычный этап · Выбирай кейс по номеру и призовой вкус · Пиши в чат.' },
+  { id: 'extra2', type: 'extra', label: 'Экстра Раунд 2', short: 'EX2', description: 'Экстра этап · Выбирай кейс по номеру и призовой вкус · Пиши в чат.' },
 ];
 
-const CONFIG_KEY = 'stream_case_game_v15_config';
-const SESSION_KEY = 'stream_case_game_v15_session';
-const LEGACY_CONFIG_KEYS = ['stream_case_game_v14_config', 'stream_case_game_v13_config', 'stream_case_game_v12_config'];
-const LEGACY_SESSION_KEYS = ['stream_case_game_v14_session', 'stream_case_game_v13_session', 'stream_case_game_v12_session'];
+const STORAGE_CONFIG = 'stream-case-game-v16-config';
+const STORAGE_SESSION = 'stream-case-game-v16-session';
 
-const rarityLabel = {
+const rarityLabels = {
   consumer: 'Белая',
   industrial: 'Голубая',
   'mil-spec': 'Синяя',
@@ -26,25 +21,34 @@ const rarityLabel = {
   rare: 'Золотая',
 };
 
-const effectLabel = {
+const effectLabels = {
   empty: 'Пустой вкус',
+  plus: 'Призовой вкус',
+  auto: 'ПЛЮС ОДНО ОЧКО',
+  bomb: 'СБРОС ВСЕХ ОЧКОВ',
+};
+
+const resultHeadlines = {
+  empty: 'ПУСТОЙ ВКУС',
   plus: 'ПРИЗОВОЙ ВКУС',
   auto: 'АВТО +1',
   bomb: 'БОМБА',
 };
 
-const effectSubLabel = {
-  empty: 'Пустой вкус',
-  plus: 'Плюс одно очко',
-  auto: 'Плюс одно очко',
-  bomb: 'Сброс всех очков',
-};
+let config = loadConfig();
+let session = loadSession();
+let adminType = 'regular';
+let adminStageId = config.currentStageId;
+let adminCaseId = 1;
+let spinState = null;
+let audioCtx = null;
+const raf = window.requestAnimationFrame ? window.requestAnimationFrame.bind(window) : (cb) => setTimeout(cb, 16);
 
-const elements = {
+const el = {
+  body: document.body,
   openAdminBtn: document.getElementById('openAdminBtn'),
   adminModal: document.getElementById('adminModal'),
   closeAdminBtn: document.getElementById('closeAdminBtn'),
-  closeAdminBackdrop: document.getElementById('closeAdminBackdrop'),
   regularTabBtn: document.getElementById('regularTabBtn'),
   extraTabBtn: document.getElementById('extraTabBtn'),
   stageSelector: document.getElementById('stageSelector'),
@@ -55,354 +59,289 @@ const elements = {
   copyStageTypeBtn: document.getElementById('copyStageTypeBtn'),
   resetCurrentStageBtn: document.getElementById('resetCurrentStageBtn'),
   resetAllStagesBtn: document.getElementById('resetAllStagesBtn'),
+  itemsEditor: document.getElementById('itemsEditor'),
   saveConfigBtn: document.getElementById('saveConfigBtn'),
   importConfigBtn: document.getElementById('importConfigBtn'),
   configInput: document.getElementById('configInput'),
-  itemsEditor: document.getElementById('itemsEditor'),
-  stageJumpSelect: document.getElementById('stageJumpSelect'),
-  currentStageTitle: document.getElementById('currentStageTitle'),
+  stageBadge: document.getElementById('stageBadge'),
+  stageTitle: document.getElementById('stageTitle'),
   stageDescription: document.getElementById('stageDescription'),
-  stageTypeBadge: document.getElementById('stageTypeBadge'),
-  stageStrip: document.getElementById('stageStrip'),
-  poolPreview: document.getElementById('poolPreview'),
-  casesGrid: document.getElementById('casesGrid'),
   newGameBtn: document.getElementById('newGameBtn'),
   finishStageBtn: document.getElementById('finishStageBtn'),
   prevStageBtn: document.getElementById('prevStageBtn'),
   nextStageBtn: document.getElementById('nextStageBtn'),
-  rouletteModal: document.getElementById('rouletteModal'),
-  closeRouletteBackdrop: document.getElementById('closeRouletteBackdrop'),
-  closeModalBtn: document.getElementById('closeModalBtn'),
-  resultCloseBtn: document.getElementById('resultCloseBtn'),
+  stageJumpSelect: document.getElementById('stageJumpSelect'),
+  stageStrip: document.getElementById('stageStrip'),
+  poolPreview: document.getElementById('poolPreview'),
+  casesGrid: document.getElementById('casesGrid'),
+  spinModal: document.getElementById('spinModal'),
+  spinTitle: document.getElementById('spinTitle'),
+  spinHint: document.getElementById('spinHint'),
+  closeSpinBtn: document.getElementById('closeSpinBtn'),
+  skipSpinBtn: document.getElementById('skipSpinBtn'),
   rouletteTrack: document.getElementById('rouletteTrack'),
   resultCard: document.getElementById('resultCard'),
-  modalTitle: document.getElementById('modalTitle'),
-  modalHint: document.getElementById('modalHint'),
-};
-
-let config = loadConfig();
-let session = loadSession();
-let adminType = getCurrentStage().type;
-let adminStageId = config.currentStageId;
-let adminCaseId = 1;
-let audioContext = null;
-let spin = {
-  active: false,
-  stageId: '',
-  caseId: 0,
-  winner: null,
-  timer: null,
-  targetOffset: 0,
 };
 
 init();
 
 function init() {
   bindEvents();
-  renderApp();
+  renderAll();
 }
 
 function bindEvents() {
-  elements.openAdminBtn.addEventListener('click', () => toggleAdmin(true));
-  elements.closeAdminBtn.addEventListener('click', () => toggleAdmin(false));
-  elements.closeAdminBackdrop.addEventListener('click', () => toggleAdmin(false));
+  el.openAdminBtn.addEventListener('click', () => toggleAdmin(true));
+  el.closeAdminBtn.addEventListener('click', () => toggleAdmin(false));
+  el.adminModal.addEventListener('click', (event) => {
+    const target = event.target;
+    if (target instanceof HTMLElement && target.dataset.closeAdmin) toggleAdmin(false);
+  });
 
-  elements.regularTabBtn.addEventListener('click', () => switchAdminType('regular'));
-  elements.extraTabBtn.addEventListener('click', () => switchAdminType('extra'));
-
-  elements.stageSelector.addEventListener('change', () => {
-    adminStageId = elements.stageSelector.value;
+  el.regularTabBtn.addEventListener('click', () => switchAdminType('regular'));
+  el.extraTabBtn.addEventListener('click', () => switchAdminType('extra'));
+  el.stageSelector.addEventListener('change', () => {
+    adminStageId = el.stageSelector.value;
     adminCaseId = 1;
     renderAdmin();
   });
-  elements.caseSelector.addEventListener('change', () => {
-    adminCaseId = Number(elements.caseSelector.value || 1);
+  el.caseSelector.addEventListener('change', () => {
+    adminCaseId = Number(el.caseSelector.value || 1);
     renderItemsEditor();
   });
-  elements.forcePickSelector.addEventListener('change', () => {
+  el.forcePickSelector.addEventListener('change', () => {
     const stage = getStage(adminStageId);
     if (!stage) return;
-    stage.forceNext = elements.forcePickSelector.value || '';
+    stage.forceNext = el.forcePickSelector.value || '';
     saveConfig();
   });
 
-  elements.addItemBtn.addEventListener('click', addItem);
-  elements.copyToAllBtn.addEventListener('click', copyCaseToAll);
-  elements.copyStageTypeBtn.addEventListener('click', copyStageType);
-  elements.resetCurrentStageBtn.addEventListener('click', resetOpenedForAdminStage);
-  elements.resetAllStagesBtn.addEventListener('click', resetAll);
-  elements.saveConfigBtn.addEventListener('click', downloadConfig);
-  elements.importConfigBtn.addEventListener('click', () => elements.configInput.click());
-  elements.configInput.addEventListener('change', importConfig);
+  el.addItemBtn.addEventListener('click', addItem);
+  el.copyToAllBtn.addEventListener('click', copyCaseToAll);
+  el.copyStageTypeBtn.addEventListener('click', copyStageType);
+  el.resetCurrentStageBtn.addEventListener('click', resetCurrentStageOpened);
+  el.resetAllStagesBtn.addEventListener('click', resetAll);
+  el.saveConfigBtn.addEventListener('click', downloadConfig);
+  el.importConfigBtn.addEventListener('click', () => el.configInput.click());
+  el.configInput.addEventListener('change', importConfig);
 
-  elements.stageJumpSelect.addEventListener('change', () => setCurrentStage(elements.stageJumpSelect.value));
-  elements.prevStageBtn.addEventListener('click', prevStage);
-  elements.nextStageBtn.addEventListener('click', nextStage);
-  elements.finishStageBtn.addEventListener('click', finishStage);
-  elements.newGameBtn.addEventListener('click', newGame);
+  el.stageJumpSelect.addEventListener('change', () => setCurrentStage(el.stageJumpSelect.value));
+  el.newGameBtn.addEventListener('click', newGame);
+  el.finishStageBtn.addEventListener('click', finishStage);
+  el.prevStageBtn.addEventListener('click', prevStage);
+  el.nextStageBtn.addEventListener('click', nextStage);
 
-  elements.closeModalBtn.addEventListener('click', onCloseSpinRequest);
-  elements.resultCloseBtn.addEventListener('click', onCloseSpinRequest);
-  elements.closeRouletteBackdrop.addEventListener('click', onCloseSpinRequest);
+  el.closeSpinBtn.addEventListener('click', onSpinCloseRequest);
+  el.skipSpinBtn.addEventListener('click', onSpinCloseRequest);
+  el.spinModal.addEventListener('click', (event) => {
+    const target = event.target;
+    if (target instanceof HTMLElement && target.dataset.closeSpin) onSpinCloseRequest();
+  });
 
   window.addEventListener('keydown', (event) => {
     if (event.key === 'Escape') {
-      if (!elements.adminModal.classList.contains('hidden')) toggleAdmin(false);
-      else if (!elements.rouletteModal.classList.contains('hidden')) onCloseSpinRequest();
+      if (!el.adminModal.classList.contains('hidden')) toggleAdmin(false);
+      if (!el.spinModal.classList.contains('hidden')) onSpinCloseRequest();
     }
-    if (event.code === 'Space' && spin.active && !elements.rouletteModal.classList.contains('hidden')) {
+    if (event.code === 'Space' && spinState && !el.spinModal.classList.contains('hidden')) {
       event.preventDefault();
-      fastForwardSpin();
+      skipSpin();
     }
   });
 }
 
-function renderApp() {
-  const stage = getCurrentStage();
-  document.body.classList.toggle('extra-theme', stage.type === 'extra');
-  renderHeader(stage);
+function renderAll() {
+  renderHeader();
   renderStageStrip();
   renderPool();
   renderCases();
   renderAdmin();
 }
 
-function renderHeader(stage) {
-  elements.currentStageTitle.textContent = stage.label;
-  elements.stageDescription.textContent = stage.description;
-  elements.stageTypeBadge.textContent = stage.type === 'extra' ? 'Экстра этап' : 'Обычный этап';
-  elements.stageJumpSelect.innerHTML = config.stages.map((s) => `<option value="${s.id}" ${s.id === config.currentStageId ? 'selected' : ''}>${escapeHtml(s.label)}</option>`).join('');
-  const index = STAGES.findIndex((s) => s.id === stage.id);
-  elements.prevStageBtn.disabled = index <= 0;
-  elements.nextStageBtn.disabled = index >= STAGES.length - 1;
-  elements.finishStageBtn.textContent = session.finished.includes(stage.id) ? 'Этап завершён' : 'Завершить этап';
+function renderHeader() {
+  const stage = getCurrentStage();
+  el.body.classList.toggle('extra-theme', stage.type === 'extra');
+  el.stageBadge.textContent = stage.type === 'extra' ? 'ЭКСТРА ЭТАП' : 'ОБЫЧНЫЙ ЭТАП';
+  el.stageTitle.textContent = stage.label;
+  el.stageDescription.textContent = stage.description;
+  el.stageJumpSelect.innerHTML = config.stages.map((s) => `<option value="${s.id}" ${s.id === config.currentStageId ? 'selected' : ''}>${escapeHtml(s.label)}</option>`).join('');
+  const idx = STAGE_DEFS.findIndex((s) => s.id === config.currentStageId);
+  el.prevStageBtn.disabled = idx <= 0;
+  el.nextStageBtn.disabled = idx >= STAGE_DEFS.length - 1;
+  el.finishStageBtn.textContent = session.finished.includes(stage.id) ? 'Этап завершён' : 'Завершить этап';
 }
 
 function renderStageStrip() {
-  elements.stageStrip.innerHTML = '';
+  el.stageStrip.innerHTML = '';
   config.stages.forEach((stage) => {
-    const btn = document.createElement('button');
-    btn.type = 'button';
-    btn.className = 'stage-chip';
-    if (stage.id === config.currentStageId) btn.classList.add('is-active');
-    if (session.finished.includes(stage.id)) btn.classList.add('is-finished');
-    btn.innerHTML = `
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'stage-chip';
+    if (stage.id === config.currentStageId) button.classList.add('is-active');
+    if (session.finished.includes(stage.id)) button.classList.add('is-finished');
+    button.innerHTML = `
       <div class="stage-chip-top">${escapeHtml(stage.type === 'extra' ? 'Экстра' : 'Обычный')}</div>
       <div class="stage-chip-title">${escapeHtml(stage.short)} · ${escapeHtml(stage.label)}</div>
       <div class="stage-chip-meta">${session.finished.includes(stage.id) ? 'завершён' : 'в процессе'}</div>
     `;
-    btn.addEventListener('click', () => setCurrentStage(stage.id));
-    elements.stageStrip.appendChild(btn);
+    button.addEventListener('click', () => setCurrentStage(stage.id));
+    el.stageStrip.appendChild(button);
   });
 }
 
 function renderPool() {
   const items = getPreviewItems(getCurrentStage());
-  elements.poolPreview.innerHTML = '';
+  el.poolPreview.innerHTML = '';
   items.forEach((item) => {
     const card = document.createElement('div');
-    card.className = `pool-card rarity-${item.rarity}`;
-    const effectClass = `effect-${item.effect}`;
+    card.className = `pool-card effect-${item.effect} rarity-${item.rarity}`;
     card.innerHTML = `
-      <div class="pool-card-art"></div>
-      <div class="pool-card-name">${escapeHtml(item.name)}</div>
-      <div class="pool-card-rarity">${escapeHtml(rarityLabel[item.rarity] || '')}</div>
-      <div class="pool-card-effect ${effectClass}">${escapeHtml(effectLabel[item.effect])}</div>
+      <div class="pool-art"></div>
+      <div class="pool-name">${escapeHtml(item.name)}</div>
+      <div class="pool-rarity">${escapeHtml(rarityLabels[item.rarity] || '')}</div>
+      <div class="pool-effect">${escapeHtml(effectLabels[item.effect])}</div>
     `;
-    setBg(card.querySelector('.pool-card-art'), item.image);
-    elements.poolPreview.appendChild(card);
+    setBg(card.querySelector('.pool-art'), item.image);
+    el.poolPreview.appendChild(card);
   });
 }
 
 function renderCases() {
   const stage = getCurrentStage();
   const opened = getOpened(stage.id);
-  const tpl = document.getElementById('caseCardTemplate');
-  elements.casesGrid.innerHTML = '';
+  const tpl = document.getElementById('caseTemplate');
+  el.casesGrid.innerHTML = '';
   stage.cases.forEach((box) => {
     const node = tpl.content.firstElementChild.cloneNode(true);
     const openedItem = opened[String(box.id)] || null;
-    node.querySelector('.case-number').textContent = `#${box.id}`;
-    node.querySelector('.case-title').textContent = box.name;
+    node.querySelector('.case-num').textContent = `#${box.id}`;
+    node.querySelector('.case-name').textContent = box.name;
     if (openedItem) {
       node.classList.add('is-opened');
-      node.querySelector('.case-status').textContent = 'ОТКРЫТ';
-      node.querySelector('.case-caption').innerHTML = `Выпал:<br><strong>${escapeHtml(openedItem.name)}</strong>`;
+      node.querySelector('.case-state').textContent = 'ОТКРЫТ';
+      node.querySelector('.case-text').innerHTML = `Выпал:<br><strong>${escapeHtml(openedItem.name)}</strong>`;
     } else {
-      node.querySelector('.case-status').textContent = stage.type === 'extra' ? 'ЭКСТРА' : 'ЗАКРЫТ';
-      node.querySelector('.case-caption').textContent = `${box.items.length} предметов внутри`;
+      node.querySelector('.case-state').textContent = stage.type === 'extra' ? 'ЭКСТРА' : 'ЗАКРЫТ';
+      node.querySelector('.case-text').textContent = `${box.items.length} предметов внутри`;
     }
-    node.addEventListener('click', () => onCaseClick(stage.id, box.id));
-    elements.casesGrid.appendChild(node);
+    node.addEventListener('click', () => onCaseClick(box.id));
+    el.casesGrid.appendChild(node);
   });
 }
 
 function renderAdmin() {
-  elements.regularTabBtn.classList.toggle('active', adminType === 'regular');
-  elements.extraTabBtn.classList.toggle('active', adminType === 'extra');
-
-  const stageOptions = config.stages.filter((s) => s.type === adminType);
-  if (!stageOptions.some((s) => s.id === adminStageId)) {
-    adminStageId = stageOptions[0]?.id || config.currentStageId;
-    adminCaseId = 1;
-  }
-
-  elements.stageSelector.innerHTML = stageOptions.map((s) => `<option value="${s.id}" ${s.id === adminStageId ? 'selected' : ''}>${escapeHtml(s.label)}</option>`).join('');
+  el.regularTabBtn.classList.toggle('active', adminType === 'regular');
+  el.extraTabBtn.classList.toggle('active', adminType === 'extra');
+  let visibleStages = config.stages.filter((s) => s.type === adminType);
+  if (!visibleStages.some((s) => s.id === adminStageId)) adminStageId = visibleStages[0]?.id || config.currentStageId;
   const stage = getStage(adminStageId);
   if (!stage) return;
-
   if (!stage.cases.some((c) => c.id === adminCaseId)) adminCaseId = 1;
-  elements.caseSelector.innerHTML = stage.cases.map((c) => `<option value="${c.id}" ${c.id === adminCaseId ? 'selected' : ''}>${c.id}. ${escapeHtml(c.name)}</option>`).join('');
 
+  el.stageSelector.innerHTML = visibleStages.map((s) => `<option value="${s.id}" ${s.id === adminStageId ? 'selected' : ''}>${escapeHtml(s.label)}</option>`).join('');
+  el.caseSelector.innerHTML = stage.cases.map((c) => `<option value="${c.id}" ${c.id === adminCaseId ? 'selected' : ''}>${c.id}. ${escapeHtml(c.name)}</option>`).join('');
   const previewItems = getPreviewItems(stage);
-  elements.forcePickSelector.innerHTML = `<option value="">Случайно по шансам</option>` + previewItems.map((item) => {
+  el.forcePickSelector.innerHTML = `<option value="">Случайно по шансам</option>` + previewItems.map((item) => {
     const sig = itemSignature(item);
-    const selected = stage.forceNext === sig ? 'selected' : '';
-    return `<option value="${escapeHtml(sig)}" ${selected}>${escapeHtml(item.name)} — ${escapeHtml(effectLabel[item.effect])}</option>`;
+    return `<option value="${escapeHtml(sig)}" ${stage.forceNext === sig ? 'selected' : ''}>${escapeHtml(item.name)} — ${escapeHtml(effectLabels[item.effect])}</option>`;
   }).join('');
-
   renderItemsEditor();
 }
 
 function renderItemsEditor() {
   const box = getAdminCase();
   if (!box) return;
+  el.itemsEditor.innerHTML = '';
   const tpl = document.getElementById('editorItemTemplate');
-  elements.itemsEditor.innerHTML = '';
 
   box.items.forEach((item) => {
-    const node = tpl.content.firstElementChild.cloneNode(true);
-    const thumb = node.querySelector('.editor-thumb');
-    const nameEl = node.querySelector('.editor-preview-name');
-    const effectEl = node.querySelector('.editor-preview-effect');
+    const card = tpl.content.firstElementChild.cloneNode(true);
+    const thumb = card.querySelector('.editor-thumb');
+    const nameCopy = card.querySelector('.editor-preview-name');
+    const effectCopy = card.querySelector('.editor-preview-effect');
     setBg(thumb, item.image);
-    nameEl.textContent = item.name;
-    effectEl.textContent = effectLabel[item.effect];
+    nameCopy.textContent = item.name;
+    effectCopy.textContent = effectLabels[item.effect];
 
-    node.querySelectorAll('[data-field]').forEach((field) => {
+    card.querySelectorAll('[data-field]').forEach((field) => {
       const key = field.dataset.field;
       if (key === 'file') {
         field.addEventListener('change', async () => {
           const file = field.files?.[0];
           if (!file) return;
           item.image = await fileToDataUrl(file);
-          saveConfig();
           setBg(thumb, item.image);
+          saveConfig();
+          nameCopy.textContent = item.name;
+          effectCopy.textContent = effectLabels[item.effect];
           renderPool();
           renderCases();
-          renderAdmin();
+          updateForcePickOptions();
         });
         return;
       }
-
-      field.value = item[key];
-      const ev = field.tagName === 'SELECT' ? 'change' : 'input';
-      field.addEventListener(ev, () => {
-        let value = field.value;
-        if (key === 'weight') value = Math.max(1, Number(value) || 1);
-        if (key === 'rarity') value = normalizeRarity(value);
-        if (key === 'effect') value = normalizeEffect(value);
-        item[key] = value;
+      field.value = String(item[key] ?? '');
+      const eventName = field.tagName === 'SELECT' ? 'change' : 'input';
+      field.addEventListener(eventName, () => {
+        if (key === 'weight') item.weight = Math.max(1, Number(field.value) || 1);
+        else if (key === 'rarity') item.rarity = normalizeRarity(field.value);
+        else if (key === 'effect') item.effect = normalizeEffect(field.value);
+        else item[key] = field.value;
+        setBg(thumb, item.image);
+        nameCopy.textContent = item.name;
+        effectCopy.textContent = effectLabels[item.effect];
         saveConfig();
-        if (key === 'image') setBg(thumb, item.image);
-        if (key === 'name') nameEl.textContent = item.name;
-        if (key === 'effect') effectEl.textContent = effectLabel[item.effect];
         renderPool();
         renderCases();
-        refreshForcePickOptions();
+        updateForcePickOptions();
       });
     });
 
-    node.querySelector('.remove-item-btn').addEventListener('click', () => {
-      const items = getAdminCase().items;
-      const idx = items.findIndex((x) => x.id === item.id);
-      if (idx >= 0) items.splice(idx, 1);
-      if (!items.length) items.push(defaultItem('Новый предмет'));
+    card.querySelector('.remove-item-btn').addEventListener('click', () => {
+      const targetBox = getAdminCase();
+      const idx = targetBox.items.findIndex((x) => x.id === item.id);
+      if (idx >= 0) targetBox.items.splice(idx, 1);
+      if (!targetBox.items.length) targetBox.items.push(defaultItem('Новый предмет'));
       saveConfig();
       renderAdmin();
       renderPool();
       renderCases();
     });
 
-    elements.itemsEditor.appendChild(node);
+    el.itemsEditor.appendChild(card);
   });
 }
 
-function refreshForcePickOptions() {
+function updateForcePickOptions() {
   const stage = getStage(adminStageId);
   if (!stage) return;
-  const current = stage.forceNext || '';
-  renderAdmin();
-  elements.forcePickSelector.value = current;
+  const current = stage.forceNext;
+  const items = getPreviewItems(stage);
+  el.forcePickSelector.innerHTML = `<option value="">Случайно по шансам</option>` + items.map((item) => {
+    const sig = itemSignature(item);
+    return `<option value="${escapeHtml(sig)}" ${current === sig ? 'selected' : ''}>${escapeHtml(item.name)} — ${escapeHtml(effectLabels[item.effect])}</option>`;
+  }).join('');
 }
 
 function switchAdminType(type) {
   adminType = type;
-  const first = config.stages.find((s) => s.type === type);
-  if (first) adminStageId = first.id;
+  adminStageId = config.stages.find((s) => s.type === type)?.id || config.currentStageId;
   adminCaseId = 1;
   renderAdmin();
 }
 
 function toggleAdmin(open) {
-  elements.adminModal.classList.toggle('hidden', !open);
-  elements.adminModal.setAttribute('aria-hidden', String(!open));
+  el.adminModal.classList.toggle('hidden', !open);
+  el.adminModal.setAttribute('aria-hidden', String(!open));
 }
 
-function setCurrentStage(stageId) {
-  if (spin.active) return;
-  const stage = getStage(stageId);
-  if (!stage) return;
-  config.currentStageId = stageId;
-  adminType = stage.type;
-  adminStageId = stageId;
-  adminCaseId = 1;
-  saveConfig();
-  closeSpin(true);
-  renderApp();
-}
-
-function prevStage() {
-  if (spin.active) return;
-  const idx = STAGES.findIndex((s) => s.id === config.currentStageId);
-  if (idx > 0) setCurrentStage(STAGES[idx - 1].id);
-}
-
-function nextStage() {
-  if (spin.active) return;
-  const idx = STAGES.findIndex((s) => s.id === config.currentStageId);
-  if (idx < STAGES.length - 1) {
-    finishStage(false);
-    setCurrentStage(STAGES[idx + 1].id);
-  }
-}
-
-function finishStage(showAlert = true) {
-  const id = config.currentStageId;
-  if (!session.finished.includes(id)) session.finished.push(id);
-  saveSession();
-  renderHeader(getCurrentStage());
-  renderStageStrip();
-  if (showAlert) alert('Этап отмечен как завершённый.');
-}
-
-function newGame() {
-  session = makeSession();
-  config.currentStageId = STAGES[0].id;
-  saveSession();
-  saveConfig();
-  closeSpin(true);
-  renderApp();
-}
-
-function onCaseClick(stageId, caseId) {
-  if (spin.active) return;
-  const stage = getStage(stageId);
+function onCaseClick(caseId) {
+  if (spinState) return;
+  const stage = getCurrentStage();
   const box = getCase(stage, caseId);
-  if (!stage || !box) return;
-  const opened = getOpened(stageId)[String(caseId)];
+  const opened = getOpened(stage.id)[String(caseId)];
   if (opened) {
-    openSpinModal(`${stage.label} · ${box.name}`);
+    openSpinModal(stage.label + ' · ' + box.name);
     showResult(opened, true);
     return;
   }
@@ -411,110 +350,175 @@ function onCaseClick(stageId, caseId) {
 
 function startSpin(stage, box) {
   const winner = resolveWinner(stage, box);
-  spin = { active: true, stageId: stage.id, caseId: box.id, winner, timer: null, targetOffset: 0 };
-  openSpinModal(`${stage.label} · ${box.name}`);
-  elements.modalHint.textContent = 'Пробел, крестик или кнопка ниже сразу докручивают до результата.';
-  elements.resultCloseBtn.textContent = 'Пропустить';
-  elements.resultCard.className = 'result-card hidden';
-  elements.resultCard.innerHTML = '';
-  elements.rouletteTrack.style.transition = 'none';
-  elements.rouletteTrack.style.transform = 'translateX(0px)';
-  populateTrack(box, winner);
-  playSpinSound();
+  const items = buildTrackItems(box.items, winner);
+  spinState = {
+    active: true,
+    stageId: stage.id,
+    caseId: box.id,
+    winner,
+    skipped: false,
+    timer: null,
+    fallbackTimer: null,
+    targetX: 0,
+  };
+  openSpinModal(stage.label + ' · ' + box.name);
+  el.resultCard.className = 'result-card hidden';
+  el.resultCard.innerHTML = '';
+  el.skipSpinBtn.textContent = 'Пропустить';
+  el.spinHint.textContent = 'Пробел или кнопка ниже — сразу показать результат.';
+  populateTrack(items);
+  playSound('spin');
 
-  requestAnimationFrame(() => {
-    const wrapper = elements.rouletteTrack.parentElement;
-    const cardWidth = 182;
-    const winnerIndex = 38;
-    const center = (wrapper.clientWidth || 960) / 2;
-    spin.targetOffset = (winnerIndex * cardWidth) - center + (cardWidth / 2) + rand(-12, 12);
-    elements.rouletteTrack.style.transition = 'transform 6.2s cubic-bezier(0.07, 0.78, 0.16, 1)';
-    elements.rouletteTrack.style.transform = `translateX(-${spin.targetOffset}px)`;
-    spin.timer = window.setTimeout(() => finalizeSpin(false), 6250);
+  raf(() => {
+    const container = el.rouletteTrack.parentElement;
+    const itemWidth = 184;
+    const gap = 14;
+    const winnerIndex = 24;
+    const center = (container.clientWidth || 900) / 2;
+    const offset = winnerIndex * (itemWidth + gap) - center + itemWidth / 2;
+    spinState.targetX = offset;
+    el.rouletteTrack.style.transition = 'transform 3.2s cubic-bezier(0.08, 0.8, 0.18, 1)';
+    el.rouletteTrack.style.transform = `translateX(-${offset}px)`;
+    spinState.timer = setTimeout(finalizeSpin, 3250);
+    spinState.fallbackTimer = setTimeout(finalizeSpin, 3800);
   });
 }
 
-function populateTrack(box, winner) {
-  elements.rouletteTrack.innerHTML = '';
-  const total = 46;
-  const winnerIndex = 38;
-  for (let i = 0; i < total; i += 1) {
-    const item = i === winnerIndex ? winner : weightedPick(box.items);
-    const card = document.createElement('div');
-    card.className = `roulette-item rarity-${item.rarity}`;
-    card.innerHTML = `
-      <div class="roulette-art"></div>
-      <div class="roulette-name">${escapeHtml(item.name)}</div>
-      <div class="roulette-line">${escapeHtml(effectLabel[item.effect])}</div>
-    `;
-    setBg(card.querySelector('.roulette-art'), item.image);
-    elements.rouletteTrack.appendChild(card);
+function buildTrackItems(sourceItems, winner) {
+  const arr = [];
+  for (let i = 0; i < 32; i += 1) {
+    arr.push(i === 24 ? cloneItem(winner) : weightedPick(sourceItems));
   }
+  return arr;
 }
 
-function fastForwardSpin() {
-  if (!spin.active) return;
-  window.clearTimeout(spin.timer);
-  elements.rouletteTrack.style.transition = 'transform 0.18s ease-out';
-  elements.rouletteTrack.style.transform = `translateX(-${spin.targetOffset}px)`;
-  spin.timer = window.setTimeout(() => finalizeSpin(true), 190);
+function populateTrack(items) {
+  el.rouletteTrack.innerHTML = '';
+  el.rouletteTrack.style.transition = 'none';
+  el.rouletteTrack.style.transform = 'translateX(0px)';
+  items.forEach((item) => {
+    const node = document.createElement('div');
+    node.className = `roulette-item rarity-${item.rarity}`;
+    node.innerHTML = `
+      <div class="roulette-item-art"></div>
+      <div class="roulette-item-name">${escapeHtml(item.name)}</div>
+      <div class="roulette-item-line">${escapeHtml(effectLabels[item.effect])}</div>
+    `;
+    setBg(node.querySelector('.roulette-item-art'), item.image);
+    el.rouletteTrack.appendChild(node);
+  });
+}
+
+function skipSpin() {
+  if (!spinState) return;
+  clearTimeout(spinState.timer);
+  clearTimeout(spinState.fallbackTimer);
+  el.rouletteTrack.style.transition = 'transform 0.15s ease-out';
+  el.rouletteTrack.style.transform = `translateX(-${spinState.targetX}px)`;
+  spinState.timer = setTimeout(finalizeSpin, 170);
 }
 
 function finalizeSpin() {
-  if (!spin.active || !spin.winner) return;
-  window.clearTimeout(spin.timer);
-  const stageId = spin.stageId;
-  const caseId = spin.caseId;
-  const winner = cloneItem(spin.winner);
-  spin.active = false;
-  getOpened(stageId)[String(caseId)] = winner;
+  if (!spinState || !spinState.active) return;
+  clearTimeout(spinState.timer);
+  clearTimeout(spinState.fallbackTimer);
+  const current = spinState;
+  const winner = cloneItem(current.winner);
+  spinState.active = false;
+  getOpened(current.stageId)[String(current.caseId)] = winner;
   saveSession();
   renderCases();
   showResult(winner, false);
 }
 
-function showResult(item, openedAlready) {
-  const rarity = rarityLabel[item.rarity] || '';
-  const headline = openedAlready ? 'УЖЕ ОТКРЫТ' : effectLabel[item.effect];
-  elements.resultCard.className = `result-card effect-${item.effect}`;
-  elements.resultCard.classList.remove('hidden');
-  elements.resultCard.innerHTML = `
+function showResult(item, wasOpened) {
+  el.resultCard.className = `result-card effect-${item.effect}`;
+  el.resultCard.classList.remove('hidden');
+  const rarity = rarityLabels[item.rarity] || '';
+  el.resultCard.innerHTML = `
     <div class="result-inner rarity-${item.rarity}">
       <div class="result-art"></div>
       <div class="result-copy">
-        <div class="result-headline">${escapeHtml(headline)}</div>
+        <div class="result-headline">${escapeHtml(wasOpened ? 'УЖЕ ОТКРЫТ' : resultHeadlines[item.effect])}</div>
         <h3>${escapeHtml(item.name)}</h3>
-        <div class="result-effect">${escapeHtml(effectSubLabel[item.effect])}</div>
+        <div class="result-effect">${escapeHtml(effectLabels[item.effect])}</div>
         <div class="result-rarity">Редкость: ${escapeHtml(rarity)}</div>
       </div>
     </div>
   `;
-  setBg(elements.resultCard.querySelector('.result-art'), item.image);
-  elements.resultCloseBtn.textContent = 'Закрыть';
-  if (!openedAlready) playResultSound(item.effect);
+  setBg(el.resultCard.querySelector('.result-art'), item.image);
+  el.skipSpinBtn.textContent = 'Закрыть';
+  el.spinHint.textContent = 'Нажми кнопку ниже или крестик, чтобы закрыть окно.';
+  if (!wasOpened) playSound(item.effect);
 }
 
-function onCloseSpinRequest() {
-  if (spin.active) {
-    fastForwardSpin();
+function onSpinCloseRequest() {
+  if (spinState && spinState.active) {
+    skipSpin();
     return;
   }
-  closeSpin(true);
+  closeSpinModal();
 }
 
 function openSpinModal(title) {
-  elements.modalTitle.textContent = title;
-  elements.rouletteModal.classList.remove('hidden');
-  elements.rouletteModal.setAttribute('aria-hidden', 'false');
+  el.spinTitle.textContent = title;
+  el.spinModal.classList.remove('hidden');
+  el.spinModal.setAttribute('aria-hidden', 'false');
 }
 
-function closeSpin(force = false) {
-  if (spin.active && !force) return;
-  if (spin.timer) window.clearTimeout(spin.timer);
-  spin.timer = null;
-  spin.active = false;
-  elements.rouletteModal.classList.add('hidden');
-  elements.rouletteModal.setAttribute('aria-hidden', 'true');
+function closeSpinModal() {
+  if (spinState) {
+    clearTimeout(spinState.timer);
+    clearTimeout(spinState.fallbackTimer);
+  }
+  spinState = null;
+  el.spinModal.classList.add('hidden');
+  el.spinModal.setAttribute('aria-hidden', 'true');
+  el.rouletteTrack.style.transition = 'none';
+}
+
+function setCurrentStage(stageId) {
+  if (spinState && spinState.active) return;
+  const stage = getStage(stageId);
+  if (!stage) return;
+  config.currentStageId = stage.id;
+  adminType = stage.type;
+  adminStageId = stage.id;
+  adminCaseId = 1;
+  saveConfig();
+  renderAll();
+}
+
+function prevStage() {
+  if (spinState && spinState.active) return;
+  const idx = STAGE_DEFS.findIndex((s) => s.id === config.currentStageId);
+  if (idx > 0) setCurrentStage(STAGE_DEFS[idx - 1].id);
+}
+
+function nextStage() {
+  if (spinState && spinState.active) return;
+  const idx = STAGE_DEFS.findIndex((s) => s.id === config.currentStageId);
+  if (idx < STAGE_DEFS.length - 1) {
+    finishStage(false);
+    setCurrentStage(STAGE_DEFS[idx + 1].id);
+  }
+}
+
+function finishStage(showAlert = true) {
+  const stageId = config.currentStageId;
+  if (!session.finished.includes(stageId)) session.finished.push(stageId);
+  saveSession();
+  renderHeader();
+  renderStageStrip();
+  if (showAlert) alert('Этап отмечен как завершённый.');
+}
+
+function newGame() {
+  session = makeSession();
+  config.currentStageId = STAGE_DEFS[0].id;
+  saveSession();
+  saveConfig();
+  try { location.reload(); } catch { renderAll(); }
 }
 
 function addItem() {
@@ -525,18 +529,14 @@ function addItem() {
   renderAdmin();
   renderPool();
   renderCases();
-  requestAnimationFrame(() => {
-    const input = elements.itemsEditor.querySelector('.editor-card:last-child input[data-field="name"]');
-    if (input) input.focus();
-  });
 }
 
 function copyCaseToAll() {
   const stage = getStage(adminStageId);
-  const source = getAdminCase();
-  if (!stage || !source) return;
-  stage.cases.forEach((box) => {
-    box.items = source.items.map(cloneItem);
+  const box = getAdminCase();
+  if (!stage || !box) return;
+  stage.cases.forEach((c) => {
+    c.items = box.items.map(cloneItem);
   });
   saveConfig();
   renderAdmin();
@@ -545,17 +545,17 @@ function copyCaseToAll() {
 }
 
 function copyStageType() {
-  const source = getStage(adminStageId);
-  if (!source) return;
-  const payload = source.cases.map((box) => ({ id: box.id, name: box.name, items: box.items.map(cloneItem) }));
-  config.stages.filter((s) => s.type === source.type).forEach((stage) => {
+  const sourceStage = getStage(adminStageId);
+  if (!sourceStage) return;
+  const payload = sourceStage.cases.map((box) => ({ id: box.id, name: box.name, items: box.items.map(cloneItem) }));
+  config.stages.filter((s) => s.type === sourceStage.type).forEach((stage) => {
     stage.cases = payload.map((box) => ({ id: box.id, name: box.name, items: box.items.map(cloneItem) }));
   });
   saveConfig();
-  renderApp();
+  renderAll();
 }
 
-function resetOpenedForAdminStage() {
+function resetCurrentStageOpened() {
   session.openedByStage[adminStageId] = {};
   saveSession();
   if (adminStageId === config.currentStageId) renderCases();
@@ -570,8 +570,19 @@ function resetAll() {
   adminCaseId = 1;
   saveConfig();
   saveSession();
-  closeSpin(true);
-  renderApp();
+  renderAll();
+}
+
+function importConfig(event) {
+  const file = event.target.files?.[0];
+  if (!file) return;
+  file.text().then((text) => {
+    config = normalizeConfig(JSON.parse(text));
+    saveConfig();
+    renderAll();
+  }).catch(() => alert('Не удалось импортировать config.json')).finally(() => {
+    event.target.value = '';
+  });
 }
 
 function downloadConfig() {
@@ -582,20 +593,6 @@ function downloadConfig() {
   a.download = 'config.json';
   a.click();
   URL.revokeObjectURL(url);
-}
-
-async function importConfig(event) {
-  const file = event.target.files?.[0];
-  if (!file) return;
-  try {
-    config = normalizeConfig(JSON.parse(await file.text()));
-    saveConfig();
-    renderApp();
-  } catch {
-    alert('Не удалось импортировать config.json');
-  } finally {
-    event.target.value = '';
-  }
 }
 
 function resolveWinner(stage, box) {
@@ -610,6 +607,20 @@ function resolveWinner(stage, box) {
   return weightedPick(box.items);
 }
 
+function getPreviewItems(stage) {
+  const out = [];
+  const seen = new Set();
+  stage.cases.forEach((box) => {
+    box.items.forEach((item) => {
+      const sig = itemSignature(item);
+      if (seen.has(sig)) return;
+      seen.add(sig);
+      out.push(cloneItem(item));
+    });
+  });
+  return out;
+}
+
 function weightedPick(items) {
   const list = items.map(cloneItem);
   const total = list.reduce((sum, item) => sum + Math.max(1, Number(item.weight) || 1), 0);
@@ -618,21 +629,7 @@ function weightedPick(items) {
     roll -= Math.max(1, Number(item.weight) || 1);
     if (roll <= 0) return item;
   }
-  return list[list.length - 1];
-}
-
-function getPreviewItems(stage) {
-  const out = [];
-  const seen = new Set();
-  stage.cases.forEach((box) => {
-    box.items.forEach((item) => {
-      const key = itemSignature(item);
-      if (seen.has(key)) return;
-      seen.add(key);
-      out.push(cloneItem(item));
-    });
-  });
-  return out;
+  return cloneItem(list[list.length - 1]);
 }
 
 function getCurrentStage() {
@@ -640,7 +637,7 @@ function getCurrentStage() {
 }
 
 function getStage(id) {
-  return config.stages.find((s) => s.id === id);
+  return config.stages.find((s) => s.id === id) || null;
 }
 
 function getCase(stage, caseId) {
@@ -656,19 +653,45 @@ function getOpened(stageId) {
   return session.openedByStage[stageId];
 }
 
+function loadConfig() {
+  try {
+    const parsed = JSON.parse(localStorage.getItem(STORAGE_CONFIG) || 'null');
+    return normalizeConfig(parsed);
+  } catch {
+    return makeConfig();
+  }
+}
+
+function loadSession() {
+  try {
+    const parsed = JSON.parse(localStorage.getItem(STORAGE_SESSION) || 'null');
+    return normalizeSession(parsed);
+  } catch {
+    return makeSession();
+  }
+}
+
+function saveConfig() {
+  localStorage.setItem(STORAGE_CONFIG, JSON.stringify(config));
+}
+
+function saveSession() {
+  localStorage.setItem(STORAGE_SESSION, JSON.stringify(session));
+}
+
 function makeConfig() {
   return {
-    currentStageId: STAGES[0].id,
-    stages: STAGES.map((stage) => ({
+    currentStageId: STAGE_DEFS[0].id,
+    stages: STAGE_DEFS.map((stage) => ({
       id: stage.id,
       type: stage.type,
       label: stage.label,
       short: stage.short,
       description: stage.description,
       forceNext: '',
-      cases: Array.from({ length: 16 }, (_, i) => ({
-        id: i + 1,
-        name: `Кейс ${String(i + 1).padStart(2, '0')}`,
+      cases: Array.from({ length: 16 }, (_, idx) => ({
+        id: idx + 1,
+        name: `Кейс ${String(idx + 1).padStart(2, '0')}`,
         items: defaultItems(stage.type).map(cloneItem),
       })),
     })),
@@ -678,8 +701,51 @@ function makeConfig() {
 function makeSession() {
   return {
     finished: [],
-    openedByStage: Object.fromEntries(STAGES.map((s) => [s.id, {}])),
+    openedByStage: Object.fromEntries(STAGE_DEFS.map((stage) => [stage.id, {}])),
   };
+}
+
+function normalizeConfig(raw) {
+  const base = makeConfig();
+  const currentStageId = STAGE_DEFS.some((s) => s.id === raw?.currentStageId) ? raw.currentStageId : base.currentStageId;
+  const stages = STAGE_DEFS.map((def) => {
+    const sourceStage = Array.isArray(raw?.stages) ? raw.stages.find((s) => s?.id === def.id) : null;
+    const sourceCases = Array.isArray(sourceStage?.cases) ? sourceStage.cases : [];
+    return {
+      id: def.id,
+      type: def.type,
+      label: def.label,
+      short: def.short,
+      description: def.description,
+      forceNext: String(sourceStage?.forceNext || ''),
+      cases: Array.from({ length: 16 }, (_, idx) => {
+        const sourceCase = sourceCases.find((c) => Number(c?.id) === idx + 1) || sourceCases[idx] || {};
+        const items = Array.isArray(sourceCase.items) && sourceCase.items.length ? sourceCase.items.map(cloneItem) : defaultItems(def.type).map(cloneItem);
+        return {
+          id: idx + 1,
+          name: String(sourceCase.name || `Кейс ${String(idx + 1).padStart(2, '0')}`),
+          items,
+        };
+      }),
+    };
+  });
+  return { currentStageId, stages };
+}
+
+function normalizeSession(raw) {
+  const base = makeSession();
+  if (Array.isArray(raw?.finished)) base.finished = raw.finished.filter((id) => STAGE_DEFS.some((s) => s.id === id));
+  if (raw?.openedByStage && typeof raw.openedByStage === 'object') {
+    STAGE_DEFS.forEach((stage) => {
+      const sourceOpened = raw.openedByStage[stage.id];
+      if (!sourceOpened || typeof sourceOpened !== 'object') return;
+      base.openedByStage[stage.id] = {};
+      Object.entries(sourceOpened).forEach(([key, value]) => {
+        base.openedByStage[stage.id][key] = cloneItem(value);
+      });
+    });
+  }
+  return base;
 }
 
 function defaultItems(type) {
@@ -723,173 +789,47 @@ function cloneItem(item) {
   };
 }
 
-function normalizeConfig(raw) {
-  const base = makeConfig();
-  const currentStageId = STAGES.some((s) => s.id === raw?.currentStageId) ? raw.currentStageId : base.currentStageId;
-  const stages = STAGES.map((def) => {
-    const source = Array.isArray(raw?.stages) ? raw.stages.find((s) => s?.id === def.id) : null;
-    const sourceCases = Array.isArray(source?.cases) ? source.cases : [];
-    return {
-      id: def.id,
-      type: def.type,
-      label: def.label,
-      short: def.short,
-      description: def.description,
-      forceNext: String(source?.forceNext || source?.forcedNextItemSignature || ''),
-      cases: Array.from({ length: 16 }, (_, idx) => {
-        const fromList = sourceCases.find((c) => Number(c?.id) === idx + 1) || sourceCases[idx] || {};
-        const items = Array.isArray(fromList.items) && fromList.items.length ? fromList.items.map(cloneItem) : defaultItems(def.type).map(cloneItem);
-        return {
-          id: idx + 1,
-          name: String(fromList.name || `Кейс ${String(idx + 1).padStart(2, '0')}`),
-          items,
-        };
-      }),
-    };
-  });
-  return { currentStageId, stages };
-}
-
-function normalizeSession(raw) {
-  const base = makeSession();
-  if (Array.isArray(raw?.finished)) base.finished = raw.finished.filter((id) => STAGES.some((s) => s.id === id));
-  if (Array.isArray(raw?.finishedStageIds)) base.finished = raw.finishedStageIds.filter((id) => STAGES.some((s) => s.id === id));
-  const source = raw?.openedByStage && typeof raw.openedByStage === 'object' ? raw.openedByStage : {};
-  STAGES.forEach((stage) => {
-    const opened = source[stage.id];
-    if (!opened || typeof opened !== 'object') return;
-    const normalized = {};
-    Object.entries(opened).forEach(([caseId, item]) => {
-      normalized[String(caseId)] = cloneItem(item);
-    });
-    base.openedByStage[stage.id] = normalized;
-  });
-  return base;
-}
-
-function loadConfig() {
-  const values = [localStorage.getItem(CONFIG_KEY), ...LEGACY_CONFIG_KEYS.map((k) => localStorage.getItem(k))].filter(Boolean);
-  for (const raw of values) {
-    try {
-      const cfg = normalizeConfig(JSON.parse(raw));
-      localStorage.setItem(CONFIG_KEY, JSON.stringify(cfg));
-      return cfg;
-    } catch {}
-  }
-  return makeConfig();
-}
-
-function loadSession() {
-  const values = [sessionStorage.getItem(SESSION_KEY), ...LEGACY_SESSION_KEYS.map((k) => sessionStorage.getItem(k))].filter(Boolean);
-  for (const raw of values) {
-    try {
-      const data = normalizeSession(JSON.parse(raw));
-      sessionStorage.setItem(SESSION_KEY, JSON.stringify(data));
-      return data;
-    } catch {}
-  }
-  return makeSession();
-}
-
-function saveConfig() {
-  localStorage.setItem(CONFIG_KEY, JSON.stringify(config));
-}
-
-function saveSession() {
-  sessionStorage.setItem(SESSION_KEY, JSON.stringify(session));
-}
-
 function normalizeRarity(value) {
-  return ['consumer', 'industrial', 'mil-spec', 'restricted', 'classified', 'covert', 'rare'].includes(value) ? value : 'consumer';
+  return rarityLabels[value] ? value : 'consumer';
 }
 
 function normalizeEffect(value) {
-  return ['empty', 'plus', 'auto', 'bomb'].includes(value) ? value : 'empty';
+  return effectLabels[value] ? value : 'empty';
 }
 
 function itemSignature(item) {
-  const x = cloneItem(item);
-  return `${x.name}__${x.effect}__${x.image}`;
+  return [item.name, item.image, item.rarity, item.effect, item.weight].join('::');
 }
 
 function setBg(node, image) {
-  node.style.backgroundImage = `linear-gradient(180deg, rgba(0,0,0,0.08), rgba(0,0,0,0.34)), url("${escapeCss(image)}")`;
+  if (!node) return;
+  node.style.backgroundImage = image ? `linear-gradient(135deg, rgba(50, 76, 120, 0.1), rgba(20, 30, 47, 0.3)), url("${escapeAttr(image)}")` : 'linear-gradient(135deg, rgba(67,98,156,0.55), rgba(22,33,55,0.92))';
 }
 
-function placeholderImage(label, effect) {
-  const bg = { empty: '1c273b', plus: '5b4314', auto: '5c520d', bomb: '5a1620' }[effect] || '1c273b';
-  const fg = { empty: 'd8e8ff', plus: 'ffd86a', auto: 'fff1b7', bomb: 'ff9cad' }[effect] || 'ffffff';
-  const safe = String(label || 'Item').replace(/[&<>]/g, '');
-  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512"><defs><linearGradient id="g" x1="0" x2="1" y1="0" y2="1"><stop offset="0%" stop-color="#${bg}"/><stop offset="100%" stop-color="#0b1220"/></linearGradient></defs><rect width="100%" height="100%" fill="url(#g)"/><circle cx="256" cy="170" r="110" fill="#${fg}" fill-opacity="0.14"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="#${fg}" font-size="44" font-family="Arial,sans-serif" font-weight="700">${safe}</text></svg>`;
+function placeholderImage(text, effect) {
+  const bg = effect === 'bomb' ? '#7d1724' : effect === 'auto' ? '#77610a' : effect === 'plus' ? '#7a5514' : '#20334e';
+  const fg = effect === 'bomb' ? '#ffdce1' : '#fff6c0';
+  const svg = `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+      <defs>
+        <linearGradient id="g" x1="0" x2="1" y1="0" y2="1">
+          <stop offset="0" stop-color="${bg}" />
+          <stop offset="1" stop-color="#08111a" />
+        </linearGradient>
+      </defs>
+      <rect width="512" height="512" rx="40" fill="url(#g)" />
+      <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="${fg}" font-family="Arial, sans-serif" font-size="54" font-weight="900">${escapeSvg(text.slice(0, 14))}</text>
+    </svg>`;
   return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
 }
 
 function fileToDataUrl(file) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
-    reader.onload = () => resolve(String(reader.result));
+    reader.onload = () => resolve(String(reader.result || ''));
     reader.onerror = reject;
     reader.readAsDataURL(file);
   });
-}
-
-function getCtx() {
-  if (!audioContext) {
-    const Ctx = window.AudioContext || window.webkitAudioContext;
-    if (!Ctx) return null;
-    audioContext = new Ctx();
-  }
-  if (audioContext.state === 'suspended') audioContext.resume().catch(() => {});
-  return audioContext;
-}
-
-function playTone(freq, duration, type = 'triangle', volume = 0.04, delay = 0) {
-  const ctx = getCtx();
-  if (!ctx) return;
-  const osc = ctx.createOscillator();
-  const gain = ctx.createGain();
-  const start = ctx.currentTime + delay;
-  const end = start + duration;
-  osc.type = type;
-  osc.frequency.setValueAtTime(freq, start);
-  gain.gain.setValueAtTime(0.0001, start);
-  gain.gain.linearRampToValueAtTime(volume, start + 0.02);
-  gain.gain.exponentialRampToValueAtTime(0.0001, end);
-  osc.connect(gain).connect(ctx.destination);
-  osc.start(start);
-  osc.stop(end + 0.03);
-}
-
-function playSpinSound() {
-  playTone(320, 0.08, 'triangle', 0.03, 0);
-  playTone(420, 0.08, 'triangle', 0.03, 0.08);
-}
-
-function playResultSound(effect) {
-  if (effect === 'plus') {
-    playTone(523, 0.16, 'triangle', 0.05, 0);
-    playTone(659, 0.16, 'triangle', 0.05, 0.12);
-    playTone(784, 0.22, 'triangle', 0.055, 0.25);
-  } else if (effect === 'auto') {
-    playTone(392, 0.14, 'sawtooth', 0.05, 0);
-    playTone(587, 0.18, 'triangle', 0.05, 0.12);
-    playTone(784, 0.2, 'triangle', 0.055, 0.28);
-    playTone(988, 0.24, 'triangle', 0.05, 0.4);
-  } else if (effect === 'bomb') {
-    playTone(220, 0.18, 'sawtooth', 0.055, 0);
-    playTone(150, 0.24, 'square', 0.055, 0.13);
-  } else {
-    playTone(340, 0.12, 'sine', 0.038, 0);
-    playTone(286, 0.14, 'sine', 0.03, 0.12);
-  }
-}
-
-function makeId() {
-  return `${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 8)}`;
-}
-
-function rand(min, max) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
 function escapeHtml(value) {
@@ -898,9 +838,45 @@ function escapeHtml(value) {
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#039;');
+    .replace(/'/g, '&#39;');
 }
 
-function escapeCss(value) {
-  return String(value).replace(/"/g, '\\"');
+function escapeAttr(value) {
+  return String(value).replace(/"/g, '&quot;');
+}
+
+function escapeSvg(value) {
+  return String(value).replace(/[&<>"']/g, '');
+}
+
+function makeId() {
+  return Math.random().toString(36).slice(2, 10);
+}
+
+function playSound(kind) {
+  try {
+    if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    const now = audioCtx.currentTime;
+    const settings = {
+      spin: [[440, 0.03], [520, 0.03], [620, 0.03]],
+      plus: [[620, 0.08], [740, 0.08], [900, 0.14]],
+      auto: [[560, 0.08], [760, 0.08], [980, 0.14], [1240, 0.18]],
+      bomb: [[240, 0.14], [160, 0.2]],
+      empty: [[360, 0.08], [300, 0.08]],
+    }[kind] || [[420, 0.05]];
+    settings.forEach(([freq, len], index) => {
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.type = kind === 'bomb' ? 'sawtooth' : 'triangle';
+      osc.frequency.value = freq;
+      gain.gain.setValueAtTime(0.0001, now + index * 0.06);
+      gain.gain.exponentialRampToValueAtTime(kind === 'spin' ? 0.015 : 0.04, now + index * 0.06 + 0.01);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + index * 0.06 + len);
+      osc.connect(gain).connect(audioCtx.destination);
+      osc.start(now + index * 0.06);
+      osc.stop(now + index * 0.06 + len + 0.02);
+    });
+  } catch {
+    // no-op
+  }
 }
