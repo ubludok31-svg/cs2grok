@@ -1,0 +1,4076 @@
+{
+  "currentStageId": "round1",
+  "finishedStageIds": [],
+  "stages": [
+    {
+      "id": "round1",
+      "type": "regular",
+      "label": "Раунд 1",
+      "shortLabel": "R1",
+      "description": "Обычный этап · Выбирай кейс по номеру · Призовой вкус — пиши в чат.",
+      "forcedNextItemSignature": "",
+      "cases": [
+        {
+          "id": 1,
+          "name": "Кейс 01",
+          "items": [
+            {
+              "id": "item_1774721969024_579562",
+              "name": "Манго",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Mango",
+              "weight": 5,
+              "rarity": "industrial",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_587635",
+              "name": "Клубника",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Strawberry",
+              "weight": 4,
+              "rarity": "mil-spec",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_547059",
+              "name": "Авто плюс 1",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Auto%20Plus%201",
+              "weight": 2,
+              "rarity": "restricted",
+              "effect": "auto"
+            },
+            {
+              "id": "item_1774721969024_746259",
+              "name": "Бомба",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Bomb",
+              "weight": 1,
+              "rarity": "covert",
+              "effect": "bomb"
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "name": "Кейс 02",
+          "items": [
+            {
+              "id": "item_1774721969024_579562",
+              "name": "Манго",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Mango",
+              "weight": 5,
+              "rarity": "industrial",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_587635",
+              "name": "Клубника",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Strawberry",
+              "weight": 4,
+              "rarity": "mil-spec",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_547059",
+              "name": "Авто плюс 1",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Auto%20Plus%201",
+              "weight": 2,
+              "rarity": "restricted",
+              "effect": "auto"
+            },
+            {
+              "id": "item_1774721969024_746259",
+              "name": "Бомба",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Bomb",
+              "weight": 1,
+              "rarity": "covert",
+              "effect": "bomb"
+            }
+          ]
+        },
+        {
+          "id": 3,
+          "name": "Кейс 03",
+          "items": [
+            {
+              "id": "item_1774721969024_579562",
+              "name": "Манго",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Mango",
+              "weight": 5,
+              "rarity": "industrial",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_587635",
+              "name": "Клубника",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Strawberry",
+              "weight": 4,
+              "rarity": "mil-spec",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_547059",
+              "name": "Авто плюс 1",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Auto%20Plus%201",
+              "weight": 2,
+              "rarity": "restricted",
+              "effect": "auto"
+            },
+            {
+              "id": "item_1774721969024_746259",
+              "name": "Бомба",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Bomb",
+              "weight": 1,
+              "rarity": "covert",
+              "effect": "bomb"
+            }
+          ]
+        },
+        {
+          "id": 4,
+          "name": "Кейс 04",
+          "items": [
+            {
+              "id": "item_1774721969024_579562",
+              "name": "Манго",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Mango",
+              "weight": 5,
+              "rarity": "industrial",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_587635",
+              "name": "Клубника",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Strawberry",
+              "weight": 4,
+              "rarity": "mil-spec",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_547059",
+              "name": "Авто плюс 1",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Auto%20Plus%201",
+              "weight": 2,
+              "rarity": "restricted",
+              "effect": "auto"
+            },
+            {
+              "id": "item_1774721969024_746259",
+              "name": "Бомба",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Bomb",
+              "weight": 1,
+              "rarity": "covert",
+              "effect": "bomb"
+            }
+          ]
+        },
+        {
+          "id": 5,
+          "name": "Кейс 05",
+          "items": [
+            {
+              "id": "item_1774721969024_579562",
+              "name": "Манго",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Mango",
+              "weight": 5,
+              "rarity": "industrial",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_587635",
+              "name": "Клубника",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Strawberry",
+              "weight": 4,
+              "rarity": "mil-spec",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_547059",
+              "name": "Авто плюс 1",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Auto%20Plus%201",
+              "weight": 2,
+              "rarity": "restricted",
+              "effect": "auto"
+            },
+            {
+              "id": "item_1774721969024_746259",
+              "name": "Бомба",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Bomb",
+              "weight": 1,
+              "rarity": "covert",
+              "effect": "bomb"
+            }
+          ]
+        },
+        {
+          "id": 6,
+          "name": "Кейс 06",
+          "items": [
+            {
+              "id": "item_1774721969024_579562",
+              "name": "Манго",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Mango",
+              "weight": 5,
+              "rarity": "industrial",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_587635",
+              "name": "Клубника",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Strawberry",
+              "weight": 4,
+              "rarity": "mil-spec",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_547059",
+              "name": "Авто плюс 1",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Auto%20Plus%201",
+              "weight": 2,
+              "rarity": "restricted",
+              "effect": "auto"
+            },
+            {
+              "id": "item_1774721969024_746259",
+              "name": "Бомба",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Bomb",
+              "weight": 1,
+              "rarity": "covert",
+              "effect": "bomb"
+            }
+          ]
+        },
+        {
+          "id": 7,
+          "name": "Кейс 07",
+          "items": [
+            {
+              "id": "item_1774721969024_579562",
+              "name": "Манго",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Mango",
+              "weight": 5,
+              "rarity": "industrial",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_587635",
+              "name": "Клубника",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Strawberry",
+              "weight": 4,
+              "rarity": "mil-spec",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_547059",
+              "name": "Авто плюс 1",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Auto%20Plus%201",
+              "weight": 2,
+              "rarity": "restricted",
+              "effect": "auto"
+            },
+            {
+              "id": "item_1774721969024_746259",
+              "name": "Бомба",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Bomb",
+              "weight": 1,
+              "rarity": "covert",
+              "effect": "bomb"
+            }
+          ]
+        },
+        {
+          "id": 8,
+          "name": "Кейс 08",
+          "items": [
+            {
+              "id": "item_1774721969024_579562",
+              "name": "Манго",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Mango",
+              "weight": 5,
+              "rarity": "industrial",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_587635",
+              "name": "Клубника",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Strawberry",
+              "weight": 4,
+              "rarity": "mil-spec",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_547059",
+              "name": "Авто плюс 1",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Auto%20Plus%201",
+              "weight": 2,
+              "rarity": "restricted",
+              "effect": "auto"
+            },
+            {
+              "id": "item_1774721969024_746259",
+              "name": "Бомба",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Bomb",
+              "weight": 1,
+              "rarity": "covert",
+              "effect": "bomb"
+            }
+          ]
+        },
+        {
+          "id": 9,
+          "name": "Кейс 09",
+          "items": [
+            {
+              "id": "item_1774721969024_579562",
+              "name": "Манго",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Mango",
+              "weight": 5,
+              "rarity": "industrial",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_587635",
+              "name": "Клубника",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Strawberry",
+              "weight": 4,
+              "rarity": "mil-spec",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_547059",
+              "name": "Авто плюс 1",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Auto%20Plus%201",
+              "weight": 2,
+              "rarity": "restricted",
+              "effect": "auto"
+            },
+            {
+              "id": "item_1774721969024_746259",
+              "name": "Бомба",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Bomb",
+              "weight": 1,
+              "rarity": "covert",
+              "effect": "bomb"
+            }
+          ]
+        },
+        {
+          "id": 10,
+          "name": "Кейс 10",
+          "items": [
+            {
+              "id": "item_1774721969024_579562",
+              "name": "Манго",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Mango",
+              "weight": 5,
+              "rarity": "industrial",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_587635",
+              "name": "Клубника",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Strawberry",
+              "weight": 4,
+              "rarity": "mil-spec",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_547059",
+              "name": "Авто плюс 1",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Auto%20Plus%201",
+              "weight": 2,
+              "rarity": "restricted",
+              "effect": "auto"
+            },
+            {
+              "id": "item_1774721969024_746259",
+              "name": "Бомба",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Bomb",
+              "weight": 1,
+              "rarity": "covert",
+              "effect": "bomb"
+            }
+          ]
+        },
+        {
+          "id": 11,
+          "name": "Кейс 11",
+          "items": [
+            {
+              "id": "item_1774721969024_579562",
+              "name": "Манго",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Mango",
+              "weight": 5,
+              "rarity": "industrial",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_587635",
+              "name": "Клубника",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Strawberry",
+              "weight": 4,
+              "rarity": "mil-spec",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_547059",
+              "name": "Авто плюс 1",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Auto%20Plus%201",
+              "weight": 2,
+              "rarity": "restricted",
+              "effect": "auto"
+            },
+            {
+              "id": "item_1774721969024_746259",
+              "name": "Бомба",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Bomb",
+              "weight": 1,
+              "rarity": "covert",
+              "effect": "bomb"
+            }
+          ]
+        },
+        {
+          "id": 12,
+          "name": "Кейс 12",
+          "items": [
+            {
+              "id": "item_1774721969024_579562",
+              "name": "Манго",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Mango",
+              "weight": 5,
+              "rarity": "industrial",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_587635",
+              "name": "Клубника",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Strawberry",
+              "weight": 4,
+              "rarity": "mil-spec",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_547059",
+              "name": "Авто плюс 1",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Auto%20Plus%201",
+              "weight": 2,
+              "rarity": "restricted",
+              "effect": "auto"
+            },
+            {
+              "id": "item_1774721969024_746259",
+              "name": "Бомба",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Bomb",
+              "weight": 1,
+              "rarity": "covert",
+              "effect": "bomb"
+            }
+          ]
+        },
+        {
+          "id": 13,
+          "name": "Кейс 13",
+          "items": [
+            {
+              "id": "item_1774721969024_579562",
+              "name": "Манго",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Mango",
+              "weight": 5,
+              "rarity": "industrial",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_587635",
+              "name": "Клубника",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Strawberry",
+              "weight": 4,
+              "rarity": "mil-spec",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_547059",
+              "name": "Авто плюс 1",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Auto%20Plus%201",
+              "weight": 2,
+              "rarity": "restricted",
+              "effect": "auto"
+            },
+            {
+              "id": "item_1774721969024_746259",
+              "name": "Бомба",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Bomb",
+              "weight": 1,
+              "rarity": "covert",
+              "effect": "bomb"
+            }
+          ]
+        },
+        {
+          "id": 14,
+          "name": "Кейс 14",
+          "items": [
+            {
+              "id": "item_1774721969024_579562",
+              "name": "Манго",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Mango",
+              "weight": 5,
+              "rarity": "industrial",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_587635",
+              "name": "Клубника",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Strawberry",
+              "weight": 4,
+              "rarity": "mil-spec",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_547059",
+              "name": "Авто плюс 1",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Auto%20Plus%201",
+              "weight": 2,
+              "rarity": "restricted",
+              "effect": "auto"
+            },
+            {
+              "id": "item_1774721969024_746259",
+              "name": "Бомба",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Bomb",
+              "weight": 1,
+              "rarity": "covert",
+              "effect": "bomb"
+            }
+          ]
+        },
+        {
+          "id": 15,
+          "name": "Кейс 15",
+          "items": [
+            {
+              "id": "item_1774721969024_579562",
+              "name": "Манго",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Mango",
+              "weight": 5,
+              "rarity": "industrial",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_587635",
+              "name": "Клубника",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Strawberry",
+              "weight": 4,
+              "rarity": "mil-spec",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_547059",
+              "name": "Авто плюс 1",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Auto%20Plus%201",
+              "weight": 2,
+              "rarity": "restricted",
+              "effect": "auto"
+            },
+            {
+              "id": "item_1774721969024_746259",
+              "name": "Бомба",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Bomb",
+              "weight": 1,
+              "rarity": "covert",
+              "effect": "bomb"
+            }
+          ]
+        },
+        {
+          "id": 16,
+          "name": "Кейс 16",
+          "items": [
+            {
+              "id": "item_1774721969024_579562",
+              "name": "Манго",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Mango",
+              "weight": 5,
+              "rarity": "industrial",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_587635",
+              "name": "Клубника",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Strawberry",
+              "weight": 4,
+              "rarity": "mil-spec",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_547059",
+              "name": "Авто плюс 1",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Auto%20Plus%201",
+              "weight": 2,
+              "rarity": "restricted",
+              "effect": "auto"
+            },
+            {
+              "id": "item_1774721969024_746259",
+              "name": "Бомба",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Bomb",
+              "weight": 1,
+              "rarity": "covert",
+              "effect": "bomb"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "round2",
+      "type": "regular",
+      "label": "Раунд 2",
+      "shortLabel": "R2",
+      "description": "Обычный этап · Выбирай кейс по номеру · Призовой вкус — пиши в чат.",
+      "forcedNextItemSignature": "",
+      "cases": [
+        {
+          "id": 1,
+          "name": "Кейс 01",
+          "items": [
+            {
+              "id": "item_1774721969024_601244",
+              "name": "Манго",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Mango",
+              "weight": 5,
+              "rarity": "industrial",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_579976",
+              "name": "Клубника",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Strawberry",
+              "weight": 4,
+              "rarity": "mil-spec",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_765400",
+              "name": "Авто плюс 1",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Auto%20Plus%201",
+              "weight": 2,
+              "rarity": "restricted",
+              "effect": "auto"
+            },
+            {
+              "id": "item_1774721969024_630129",
+              "name": "Бомба",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Bomb",
+              "weight": 1,
+              "rarity": "covert",
+              "effect": "bomb"
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "name": "Кейс 02",
+          "items": [
+            {
+              "id": "item_1774721969024_601244",
+              "name": "Манго",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Mango",
+              "weight": 5,
+              "rarity": "industrial",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_579976",
+              "name": "Клубника",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Strawberry",
+              "weight": 4,
+              "rarity": "mil-spec",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_765400",
+              "name": "Авто плюс 1",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Auto%20Plus%201",
+              "weight": 2,
+              "rarity": "restricted",
+              "effect": "auto"
+            },
+            {
+              "id": "item_1774721969024_630129",
+              "name": "Бомба",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Bomb",
+              "weight": 1,
+              "rarity": "covert",
+              "effect": "bomb"
+            }
+          ]
+        },
+        {
+          "id": 3,
+          "name": "Кейс 03",
+          "items": [
+            {
+              "id": "item_1774721969024_601244",
+              "name": "Манго",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Mango",
+              "weight": 5,
+              "rarity": "industrial",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_579976",
+              "name": "Клубника",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Strawberry",
+              "weight": 4,
+              "rarity": "mil-spec",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_765400",
+              "name": "Авто плюс 1",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Auto%20Plus%201",
+              "weight": 2,
+              "rarity": "restricted",
+              "effect": "auto"
+            },
+            {
+              "id": "item_1774721969024_630129",
+              "name": "Бомба",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Bomb",
+              "weight": 1,
+              "rarity": "covert",
+              "effect": "bomb"
+            }
+          ]
+        },
+        {
+          "id": 4,
+          "name": "Кейс 04",
+          "items": [
+            {
+              "id": "item_1774721969024_601244",
+              "name": "Манго",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Mango",
+              "weight": 5,
+              "rarity": "industrial",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_579976",
+              "name": "Клубника",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Strawberry",
+              "weight": 4,
+              "rarity": "mil-spec",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_765400",
+              "name": "Авто плюс 1",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Auto%20Plus%201",
+              "weight": 2,
+              "rarity": "restricted",
+              "effect": "auto"
+            },
+            {
+              "id": "item_1774721969024_630129",
+              "name": "Бомба",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Bomb",
+              "weight": 1,
+              "rarity": "covert",
+              "effect": "bomb"
+            }
+          ]
+        },
+        {
+          "id": 5,
+          "name": "Кейс 05",
+          "items": [
+            {
+              "id": "item_1774721969024_601244",
+              "name": "Манго",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Mango",
+              "weight": 5,
+              "rarity": "industrial",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_579976",
+              "name": "Клубника",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Strawberry",
+              "weight": 4,
+              "rarity": "mil-spec",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_765400",
+              "name": "Авто плюс 1",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Auto%20Plus%201",
+              "weight": 2,
+              "rarity": "restricted",
+              "effect": "auto"
+            },
+            {
+              "id": "item_1774721969024_630129",
+              "name": "Бомба",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Bomb",
+              "weight": 1,
+              "rarity": "covert",
+              "effect": "bomb"
+            }
+          ]
+        },
+        {
+          "id": 6,
+          "name": "Кейс 06",
+          "items": [
+            {
+              "id": "item_1774721969024_601244",
+              "name": "Манго",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Mango",
+              "weight": 5,
+              "rarity": "industrial",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_579976",
+              "name": "Клубника",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Strawberry",
+              "weight": 4,
+              "rarity": "mil-spec",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_765400",
+              "name": "Авто плюс 1",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Auto%20Plus%201",
+              "weight": 2,
+              "rarity": "restricted",
+              "effect": "auto"
+            },
+            {
+              "id": "item_1774721969024_630129",
+              "name": "Бомба",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Bomb",
+              "weight": 1,
+              "rarity": "covert",
+              "effect": "bomb"
+            }
+          ]
+        },
+        {
+          "id": 7,
+          "name": "Кейс 07",
+          "items": [
+            {
+              "id": "item_1774721969024_601244",
+              "name": "Манго",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Mango",
+              "weight": 5,
+              "rarity": "industrial",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_579976",
+              "name": "Клубника",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Strawberry",
+              "weight": 4,
+              "rarity": "mil-spec",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_765400",
+              "name": "Авто плюс 1",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Auto%20Plus%201",
+              "weight": 2,
+              "rarity": "restricted",
+              "effect": "auto"
+            },
+            {
+              "id": "item_1774721969024_630129",
+              "name": "Бомба",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Bomb",
+              "weight": 1,
+              "rarity": "covert",
+              "effect": "bomb"
+            }
+          ]
+        },
+        {
+          "id": 8,
+          "name": "Кейс 08",
+          "items": [
+            {
+              "id": "item_1774721969024_601244",
+              "name": "Манго",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Mango",
+              "weight": 5,
+              "rarity": "industrial",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_579976",
+              "name": "Клубника",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Strawberry",
+              "weight": 4,
+              "rarity": "mil-spec",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_765400",
+              "name": "Авто плюс 1",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Auto%20Plus%201",
+              "weight": 2,
+              "rarity": "restricted",
+              "effect": "auto"
+            },
+            {
+              "id": "item_1774721969024_630129",
+              "name": "Бомба",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Bomb",
+              "weight": 1,
+              "rarity": "covert",
+              "effect": "bomb"
+            }
+          ]
+        },
+        {
+          "id": 9,
+          "name": "Кейс 09",
+          "items": [
+            {
+              "id": "item_1774721969024_601244",
+              "name": "Манго",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Mango",
+              "weight": 5,
+              "rarity": "industrial",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_579976",
+              "name": "Клубника",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Strawberry",
+              "weight": 4,
+              "rarity": "mil-spec",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_765400",
+              "name": "Авто плюс 1",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Auto%20Plus%201",
+              "weight": 2,
+              "rarity": "restricted",
+              "effect": "auto"
+            },
+            {
+              "id": "item_1774721969024_630129",
+              "name": "Бомба",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Bomb",
+              "weight": 1,
+              "rarity": "covert",
+              "effect": "bomb"
+            }
+          ]
+        },
+        {
+          "id": 10,
+          "name": "Кейс 10",
+          "items": [
+            {
+              "id": "item_1774721969024_601244",
+              "name": "Манго",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Mango",
+              "weight": 5,
+              "rarity": "industrial",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_579976",
+              "name": "Клубника",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Strawberry",
+              "weight": 4,
+              "rarity": "mil-spec",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_765400",
+              "name": "Авто плюс 1",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Auto%20Plus%201",
+              "weight": 2,
+              "rarity": "restricted",
+              "effect": "auto"
+            },
+            {
+              "id": "item_1774721969024_630129",
+              "name": "Бомба",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Bomb",
+              "weight": 1,
+              "rarity": "covert",
+              "effect": "bomb"
+            }
+          ]
+        },
+        {
+          "id": 11,
+          "name": "Кейс 11",
+          "items": [
+            {
+              "id": "item_1774721969024_601244",
+              "name": "Манго",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Mango",
+              "weight": 5,
+              "rarity": "industrial",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_579976",
+              "name": "Клубника",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Strawberry",
+              "weight": 4,
+              "rarity": "mil-spec",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_765400",
+              "name": "Авто плюс 1",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Auto%20Plus%201",
+              "weight": 2,
+              "rarity": "restricted",
+              "effect": "auto"
+            },
+            {
+              "id": "item_1774721969024_630129",
+              "name": "Бомба",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Bomb",
+              "weight": 1,
+              "rarity": "covert",
+              "effect": "bomb"
+            }
+          ]
+        },
+        {
+          "id": 12,
+          "name": "Кейс 12",
+          "items": [
+            {
+              "id": "item_1774721969024_601244",
+              "name": "Манго",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Mango",
+              "weight": 5,
+              "rarity": "industrial",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_579976",
+              "name": "Клубника",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Strawberry",
+              "weight": 4,
+              "rarity": "mil-spec",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_765400",
+              "name": "Авто плюс 1",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Auto%20Plus%201",
+              "weight": 2,
+              "rarity": "restricted",
+              "effect": "auto"
+            },
+            {
+              "id": "item_1774721969024_630129",
+              "name": "Бомба",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Bomb",
+              "weight": 1,
+              "rarity": "covert",
+              "effect": "bomb"
+            }
+          ]
+        },
+        {
+          "id": 13,
+          "name": "Кейс 13",
+          "items": [
+            {
+              "id": "item_1774721969024_601244",
+              "name": "Манго",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Mango",
+              "weight": 5,
+              "rarity": "industrial",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_579976",
+              "name": "Клубника",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Strawberry",
+              "weight": 4,
+              "rarity": "mil-spec",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_765400",
+              "name": "Авто плюс 1",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Auto%20Plus%201",
+              "weight": 2,
+              "rarity": "restricted",
+              "effect": "auto"
+            },
+            {
+              "id": "item_1774721969024_630129",
+              "name": "Бомба",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Bomb",
+              "weight": 1,
+              "rarity": "covert",
+              "effect": "bomb"
+            }
+          ]
+        },
+        {
+          "id": 14,
+          "name": "Кейс 14",
+          "items": [
+            {
+              "id": "item_1774721969024_601244",
+              "name": "Манго",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Mango",
+              "weight": 5,
+              "rarity": "industrial",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_579976",
+              "name": "Клубника",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Strawberry",
+              "weight": 4,
+              "rarity": "mil-spec",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_765400",
+              "name": "Авто плюс 1",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Auto%20Plus%201",
+              "weight": 2,
+              "rarity": "restricted",
+              "effect": "auto"
+            },
+            {
+              "id": "item_1774721969024_630129",
+              "name": "Бомба",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Bomb",
+              "weight": 1,
+              "rarity": "covert",
+              "effect": "bomb"
+            }
+          ]
+        },
+        {
+          "id": 15,
+          "name": "Кейс 15",
+          "items": [
+            {
+              "id": "item_1774721969024_601244",
+              "name": "Манго",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Mango",
+              "weight": 5,
+              "rarity": "industrial",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_579976",
+              "name": "Клубника",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Strawberry",
+              "weight": 4,
+              "rarity": "mil-spec",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_765400",
+              "name": "Авто плюс 1",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Auto%20Plus%201",
+              "weight": 2,
+              "rarity": "restricted",
+              "effect": "auto"
+            },
+            {
+              "id": "item_1774721969024_630129",
+              "name": "Бомба",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Bomb",
+              "weight": 1,
+              "rarity": "covert",
+              "effect": "bomb"
+            }
+          ]
+        },
+        {
+          "id": 16,
+          "name": "Кейс 16",
+          "items": [
+            {
+              "id": "item_1774721969024_601244",
+              "name": "Манго",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Mango",
+              "weight": 5,
+              "rarity": "industrial",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_579976",
+              "name": "Клубника",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Strawberry",
+              "weight": 4,
+              "rarity": "mil-spec",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_765400",
+              "name": "Авто плюс 1",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Auto%20Plus%201",
+              "weight": 2,
+              "rarity": "restricted",
+              "effect": "auto"
+            },
+            {
+              "id": "item_1774721969024_630129",
+              "name": "Бомба",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Bomb",
+              "weight": 1,
+              "rarity": "covert",
+              "effect": "bomb"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "extra1",
+      "type": "extra",
+      "label": "Экстра Раунд 1",
+      "shortLabel": "EX1",
+      "description": "Экстра этап · Выбирай кейс по номеру · Призовой вкус — пиши в чат.",
+      "forcedNextItemSignature": "",
+      "cases": [
+        {
+          "id": 1,
+          "name": "Кейс 01",
+          "items": [
+            {
+              "id": "item_1774721969024_525478",
+              "name": "Манго Экстра",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Extra%20Mango",
+              "weight": 5,
+              "rarity": "rare",
+              "effect": "plus"
+            },
+            {
+              "id": "item_1774721969024_448466",
+              "name": "Арбуз Экстра",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Extra%20Watermelon",
+              "weight": 4,
+              "rarity": "classified",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_665874",
+              "name": "Авто плюс 1",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Auto%20Plus%201",
+              "weight": 2,
+              "rarity": "rare",
+              "effect": "auto"
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "name": "Кейс 02",
+          "items": [
+            {
+              "id": "item_1774721969024_525478",
+              "name": "Манго Экстра",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Extra%20Mango",
+              "weight": 5,
+              "rarity": "rare",
+              "effect": "plus"
+            },
+            {
+              "id": "item_1774721969024_448466",
+              "name": "Арбуз Экстра",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Extra%20Watermelon",
+              "weight": 4,
+              "rarity": "classified",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_665874",
+              "name": "Авто плюс 1",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Auto%20Plus%201",
+              "weight": 2,
+              "rarity": "rare",
+              "effect": "auto"
+            }
+          ]
+        },
+        {
+          "id": 3,
+          "name": "Кейс 03",
+          "items": [
+            {
+              "id": "item_1774721969024_525478",
+              "name": "Манго Экстра",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Extra%20Mango",
+              "weight": 5,
+              "rarity": "rare",
+              "effect": "plus"
+            },
+            {
+              "id": "item_1774721969024_448466",
+              "name": "Арбуз Экстра",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Extra%20Watermelon",
+              "weight": 4,
+              "rarity": "classified",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_665874",
+              "name": "Авто плюс 1",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Auto%20Plus%201",
+              "weight": 2,
+              "rarity": "rare",
+              "effect": "auto"
+            }
+          ]
+        },
+        {
+          "id": 4,
+          "name": "Кейс 04",
+          "items": [
+            {
+              "id": "item_1774721969024_525478",
+              "name": "Манго Экстра",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Extra%20Mango",
+              "weight": 5,
+              "rarity": "rare",
+              "effect": "plus"
+            },
+            {
+              "id": "item_1774721969024_448466",
+              "name": "Арбуз Экстра",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Extra%20Watermelon",
+              "weight": 4,
+              "rarity": "classified",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_665874",
+              "name": "Авто плюс 1",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Auto%20Plus%201",
+              "weight": 2,
+              "rarity": "rare",
+              "effect": "auto"
+            }
+          ]
+        },
+        {
+          "id": 5,
+          "name": "Кейс 05",
+          "items": [
+            {
+              "id": "item_1774721969024_525478",
+              "name": "Манго Экстра",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Extra%20Mango",
+              "weight": 5,
+              "rarity": "rare",
+              "effect": "plus"
+            },
+            {
+              "id": "item_1774721969024_448466",
+              "name": "Арбуз Экстра",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Extra%20Watermelon",
+              "weight": 4,
+              "rarity": "classified",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_665874",
+              "name": "Авто плюс 1",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Auto%20Plus%201",
+              "weight": 2,
+              "rarity": "rare",
+              "effect": "auto"
+            }
+          ]
+        },
+        {
+          "id": 6,
+          "name": "Кейс 06",
+          "items": [
+            {
+              "id": "item_1774721969024_525478",
+              "name": "Манго Экстра",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Extra%20Mango",
+              "weight": 5,
+              "rarity": "rare",
+              "effect": "plus"
+            },
+            {
+              "id": "item_1774721969024_448466",
+              "name": "Арбуз Экстра",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Extra%20Watermelon",
+              "weight": 4,
+              "rarity": "classified",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_665874",
+              "name": "Авто плюс 1",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Auto%20Plus%201",
+              "weight": 2,
+              "rarity": "rare",
+              "effect": "auto"
+            }
+          ]
+        },
+        {
+          "id": 7,
+          "name": "Кейс 07",
+          "items": [
+            {
+              "id": "item_1774721969024_525478",
+              "name": "Манго Экстра",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Extra%20Mango",
+              "weight": 5,
+              "rarity": "rare",
+              "effect": "plus"
+            },
+            {
+              "id": "item_1774721969024_448466",
+              "name": "Арбуз Экстра",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Extra%20Watermelon",
+              "weight": 4,
+              "rarity": "classified",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_665874",
+              "name": "Авто плюс 1",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Auto%20Plus%201",
+              "weight": 2,
+              "rarity": "rare",
+              "effect": "auto"
+            }
+          ]
+        },
+        {
+          "id": 8,
+          "name": "Кейс 08",
+          "items": [
+            {
+              "id": "item_1774721969024_525478",
+              "name": "Манго Экстра",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Extra%20Mango",
+              "weight": 5,
+              "rarity": "rare",
+              "effect": "plus"
+            },
+            {
+              "id": "item_1774721969024_448466",
+              "name": "Арбуз Экстра",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Extra%20Watermelon",
+              "weight": 4,
+              "rarity": "classified",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_665874",
+              "name": "Авто плюс 1",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Auto%20Plus%201",
+              "weight": 2,
+              "rarity": "rare",
+              "effect": "auto"
+            }
+          ]
+        },
+        {
+          "id": 9,
+          "name": "Кейс 09",
+          "items": [
+            {
+              "id": "item_1774721969024_525478",
+              "name": "Манго Экстра",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Extra%20Mango",
+              "weight": 5,
+              "rarity": "rare",
+              "effect": "plus"
+            },
+            {
+              "id": "item_1774721969024_448466",
+              "name": "Арбуз Экстра",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Extra%20Watermelon",
+              "weight": 4,
+              "rarity": "classified",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_665874",
+              "name": "Авто плюс 1",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Auto%20Plus%201",
+              "weight": 2,
+              "rarity": "rare",
+              "effect": "auto"
+            }
+          ]
+        },
+        {
+          "id": 10,
+          "name": "Кейс 10",
+          "items": [
+            {
+              "id": "item_1774721969024_525478",
+              "name": "Манго Экстра",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Extra%20Mango",
+              "weight": 5,
+              "rarity": "rare",
+              "effect": "plus"
+            },
+            {
+              "id": "item_1774721969024_448466",
+              "name": "Арбуз Экстра",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Extra%20Watermelon",
+              "weight": 4,
+              "rarity": "classified",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_665874",
+              "name": "Авто плюс 1",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Auto%20Plus%201",
+              "weight": 2,
+              "rarity": "rare",
+              "effect": "auto"
+            }
+          ]
+        },
+        {
+          "id": 11,
+          "name": "Кейс 11",
+          "items": [
+            {
+              "id": "item_1774721969024_525478",
+              "name": "Манго Экстра",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Extra%20Mango",
+              "weight": 5,
+              "rarity": "rare",
+              "effect": "plus"
+            },
+            {
+              "id": "item_1774721969024_448466",
+              "name": "Арбуз Экстра",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Extra%20Watermelon",
+              "weight": 4,
+              "rarity": "classified",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_665874",
+              "name": "Авто плюс 1",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Auto%20Plus%201",
+              "weight": 2,
+              "rarity": "rare",
+              "effect": "auto"
+            }
+          ]
+        },
+        {
+          "id": 12,
+          "name": "Кейс 12",
+          "items": [
+            {
+              "id": "item_1774721969024_525478",
+              "name": "Манго Экстра",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Extra%20Mango",
+              "weight": 5,
+              "rarity": "rare",
+              "effect": "plus"
+            },
+            {
+              "id": "item_1774721969024_448466",
+              "name": "Арбуз Экстра",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Extra%20Watermelon",
+              "weight": 4,
+              "rarity": "classified",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_665874",
+              "name": "Авто плюс 1",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Auto%20Plus%201",
+              "weight": 2,
+              "rarity": "rare",
+              "effect": "auto"
+            }
+          ]
+        },
+        {
+          "id": 13,
+          "name": "Кейс 13",
+          "items": [
+            {
+              "id": "item_1774721969024_525478",
+              "name": "Манго Экстра",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Extra%20Mango",
+              "weight": 5,
+              "rarity": "rare",
+              "effect": "plus"
+            },
+            {
+              "id": "item_1774721969024_448466",
+              "name": "Арбуз Экстра",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Extra%20Watermelon",
+              "weight": 4,
+              "rarity": "classified",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_665874",
+              "name": "Авто плюс 1",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Auto%20Plus%201",
+              "weight": 2,
+              "rarity": "rare",
+              "effect": "auto"
+            }
+          ]
+        },
+        {
+          "id": 14,
+          "name": "Кейс 14",
+          "items": [
+            {
+              "id": "item_1774721969024_525478",
+              "name": "Манго Экстра",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Extra%20Mango",
+              "weight": 5,
+              "rarity": "rare",
+              "effect": "plus"
+            },
+            {
+              "id": "item_1774721969024_448466",
+              "name": "Арбуз Экстра",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Extra%20Watermelon",
+              "weight": 4,
+              "rarity": "classified",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_665874",
+              "name": "Авто плюс 1",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Auto%20Plus%201",
+              "weight": 2,
+              "rarity": "rare",
+              "effect": "auto"
+            }
+          ]
+        },
+        {
+          "id": 15,
+          "name": "Кейс 15",
+          "items": [
+            {
+              "id": "item_1774721969024_525478",
+              "name": "Манго Экстра",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Extra%20Mango",
+              "weight": 5,
+              "rarity": "rare",
+              "effect": "plus"
+            },
+            {
+              "id": "item_1774721969024_448466",
+              "name": "Арбуз Экстра",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Extra%20Watermelon",
+              "weight": 4,
+              "rarity": "classified",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_665874",
+              "name": "Авто плюс 1",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Auto%20Plus%201",
+              "weight": 2,
+              "rarity": "rare",
+              "effect": "auto"
+            }
+          ]
+        },
+        {
+          "id": 16,
+          "name": "Кейс 16",
+          "items": [
+            {
+              "id": "item_1774721969024_525478",
+              "name": "Манго Экстра",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Extra%20Mango",
+              "weight": 5,
+              "rarity": "rare",
+              "effect": "plus"
+            },
+            {
+              "id": "item_1774721969024_448466",
+              "name": "Арбуз Экстра",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Extra%20Watermelon",
+              "weight": 4,
+              "rarity": "classified",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_665874",
+              "name": "Авто плюс 1",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Auto%20Plus%201",
+              "weight": 2,
+              "rarity": "rare",
+              "effect": "auto"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "round3",
+      "type": "regular",
+      "label": "Раунд 3",
+      "shortLabel": "R3",
+      "description": "Обычный этап · Выбирай кейс по номеру · Призовой вкус — пиши в чат.",
+      "forcedNextItemSignature": "",
+      "cases": [
+        {
+          "id": 1,
+          "name": "Кейс 01",
+          "items": [
+            {
+              "id": "item_1774721969024_934501",
+              "name": "Манго",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Mango",
+              "weight": 5,
+              "rarity": "industrial",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_247945",
+              "name": "Клубника",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Strawberry",
+              "weight": 4,
+              "rarity": "mil-spec",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_678949",
+              "name": "Авто плюс 1",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Auto%20Plus%201",
+              "weight": 2,
+              "rarity": "restricted",
+              "effect": "auto"
+            },
+            {
+              "id": "item_1774721969024_352866",
+              "name": "Бомба",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Bomb",
+              "weight": 1,
+              "rarity": "covert",
+              "effect": "bomb"
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "name": "Кейс 02",
+          "items": [
+            {
+              "id": "item_1774721969024_934501",
+              "name": "Манго",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Mango",
+              "weight": 5,
+              "rarity": "industrial",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_247945",
+              "name": "Клубника",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Strawberry",
+              "weight": 4,
+              "rarity": "mil-spec",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_678949",
+              "name": "Авто плюс 1",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Auto%20Plus%201",
+              "weight": 2,
+              "rarity": "restricted",
+              "effect": "auto"
+            },
+            {
+              "id": "item_1774721969024_352866",
+              "name": "Бомба",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Bomb",
+              "weight": 1,
+              "rarity": "covert",
+              "effect": "bomb"
+            }
+          ]
+        },
+        {
+          "id": 3,
+          "name": "Кейс 03",
+          "items": [
+            {
+              "id": "item_1774721969024_934501",
+              "name": "Манго",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Mango",
+              "weight": 5,
+              "rarity": "industrial",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_247945",
+              "name": "Клубника",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Strawberry",
+              "weight": 4,
+              "rarity": "mil-spec",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_678949",
+              "name": "Авто плюс 1",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Auto%20Plus%201",
+              "weight": 2,
+              "rarity": "restricted",
+              "effect": "auto"
+            },
+            {
+              "id": "item_1774721969024_352866",
+              "name": "Бомба",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Bomb",
+              "weight": 1,
+              "rarity": "covert",
+              "effect": "bomb"
+            }
+          ]
+        },
+        {
+          "id": 4,
+          "name": "Кейс 04",
+          "items": [
+            {
+              "id": "item_1774721969024_934501",
+              "name": "Манго",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Mango",
+              "weight": 5,
+              "rarity": "industrial",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_247945",
+              "name": "Клубника",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Strawberry",
+              "weight": 4,
+              "rarity": "mil-spec",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_678949",
+              "name": "Авто плюс 1",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Auto%20Plus%201",
+              "weight": 2,
+              "rarity": "restricted",
+              "effect": "auto"
+            },
+            {
+              "id": "item_1774721969024_352866",
+              "name": "Бомба",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Bomb",
+              "weight": 1,
+              "rarity": "covert",
+              "effect": "bomb"
+            }
+          ]
+        },
+        {
+          "id": 5,
+          "name": "Кейс 05",
+          "items": [
+            {
+              "id": "item_1774721969024_934501",
+              "name": "Манго",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Mango",
+              "weight": 5,
+              "rarity": "industrial",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_247945",
+              "name": "Клубника",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Strawberry",
+              "weight": 4,
+              "rarity": "mil-spec",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_678949",
+              "name": "Авто плюс 1",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Auto%20Plus%201",
+              "weight": 2,
+              "rarity": "restricted",
+              "effect": "auto"
+            },
+            {
+              "id": "item_1774721969024_352866",
+              "name": "Бомба",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Bomb",
+              "weight": 1,
+              "rarity": "covert",
+              "effect": "bomb"
+            }
+          ]
+        },
+        {
+          "id": 6,
+          "name": "Кейс 06",
+          "items": [
+            {
+              "id": "item_1774721969024_934501",
+              "name": "Манго",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Mango",
+              "weight": 5,
+              "rarity": "industrial",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_247945",
+              "name": "Клубника",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Strawberry",
+              "weight": 4,
+              "rarity": "mil-spec",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_678949",
+              "name": "Авто плюс 1",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Auto%20Plus%201",
+              "weight": 2,
+              "rarity": "restricted",
+              "effect": "auto"
+            },
+            {
+              "id": "item_1774721969024_352866",
+              "name": "Бомба",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Bomb",
+              "weight": 1,
+              "rarity": "covert",
+              "effect": "bomb"
+            }
+          ]
+        },
+        {
+          "id": 7,
+          "name": "Кейс 07",
+          "items": [
+            {
+              "id": "item_1774721969024_934501",
+              "name": "Манго",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Mango",
+              "weight": 5,
+              "rarity": "industrial",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_247945",
+              "name": "Клубника",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Strawberry",
+              "weight": 4,
+              "rarity": "mil-spec",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_678949",
+              "name": "Авто плюс 1",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Auto%20Plus%201",
+              "weight": 2,
+              "rarity": "restricted",
+              "effect": "auto"
+            },
+            {
+              "id": "item_1774721969024_352866",
+              "name": "Бомба",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Bomb",
+              "weight": 1,
+              "rarity": "covert",
+              "effect": "bomb"
+            }
+          ]
+        },
+        {
+          "id": 8,
+          "name": "Кейс 08",
+          "items": [
+            {
+              "id": "item_1774721969024_934501",
+              "name": "Манго",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Mango",
+              "weight": 5,
+              "rarity": "industrial",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_247945",
+              "name": "Клубника",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Strawberry",
+              "weight": 4,
+              "rarity": "mil-spec",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_678949",
+              "name": "Авто плюс 1",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Auto%20Plus%201",
+              "weight": 2,
+              "rarity": "restricted",
+              "effect": "auto"
+            },
+            {
+              "id": "item_1774721969024_352866",
+              "name": "Бомба",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Bomb",
+              "weight": 1,
+              "rarity": "covert",
+              "effect": "bomb"
+            }
+          ]
+        },
+        {
+          "id": 9,
+          "name": "Кейс 09",
+          "items": [
+            {
+              "id": "item_1774721969024_934501",
+              "name": "Манго",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Mango",
+              "weight": 5,
+              "rarity": "industrial",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_247945",
+              "name": "Клубника",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Strawberry",
+              "weight": 4,
+              "rarity": "mil-spec",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_678949",
+              "name": "Авто плюс 1",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Auto%20Plus%201",
+              "weight": 2,
+              "rarity": "restricted",
+              "effect": "auto"
+            },
+            {
+              "id": "item_1774721969024_352866",
+              "name": "Бомба",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Bomb",
+              "weight": 1,
+              "rarity": "covert",
+              "effect": "bomb"
+            }
+          ]
+        },
+        {
+          "id": 10,
+          "name": "Кейс 10",
+          "items": [
+            {
+              "id": "item_1774721969024_934501",
+              "name": "Манго",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Mango",
+              "weight": 5,
+              "rarity": "industrial",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_247945",
+              "name": "Клубника",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Strawberry",
+              "weight": 4,
+              "rarity": "mil-spec",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_678949",
+              "name": "Авто плюс 1",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Auto%20Plus%201",
+              "weight": 2,
+              "rarity": "restricted",
+              "effect": "auto"
+            },
+            {
+              "id": "item_1774721969024_352866",
+              "name": "Бомба",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Bomb",
+              "weight": 1,
+              "rarity": "covert",
+              "effect": "bomb"
+            }
+          ]
+        },
+        {
+          "id": 11,
+          "name": "Кейс 11",
+          "items": [
+            {
+              "id": "item_1774721969024_934501",
+              "name": "Манго",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Mango",
+              "weight": 5,
+              "rarity": "industrial",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_247945",
+              "name": "Клубника",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Strawberry",
+              "weight": 4,
+              "rarity": "mil-spec",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_678949",
+              "name": "Авто плюс 1",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Auto%20Plus%201",
+              "weight": 2,
+              "rarity": "restricted",
+              "effect": "auto"
+            },
+            {
+              "id": "item_1774721969024_352866",
+              "name": "Бомба",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Bomb",
+              "weight": 1,
+              "rarity": "covert",
+              "effect": "bomb"
+            }
+          ]
+        },
+        {
+          "id": 12,
+          "name": "Кейс 12",
+          "items": [
+            {
+              "id": "item_1774721969024_934501",
+              "name": "Манго",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Mango",
+              "weight": 5,
+              "rarity": "industrial",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_247945",
+              "name": "Клубника",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Strawberry",
+              "weight": 4,
+              "rarity": "mil-spec",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_678949",
+              "name": "Авто плюс 1",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Auto%20Plus%201",
+              "weight": 2,
+              "rarity": "restricted",
+              "effect": "auto"
+            },
+            {
+              "id": "item_1774721969024_352866",
+              "name": "Бомба",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Bomb",
+              "weight": 1,
+              "rarity": "covert",
+              "effect": "bomb"
+            }
+          ]
+        },
+        {
+          "id": 13,
+          "name": "Кейс 13",
+          "items": [
+            {
+              "id": "item_1774721969024_934501",
+              "name": "Манго",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Mango",
+              "weight": 5,
+              "rarity": "industrial",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_247945",
+              "name": "Клубника",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Strawberry",
+              "weight": 4,
+              "rarity": "mil-spec",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_678949",
+              "name": "Авто плюс 1",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Auto%20Plus%201",
+              "weight": 2,
+              "rarity": "restricted",
+              "effect": "auto"
+            },
+            {
+              "id": "item_1774721969024_352866",
+              "name": "Бомба",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Bomb",
+              "weight": 1,
+              "rarity": "covert",
+              "effect": "bomb"
+            }
+          ]
+        },
+        {
+          "id": 14,
+          "name": "Кейс 14",
+          "items": [
+            {
+              "id": "item_1774721969024_934501",
+              "name": "Манго",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Mango",
+              "weight": 5,
+              "rarity": "industrial",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_247945",
+              "name": "Клубника",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Strawberry",
+              "weight": 4,
+              "rarity": "mil-spec",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_678949",
+              "name": "Авто плюс 1",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Auto%20Plus%201",
+              "weight": 2,
+              "rarity": "restricted",
+              "effect": "auto"
+            },
+            {
+              "id": "item_1774721969024_352866",
+              "name": "Бомба",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Bomb",
+              "weight": 1,
+              "rarity": "covert",
+              "effect": "bomb"
+            }
+          ]
+        },
+        {
+          "id": 15,
+          "name": "Кейс 15",
+          "items": [
+            {
+              "id": "item_1774721969024_934501",
+              "name": "Манго",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Mango",
+              "weight": 5,
+              "rarity": "industrial",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_247945",
+              "name": "Клубника",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Strawberry",
+              "weight": 4,
+              "rarity": "mil-spec",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_678949",
+              "name": "Авто плюс 1",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Auto%20Plus%201",
+              "weight": 2,
+              "rarity": "restricted",
+              "effect": "auto"
+            },
+            {
+              "id": "item_1774721969024_352866",
+              "name": "Бомба",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Bomb",
+              "weight": 1,
+              "rarity": "covert",
+              "effect": "bomb"
+            }
+          ]
+        },
+        {
+          "id": 16,
+          "name": "Кейс 16",
+          "items": [
+            {
+              "id": "item_1774721969024_934501",
+              "name": "Манго",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Mango",
+              "weight": 5,
+              "rarity": "industrial",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_247945",
+              "name": "Клубника",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Strawberry",
+              "weight": 4,
+              "rarity": "mil-spec",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_678949",
+              "name": "Авто плюс 1",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Auto%20Plus%201",
+              "weight": 2,
+              "rarity": "restricted",
+              "effect": "auto"
+            },
+            {
+              "id": "item_1774721969024_352866",
+              "name": "Бомба",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Bomb",
+              "weight": 1,
+              "rarity": "covert",
+              "effect": "bomb"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "round4",
+      "type": "regular",
+      "label": "Раунд 4",
+      "shortLabel": "R4",
+      "description": "Обычный этап · Выбирай кейс по номеру · Призовой вкус — пиши в чат.",
+      "forcedNextItemSignature": "",
+      "cases": [
+        {
+          "id": 1,
+          "name": "Кейс 01",
+          "items": [
+            {
+              "id": "item_1774721969024_991295",
+              "name": "Манго",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Mango",
+              "weight": 5,
+              "rarity": "industrial",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_958446",
+              "name": "Клубника",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Strawberry",
+              "weight": 4,
+              "rarity": "mil-spec",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_623909",
+              "name": "Авто плюс 1",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Auto%20Plus%201",
+              "weight": 2,
+              "rarity": "restricted",
+              "effect": "auto"
+            },
+            {
+              "id": "item_1774721969024_105656",
+              "name": "Бомба",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Bomb",
+              "weight": 1,
+              "rarity": "covert",
+              "effect": "bomb"
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "name": "Кейс 02",
+          "items": [
+            {
+              "id": "item_1774721969024_991295",
+              "name": "Манго",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Mango",
+              "weight": 5,
+              "rarity": "industrial",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_958446",
+              "name": "Клубника",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Strawberry",
+              "weight": 4,
+              "rarity": "mil-spec",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_623909",
+              "name": "Авто плюс 1",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Auto%20Plus%201",
+              "weight": 2,
+              "rarity": "restricted",
+              "effect": "auto"
+            },
+            {
+              "id": "item_1774721969024_105656",
+              "name": "Бомба",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Bomb",
+              "weight": 1,
+              "rarity": "covert",
+              "effect": "bomb"
+            }
+          ]
+        },
+        {
+          "id": 3,
+          "name": "Кейс 03",
+          "items": [
+            {
+              "id": "item_1774721969024_991295",
+              "name": "Манго",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Mango",
+              "weight": 5,
+              "rarity": "industrial",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_958446",
+              "name": "Клубника",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Strawberry",
+              "weight": 4,
+              "rarity": "mil-spec",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_623909",
+              "name": "Авто плюс 1",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Auto%20Plus%201",
+              "weight": 2,
+              "rarity": "restricted",
+              "effect": "auto"
+            },
+            {
+              "id": "item_1774721969024_105656",
+              "name": "Бомба",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Bomb",
+              "weight": 1,
+              "rarity": "covert",
+              "effect": "bomb"
+            }
+          ]
+        },
+        {
+          "id": 4,
+          "name": "Кейс 04",
+          "items": [
+            {
+              "id": "item_1774721969024_991295",
+              "name": "Манго",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Mango",
+              "weight": 5,
+              "rarity": "industrial",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_958446",
+              "name": "Клубника",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Strawberry",
+              "weight": 4,
+              "rarity": "mil-spec",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_623909",
+              "name": "Авто плюс 1",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Auto%20Plus%201",
+              "weight": 2,
+              "rarity": "restricted",
+              "effect": "auto"
+            },
+            {
+              "id": "item_1774721969024_105656",
+              "name": "Бомба",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Bomb",
+              "weight": 1,
+              "rarity": "covert",
+              "effect": "bomb"
+            }
+          ]
+        },
+        {
+          "id": 5,
+          "name": "Кейс 05",
+          "items": [
+            {
+              "id": "item_1774721969024_991295",
+              "name": "Манго",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Mango",
+              "weight": 5,
+              "rarity": "industrial",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_958446",
+              "name": "Клубника",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Strawberry",
+              "weight": 4,
+              "rarity": "mil-spec",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_623909",
+              "name": "Авто плюс 1",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Auto%20Plus%201",
+              "weight": 2,
+              "rarity": "restricted",
+              "effect": "auto"
+            },
+            {
+              "id": "item_1774721969024_105656",
+              "name": "Бомба",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Bomb",
+              "weight": 1,
+              "rarity": "covert",
+              "effect": "bomb"
+            }
+          ]
+        },
+        {
+          "id": 6,
+          "name": "Кейс 06",
+          "items": [
+            {
+              "id": "item_1774721969024_991295",
+              "name": "Манго",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Mango",
+              "weight": 5,
+              "rarity": "industrial",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_958446",
+              "name": "Клубника",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Strawberry",
+              "weight": 4,
+              "rarity": "mil-spec",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_623909",
+              "name": "Авто плюс 1",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Auto%20Plus%201",
+              "weight": 2,
+              "rarity": "restricted",
+              "effect": "auto"
+            },
+            {
+              "id": "item_1774721969024_105656",
+              "name": "Бомба",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Bomb",
+              "weight": 1,
+              "rarity": "covert",
+              "effect": "bomb"
+            }
+          ]
+        },
+        {
+          "id": 7,
+          "name": "Кейс 07",
+          "items": [
+            {
+              "id": "item_1774721969024_991295",
+              "name": "Манго",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Mango",
+              "weight": 5,
+              "rarity": "industrial",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_958446",
+              "name": "Клубника",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Strawberry",
+              "weight": 4,
+              "rarity": "mil-spec",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_623909",
+              "name": "Авто плюс 1",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Auto%20Plus%201",
+              "weight": 2,
+              "rarity": "restricted",
+              "effect": "auto"
+            },
+            {
+              "id": "item_1774721969024_105656",
+              "name": "Бомба",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Bomb",
+              "weight": 1,
+              "rarity": "covert",
+              "effect": "bomb"
+            }
+          ]
+        },
+        {
+          "id": 8,
+          "name": "Кейс 08",
+          "items": [
+            {
+              "id": "item_1774721969024_991295",
+              "name": "Манго",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Mango",
+              "weight": 5,
+              "rarity": "industrial",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_958446",
+              "name": "Клубника",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Strawberry",
+              "weight": 4,
+              "rarity": "mil-spec",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_623909",
+              "name": "Авто плюс 1",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Auto%20Plus%201",
+              "weight": 2,
+              "rarity": "restricted",
+              "effect": "auto"
+            },
+            {
+              "id": "item_1774721969024_105656",
+              "name": "Бомба",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Bomb",
+              "weight": 1,
+              "rarity": "covert",
+              "effect": "bomb"
+            }
+          ]
+        },
+        {
+          "id": 9,
+          "name": "Кейс 09",
+          "items": [
+            {
+              "id": "item_1774721969024_991295",
+              "name": "Манго",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Mango",
+              "weight": 5,
+              "rarity": "industrial",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_958446",
+              "name": "Клубника",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Strawberry",
+              "weight": 4,
+              "rarity": "mil-spec",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_623909",
+              "name": "Авто плюс 1",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Auto%20Plus%201",
+              "weight": 2,
+              "rarity": "restricted",
+              "effect": "auto"
+            },
+            {
+              "id": "item_1774721969024_105656",
+              "name": "Бомба",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Bomb",
+              "weight": 1,
+              "rarity": "covert",
+              "effect": "bomb"
+            }
+          ]
+        },
+        {
+          "id": 10,
+          "name": "Кейс 10",
+          "items": [
+            {
+              "id": "item_1774721969024_991295",
+              "name": "Манго",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Mango",
+              "weight": 5,
+              "rarity": "industrial",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_958446",
+              "name": "Клубника",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Strawberry",
+              "weight": 4,
+              "rarity": "mil-spec",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_623909",
+              "name": "Авто плюс 1",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Auto%20Plus%201",
+              "weight": 2,
+              "rarity": "restricted",
+              "effect": "auto"
+            },
+            {
+              "id": "item_1774721969024_105656",
+              "name": "Бомба",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Bomb",
+              "weight": 1,
+              "rarity": "covert",
+              "effect": "bomb"
+            }
+          ]
+        },
+        {
+          "id": 11,
+          "name": "Кейс 11",
+          "items": [
+            {
+              "id": "item_1774721969024_991295",
+              "name": "Манго",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Mango",
+              "weight": 5,
+              "rarity": "industrial",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_958446",
+              "name": "Клубника",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Strawberry",
+              "weight": 4,
+              "rarity": "mil-spec",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_623909",
+              "name": "Авто плюс 1",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Auto%20Plus%201",
+              "weight": 2,
+              "rarity": "restricted",
+              "effect": "auto"
+            },
+            {
+              "id": "item_1774721969024_105656",
+              "name": "Бомба",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Bomb",
+              "weight": 1,
+              "rarity": "covert",
+              "effect": "bomb"
+            }
+          ]
+        },
+        {
+          "id": 12,
+          "name": "Кейс 12",
+          "items": [
+            {
+              "id": "item_1774721969024_991295",
+              "name": "Манго",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Mango",
+              "weight": 5,
+              "rarity": "industrial",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_958446",
+              "name": "Клубника",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Strawberry",
+              "weight": 4,
+              "rarity": "mil-spec",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_623909",
+              "name": "Авто плюс 1",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Auto%20Plus%201",
+              "weight": 2,
+              "rarity": "restricted",
+              "effect": "auto"
+            },
+            {
+              "id": "item_1774721969024_105656",
+              "name": "Бомба",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Bomb",
+              "weight": 1,
+              "rarity": "covert",
+              "effect": "bomb"
+            }
+          ]
+        },
+        {
+          "id": 13,
+          "name": "Кейс 13",
+          "items": [
+            {
+              "id": "item_1774721969024_991295",
+              "name": "Манго",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Mango",
+              "weight": 5,
+              "rarity": "industrial",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_958446",
+              "name": "Клубника",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Strawberry",
+              "weight": 4,
+              "rarity": "mil-spec",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_623909",
+              "name": "Авто плюс 1",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Auto%20Plus%201",
+              "weight": 2,
+              "rarity": "restricted",
+              "effect": "auto"
+            },
+            {
+              "id": "item_1774721969024_105656",
+              "name": "Бомба",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Bomb",
+              "weight": 1,
+              "rarity": "covert",
+              "effect": "bomb"
+            }
+          ]
+        },
+        {
+          "id": 14,
+          "name": "Кейс 14",
+          "items": [
+            {
+              "id": "item_1774721969024_991295",
+              "name": "Манго",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Mango",
+              "weight": 5,
+              "rarity": "industrial",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_958446",
+              "name": "Клубника",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Strawberry",
+              "weight": 4,
+              "rarity": "mil-spec",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_623909",
+              "name": "Авто плюс 1",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Auto%20Plus%201",
+              "weight": 2,
+              "rarity": "restricted",
+              "effect": "auto"
+            },
+            {
+              "id": "item_1774721969024_105656",
+              "name": "Бомба",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Bomb",
+              "weight": 1,
+              "rarity": "covert",
+              "effect": "bomb"
+            }
+          ]
+        },
+        {
+          "id": 15,
+          "name": "Кейс 15",
+          "items": [
+            {
+              "id": "item_1774721969024_991295",
+              "name": "Манго",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Mango",
+              "weight": 5,
+              "rarity": "industrial",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_958446",
+              "name": "Клубника",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Strawberry",
+              "weight": 4,
+              "rarity": "mil-spec",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_623909",
+              "name": "Авто плюс 1",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Auto%20Plus%201",
+              "weight": 2,
+              "rarity": "restricted",
+              "effect": "auto"
+            },
+            {
+              "id": "item_1774721969024_105656",
+              "name": "Бомба",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Bomb",
+              "weight": 1,
+              "rarity": "covert",
+              "effect": "bomb"
+            }
+          ]
+        },
+        {
+          "id": 16,
+          "name": "Кейс 16",
+          "items": [
+            {
+              "id": "item_1774721969024_991295",
+              "name": "Манго",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Mango",
+              "weight": 5,
+              "rarity": "industrial",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_958446",
+              "name": "Клубника",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Strawberry",
+              "weight": 4,
+              "rarity": "mil-spec",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_623909",
+              "name": "Авто плюс 1",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Auto%20Plus%201",
+              "weight": 2,
+              "rarity": "restricted",
+              "effect": "auto"
+            },
+            {
+              "id": "item_1774721969024_105656",
+              "name": "Бомба",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Bomb",
+              "weight": 1,
+              "rarity": "covert",
+              "effect": "bomb"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "round5",
+      "type": "regular",
+      "label": "Раунд 5",
+      "shortLabel": "R5",
+      "description": "Обычный этап · Выбирай кейс по номеру · Призовой вкус — пиши в чат.",
+      "forcedNextItemSignature": "",
+      "cases": [
+        {
+          "id": 1,
+          "name": "Кейс 01",
+          "items": [
+            {
+              "id": "item_1774721969024_109212",
+              "name": "Манго",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Mango",
+              "weight": 5,
+              "rarity": "industrial",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_397205",
+              "name": "Клубника",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Strawberry",
+              "weight": 4,
+              "rarity": "mil-spec",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_686395",
+              "name": "Авто плюс 1",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Auto%20Plus%201",
+              "weight": 2,
+              "rarity": "restricted",
+              "effect": "auto"
+            },
+            {
+              "id": "item_1774721969024_309670",
+              "name": "Бомба",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Bomb",
+              "weight": 1,
+              "rarity": "covert",
+              "effect": "bomb"
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "name": "Кейс 02",
+          "items": [
+            {
+              "id": "item_1774721969024_109212",
+              "name": "Манго",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Mango",
+              "weight": 5,
+              "rarity": "industrial",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_397205",
+              "name": "Клубника",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Strawberry",
+              "weight": 4,
+              "rarity": "mil-spec",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_686395",
+              "name": "Авто плюс 1",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Auto%20Plus%201",
+              "weight": 2,
+              "rarity": "restricted",
+              "effect": "auto"
+            },
+            {
+              "id": "item_1774721969024_309670",
+              "name": "Бомба",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Bomb",
+              "weight": 1,
+              "rarity": "covert",
+              "effect": "bomb"
+            }
+          ]
+        },
+        {
+          "id": 3,
+          "name": "Кейс 03",
+          "items": [
+            {
+              "id": "item_1774721969024_109212",
+              "name": "Манго",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Mango",
+              "weight": 5,
+              "rarity": "industrial",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_397205",
+              "name": "Клубника",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Strawberry",
+              "weight": 4,
+              "rarity": "mil-spec",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_686395",
+              "name": "Авто плюс 1",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Auto%20Plus%201",
+              "weight": 2,
+              "rarity": "restricted",
+              "effect": "auto"
+            },
+            {
+              "id": "item_1774721969024_309670",
+              "name": "Бомба",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Bomb",
+              "weight": 1,
+              "rarity": "covert",
+              "effect": "bomb"
+            }
+          ]
+        },
+        {
+          "id": 4,
+          "name": "Кейс 04",
+          "items": [
+            {
+              "id": "item_1774721969024_109212",
+              "name": "Манго",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Mango",
+              "weight": 5,
+              "rarity": "industrial",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_397205",
+              "name": "Клубника",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Strawberry",
+              "weight": 4,
+              "rarity": "mil-spec",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_686395",
+              "name": "Авто плюс 1",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Auto%20Plus%201",
+              "weight": 2,
+              "rarity": "restricted",
+              "effect": "auto"
+            },
+            {
+              "id": "item_1774721969024_309670",
+              "name": "Бомба",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Bomb",
+              "weight": 1,
+              "rarity": "covert",
+              "effect": "bomb"
+            }
+          ]
+        },
+        {
+          "id": 5,
+          "name": "Кейс 05",
+          "items": [
+            {
+              "id": "item_1774721969024_109212",
+              "name": "Манго",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Mango",
+              "weight": 5,
+              "rarity": "industrial",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_397205",
+              "name": "Клубника",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Strawberry",
+              "weight": 4,
+              "rarity": "mil-spec",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_686395",
+              "name": "Авто плюс 1",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Auto%20Plus%201",
+              "weight": 2,
+              "rarity": "restricted",
+              "effect": "auto"
+            },
+            {
+              "id": "item_1774721969024_309670",
+              "name": "Бомба",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Bomb",
+              "weight": 1,
+              "rarity": "covert",
+              "effect": "bomb"
+            }
+          ]
+        },
+        {
+          "id": 6,
+          "name": "Кейс 06",
+          "items": [
+            {
+              "id": "item_1774721969024_109212",
+              "name": "Манго",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Mango",
+              "weight": 5,
+              "rarity": "industrial",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_397205",
+              "name": "Клубника",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Strawberry",
+              "weight": 4,
+              "rarity": "mil-spec",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_686395",
+              "name": "Авто плюс 1",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Auto%20Plus%201",
+              "weight": 2,
+              "rarity": "restricted",
+              "effect": "auto"
+            },
+            {
+              "id": "item_1774721969024_309670",
+              "name": "Бомба",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Bomb",
+              "weight": 1,
+              "rarity": "covert",
+              "effect": "bomb"
+            }
+          ]
+        },
+        {
+          "id": 7,
+          "name": "Кейс 07",
+          "items": [
+            {
+              "id": "item_1774721969024_109212",
+              "name": "Манго",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Mango",
+              "weight": 5,
+              "rarity": "industrial",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_397205",
+              "name": "Клубника",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Strawberry",
+              "weight": 4,
+              "rarity": "mil-spec",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_686395",
+              "name": "Авто плюс 1",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Auto%20Plus%201",
+              "weight": 2,
+              "rarity": "restricted",
+              "effect": "auto"
+            },
+            {
+              "id": "item_1774721969024_309670",
+              "name": "Бомба",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Bomb",
+              "weight": 1,
+              "rarity": "covert",
+              "effect": "bomb"
+            }
+          ]
+        },
+        {
+          "id": 8,
+          "name": "Кейс 08",
+          "items": [
+            {
+              "id": "item_1774721969024_109212",
+              "name": "Манго",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Mango",
+              "weight": 5,
+              "rarity": "industrial",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_397205",
+              "name": "Клубника",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Strawberry",
+              "weight": 4,
+              "rarity": "mil-spec",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_686395",
+              "name": "Авто плюс 1",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Auto%20Plus%201",
+              "weight": 2,
+              "rarity": "restricted",
+              "effect": "auto"
+            },
+            {
+              "id": "item_1774721969024_309670",
+              "name": "Бомба",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Bomb",
+              "weight": 1,
+              "rarity": "covert",
+              "effect": "bomb"
+            }
+          ]
+        },
+        {
+          "id": 9,
+          "name": "Кейс 09",
+          "items": [
+            {
+              "id": "item_1774721969024_109212",
+              "name": "Манго",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Mango",
+              "weight": 5,
+              "rarity": "industrial",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_397205",
+              "name": "Клубника",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Strawberry",
+              "weight": 4,
+              "rarity": "mil-spec",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_686395",
+              "name": "Авто плюс 1",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Auto%20Plus%201",
+              "weight": 2,
+              "rarity": "restricted",
+              "effect": "auto"
+            },
+            {
+              "id": "item_1774721969024_309670",
+              "name": "Бомба",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Bomb",
+              "weight": 1,
+              "rarity": "covert",
+              "effect": "bomb"
+            }
+          ]
+        },
+        {
+          "id": 10,
+          "name": "Кейс 10",
+          "items": [
+            {
+              "id": "item_1774721969024_109212",
+              "name": "Манго",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Mango",
+              "weight": 5,
+              "rarity": "industrial",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_397205",
+              "name": "Клубника",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Strawberry",
+              "weight": 4,
+              "rarity": "mil-spec",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_686395",
+              "name": "Авто плюс 1",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Auto%20Plus%201",
+              "weight": 2,
+              "rarity": "restricted",
+              "effect": "auto"
+            },
+            {
+              "id": "item_1774721969024_309670",
+              "name": "Бомба",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Bomb",
+              "weight": 1,
+              "rarity": "covert",
+              "effect": "bomb"
+            }
+          ]
+        },
+        {
+          "id": 11,
+          "name": "Кейс 11",
+          "items": [
+            {
+              "id": "item_1774721969024_109212",
+              "name": "Манго",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Mango",
+              "weight": 5,
+              "rarity": "industrial",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_397205",
+              "name": "Клубника",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Strawberry",
+              "weight": 4,
+              "rarity": "mil-spec",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_686395",
+              "name": "Авто плюс 1",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Auto%20Plus%201",
+              "weight": 2,
+              "rarity": "restricted",
+              "effect": "auto"
+            },
+            {
+              "id": "item_1774721969024_309670",
+              "name": "Бомба",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Bomb",
+              "weight": 1,
+              "rarity": "covert",
+              "effect": "bomb"
+            }
+          ]
+        },
+        {
+          "id": 12,
+          "name": "Кейс 12",
+          "items": [
+            {
+              "id": "item_1774721969024_109212",
+              "name": "Манго",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Mango",
+              "weight": 5,
+              "rarity": "industrial",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_397205",
+              "name": "Клубника",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Strawberry",
+              "weight": 4,
+              "rarity": "mil-spec",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_686395",
+              "name": "Авто плюс 1",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Auto%20Plus%201",
+              "weight": 2,
+              "rarity": "restricted",
+              "effect": "auto"
+            },
+            {
+              "id": "item_1774721969024_309670",
+              "name": "Бомба",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Bomb",
+              "weight": 1,
+              "rarity": "covert",
+              "effect": "bomb"
+            }
+          ]
+        },
+        {
+          "id": 13,
+          "name": "Кейс 13",
+          "items": [
+            {
+              "id": "item_1774721969024_109212",
+              "name": "Манго",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Mango",
+              "weight": 5,
+              "rarity": "industrial",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_397205",
+              "name": "Клубника",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Strawberry",
+              "weight": 4,
+              "rarity": "mil-spec",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_686395",
+              "name": "Авто плюс 1",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Auto%20Plus%201",
+              "weight": 2,
+              "rarity": "restricted",
+              "effect": "auto"
+            },
+            {
+              "id": "item_1774721969024_309670",
+              "name": "Бомба",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Bomb",
+              "weight": 1,
+              "rarity": "covert",
+              "effect": "bomb"
+            }
+          ]
+        },
+        {
+          "id": 14,
+          "name": "Кейс 14",
+          "items": [
+            {
+              "id": "item_1774721969024_109212",
+              "name": "Манго",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Mango",
+              "weight": 5,
+              "rarity": "industrial",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_397205",
+              "name": "Клубника",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Strawberry",
+              "weight": 4,
+              "rarity": "mil-spec",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_686395",
+              "name": "Авто плюс 1",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Auto%20Plus%201",
+              "weight": 2,
+              "rarity": "restricted",
+              "effect": "auto"
+            },
+            {
+              "id": "item_1774721969024_309670",
+              "name": "Бомба",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Bomb",
+              "weight": 1,
+              "rarity": "covert",
+              "effect": "bomb"
+            }
+          ]
+        },
+        {
+          "id": 15,
+          "name": "Кейс 15",
+          "items": [
+            {
+              "id": "item_1774721969024_109212",
+              "name": "Манго",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Mango",
+              "weight": 5,
+              "rarity": "industrial",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_397205",
+              "name": "Клубника",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Strawberry",
+              "weight": 4,
+              "rarity": "mil-spec",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_686395",
+              "name": "Авто плюс 1",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Auto%20Plus%201",
+              "weight": 2,
+              "rarity": "restricted",
+              "effect": "auto"
+            },
+            {
+              "id": "item_1774721969024_309670",
+              "name": "Бомба",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Bomb",
+              "weight": 1,
+              "rarity": "covert",
+              "effect": "bomb"
+            }
+          ]
+        },
+        {
+          "id": 16,
+          "name": "Кейс 16",
+          "items": [
+            {
+              "id": "item_1774721969024_109212",
+              "name": "Манго",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Mango",
+              "weight": 5,
+              "rarity": "industrial",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_397205",
+              "name": "Клубника",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Strawberry",
+              "weight": 4,
+              "rarity": "mil-spec",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_686395",
+              "name": "Авто плюс 1",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Auto%20Plus%201",
+              "weight": 2,
+              "rarity": "restricted",
+              "effect": "auto"
+            },
+            {
+              "id": "item_1774721969024_309670",
+              "name": "Бомба",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Bomb",
+              "weight": 1,
+              "rarity": "covert",
+              "effect": "bomb"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "extra2",
+      "type": "extra",
+      "label": "Экстра Раунд 2",
+      "shortLabel": "EX2",
+      "description": "Экстра этап · Выбирай кейс по номеру · Призовой вкус — пиши в чат.",
+      "forcedNextItemSignature": "",
+      "cases": [
+        {
+          "id": 1,
+          "name": "Кейс 01",
+          "items": [
+            {
+              "id": "item_1774721969024_832605",
+              "name": "Манго Экстра",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Extra%20Mango",
+              "weight": 5,
+              "rarity": "rare",
+              "effect": "plus"
+            },
+            {
+              "id": "item_1774721969024_678240",
+              "name": "Арбуз Экстра",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Extra%20Watermelon",
+              "weight": 4,
+              "rarity": "classified",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_445227",
+              "name": "Авто плюс 1",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Auto%20Plus%201",
+              "weight": 2,
+              "rarity": "rare",
+              "effect": "auto"
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "name": "Кейс 02",
+          "items": [
+            {
+              "id": "item_1774721969024_832605",
+              "name": "Манго Экстра",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Extra%20Mango",
+              "weight": 5,
+              "rarity": "rare",
+              "effect": "plus"
+            },
+            {
+              "id": "item_1774721969024_678240",
+              "name": "Арбуз Экстра",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Extra%20Watermelon",
+              "weight": 4,
+              "rarity": "classified",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_445227",
+              "name": "Авто плюс 1",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Auto%20Plus%201",
+              "weight": 2,
+              "rarity": "rare",
+              "effect": "auto"
+            }
+          ]
+        },
+        {
+          "id": 3,
+          "name": "Кейс 03",
+          "items": [
+            {
+              "id": "item_1774721969024_832605",
+              "name": "Манго Экстра",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Extra%20Mango",
+              "weight": 5,
+              "rarity": "rare",
+              "effect": "plus"
+            },
+            {
+              "id": "item_1774721969024_678240",
+              "name": "Арбуз Экстра",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Extra%20Watermelon",
+              "weight": 4,
+              "rarity": "classified",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_445227",
+              "name": "Авто плюс 1",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Auto%20Plus%201",
+              "weight": 2,
+              "rarity": "rare",
+              "effect": "auto"
+            }
+          ]
+        },
+        {
+          "id": 4,
+          "name": "Кейс 04",
+          "items": [
+            {
+              "id": "item_1774721969024_832605",
+              "name": "Манго Экстра",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Extra%20Mango",
+              "weight": 5,
+              "rarity": "rare",
+              "effect": "plus"
+            },
+            {
+              "id": "item_1774721969024_678240",
+              "name": "Арбуз Экстра",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Extra%20Watermelon",
+              "weight": 4,
+              "rarity": "classified",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_445227",
+              "name": "Авто плюс 1",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Auto%20Plus%201",
+              "weight": 2,
+              "rarity": "rare",
+              "effect": "auto"
+            }
+          ]
+        },
+        {
+          "id": 5,
+          "name": "Кейс 05",
+          "items": [
+            {
+              "id": "item_1774721969024_832605",
+              "name": "Манго Экстра",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Extra%20Mango",
+              "weight": 5,
+              "rarity": "rare",
+              "effect": "plus"
+            },
+            {
+              "id": "item_1774721969024_678240",
+              "name": "Арбуз Экстра",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Extra%20Watermelon",
+              "weight": 4,
+              "rarity": "classified",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_445227",
+              "name": "Авто плюс 1",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Auto%20Plus%201",
+              "weight": 2,
+              "rarity": "rare",
+              "effect": "auto"
+            }
+          ]
+        },
+        {
+          "id": 6,
+          "name": "Кейс 06",
+          "items": [
+            {
+              "id": "item_1774721969024_832605",
+              "name": "Манго Экстра",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Extra%20Mango",
+              "weight": 5,
+              "rarity": "rare",
+              "effect": "plus"
+            },
+            {
+              "id": "item_1774721969024_678240",
+              "name": "Арбуз Экстра",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Extra%20Watermelon",
+              "weight": 4,
+              "rarity": "classified",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_445227",
+              "name": "Авто плюс 1",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Auto%20Plus%201",
+              "weight": 2,
+              "rarity": "rare",
+              "effect": "auto"
+            }
+          ]
+        },
+        {
+          "id": 7,
+          "name": "Кейс 07",
+          "items": [
+            {
+              "id": "item_1774721969024_832605",
+              "name": "Манго Экстра",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Extra%20Mango",
+              "weight": 5,
+              "rarity": "rare",
+              "effect": "plus"
+            },
+            {
+              "id": "item_1774721969024_678240",
+              "name": "Арбуз Экстра",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Extra%20Watermelon",
+              "weight": 4,
+              "rarity": "classified",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_445227",
+              "name": "Авто плюс 1",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Auto%20Plus%201",
+              "weight": 2,
+              "rarity": "rare",
+              "effect": "auto"
+            }
+          ]
+        },
+        {
+          "id": 8,
+          "name": "Кейс 08",
+          "items": [
+            {
+              "id": "item_1774721969024_832605",
+              "name": "Манго Экстра",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Extra%20Mango",
+              "weight": 5,
+              "rarity": "rare",
+              "effect": "plus"
+            },
+            {
+              "id": "item_1774721969024_678240",
+              "name": "Арбуз Экстра",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Extra%20Watermelon",
+              "weight": 4,
+              "rarity": "classified",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_445227",
+              "name": "Авто плюс 1",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Auto%20Plus%201",
+              "weight": 2,
+              "rarity": "rare",
+              "effect": "auto"
+            }
+          ]
+        },
+        {
+          "id": 9,
+          "name": "Кейс 09",
+          "items": [
+            {
+              "id": "item_1774721969024_832605",
+              "name": "Манго Экстра",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Extra%20Mango",
+              "weight": 5,
+              "rarity": "rare",
+              "effect": "plus"
+            },
+            {
+              "id": "item_1774721969024_678240",
+              "name": "Арбуз Экстра",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Extra%20Watermelon",
+              "weight": 4,
+              "rarity": "classified",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_445227",
+              "name": "Авто плюс 1",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Auto%20Plus%201",
+              "weight": 2,
+              "rarity": "rare",
+              "effect": "auto"
+            }
+          ]
+        },
+        {
+          "id": 10,
+          "name": "Кейс 10",
+          "items": [
+            {
+              "id": "item_1774721969024_832605",
+              "name": "Манго Экстра",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Extra%20Mango",
+              "weight": 5,
+              "rarity": "rare",
+              "effect": "plus"
+            },
+            {
+              "id": "item_1774721969024_678240",
+              "name": "Арбуз Экстра",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Extra%20Watermelon",
+              "weight": 4,
+              "rarity": "classified",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_445227",
+              "name": "Авто плюс 1",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Auto%20Plus%201",
+              "weight": 2,
+              "rarity": "rare",
+              "effect": "auto"
+            }
+          ]
+        },
+        {
+          "id": 11,
+          "name": "Кейс 11",
+          "items": [
+            {
+              "id": "item_1774721969024_832605",
+              "name": "Манго Экстра",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Extra%20Mango",
+              "weight": 5,
+              "rarity": "rare",
+              "effect": "plus"
+            },
+            {
+              "id": "item_1774721969024_678240",
+              "name": "Арбуз Экстра",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Extra%20Watermelon",
+              "weight": 4,
+              "rarity": "classified",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_445227",
+              "name": "Авто плюс 1",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Auto%20Plus%201",
+              "weight": 2,
+              "rarity": "rare",
+              "effect": "auto"
+            }
+          ]
+        },
+        {
+          "id": 12,
+          "name": "Кейс 12",
+          "items": [
+            {
+              "id": "item_1774721969024_832605",
+              "name": "Манго Экстра",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Extra%20Mango",
+              "weight": 5,
+              "rarity": "rare",
+              "effect": "plus"
+            },
+            {
+              "id": "item_1774721969024_678240",
+              "name": "Арбуз Экстра",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Extra%20Watermelon",
+              "weight": 4,
+              "rarity": "classified",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_445227",
+              "name": "Авто плюс 1",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Auto%20Plus%201",
+              "weight": 2,
+              "rarity": "rare",
+              "effect": "auto"
+            }
+          ]
+        },
+        {
+          "id": 13,
+          "name": "Кейс 13",
+          "items": [
+            {
+              "id": "item_1774721969024_832605",
+              "name": "Манго Экстра",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Extra%20Mango",
+              "weight": 5,
+              "rarity": "rare",
+              "effect": "plus"
+            },
+            {
+              "id": "item_1774721969024_678240",
+              "name": "Арбуз Экстра",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Extra%20Watermelon",
+              "weight": 4,
+              "rarity": "classified",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_445227",
+              "name": "Авто плюс 1",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Auto%20Plus%201",
+              "weight": 2,
+              "rarity": "rare",
+              "effect": "auto"
+            }
+          ]
+        },
+        {
+          "id": 14,
+          "name": "Кейс 14",
+          "items": [
+            {
+              "id": "item_1774721969024_832605",
+              "name": "Манго Экстра",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Extra%20Mango",
+              "weight": 5,
+              "rarity": "rare",
+              "effect": "plus"
+            },
+            {
+              "id": "item_1774721969024_678240",
+              "name": "Арбуз Экстра",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Extra%20Watermelon",
+              "weight": 4,
+              "rarity": "classified",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_445227",
+              "name": "Авто плюс 1",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Auto%20Plus%201",
+              "weight": 2,
+              "rarity": "rare",
+              "effect": "auto"
+            }
+          ]
+        },
+        {
+          "id": 15,
+          "name": "Кейс 15",
+          "items": [
+            {
+              "id": "item_1774721969024_832605",
+              "name": "Манго Экстра",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Extra%20Mango",
+              "weight": 5,
+              "rarity": "rare",
+              "effect": "plus"
+            },
+            {
+              "id": "item_1774721969024_678240",
+              "name": "Арбуз Экстра",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Extra%20Watermelon",
+              "weight": 4,
+              "rarity": "classified",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_445227",
+              "name": "Авто плюс 1",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Auto%20Plus%201",
+              "weight": 2,
+              "rarity": "rare",
+              "effect": "auto"
+            }
+          ]
+        },
+        {
+          "id": 16,
+          "name": "Кейс 16",
+          "items": [
+            {
+              "id": "item_1774721969024_832605",
+              "name": "Манго Экстра",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Extra%20Mango",
+              "weight": 5,
+              "rarity": "rare",
+              "effect": "plus"
+            },
+            {
+              "id": "item_1774721969024_678240",
+              "name": "Арбуз Экстра",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Extra%20Watermelon",
+              "weight": 4,
+              "rarity": "classified",
+              "effect": "empty"
+            },
+            {
+              "id": "item_1774721969024_445227",
+              "name": "Авто плюс 1",
+              "image": "https://placehold.co/900x900/101826/EAF1FF?text=Auto%20Plus%201",
+              "weight": 2,
+              "rarity": "rare",
+              "effect": "auto"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

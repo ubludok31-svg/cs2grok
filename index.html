@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Stream Case Game v9</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="bg-fx" aria-hidden="true">
+    <div class="spark spark-1"></div>
+    <div class="spark spark-2"></div>
+    <div class="spark spark-3"></div>
+    <div class="juice juice-1"></div>
+    <div class="juice juice-2"></div>
+  </div>
+
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="hero-copy">
+        <div class="eyebrow">Zaliva.PL</div>
+        <h1>Zaliva.PL — ХОЧЕШЬ ЖИЖОБУ ИЛИ РАЗКИ ПО ВСЕЙ 🇵🇱 🇪🇺 ? — ЗАХОДИ В ОПИСАНИЕ ПРОФИЛЯ 🎵</h1>
+      </div>
+      <div class="topbar-actions">
+        <button id="openAdminBtn" class="ghost-btn">Админ-панель</button>
+      </div>
+    </header>
+
+    <section class="round-panel" id="roundPanel">
+      <div class="round-main round-main-centered">
+        <div class="round-badge" id="stageTypeBadge">Обычный раунд</div>
+        <div class="round-title-wrap round-title-wrap-centered">
+          <h2 id="currentStageTitle">Раунд 1</h2>
+          <span id="stageCounter" class="stage-counter">1 / 7</span>
+        </div>
+        <p id="stageDescription" class="round-subtitle">Открой кейс по номеру, который выбрали зрители.</p>
+      </div>
+
+      <div class="round-controls">
+        <button id="newGameBtn" class="ghost-btn">Новая игра</button>
+        <button id="finishStageBtn" class="ghost-btn">Завершить этап</button>
+        <button id="prevStageBtn" class="ghost-btn">Назад</button>
+        <button id="nextStageBtn">Следующий этап</button>
+      </div>
+    </section>
+
+    <section class="stage-strip" id="stageStrip"></section>
+
+    <section class="viewer-panel">
+      <div class="viewer-panel-head">
+        <div>
+          <h3>Что может выпасть в этом раунде?</h3>
+          <p id="poolNote">Для получения промика нужно собрать 2 очка в течение одного раунда.</p>
+        </div>
+      </div>
+      <div id="poolPreview" class="pool-preview"></div>
+    </section>
+
+    <main class="cases-section">
+      <div class="section-head compact-head">
+        <div>
+          <h3>Кейсы</h3>
+          <p>Открытые кейсы остаются открытыми до обновления страницы. После обновления страницы снова закрываются только кейсы, а настройки админки остаются сохранёнными.</p>
+        </div>
+      </div>
+      <div id="casesGrid" class="cases-grid"></div>
+    </main>
+  </div>
+
+  <div id="rouletteModal" class="modal hidden" aria-hidden="true">
+    <div class="modal-backdrop" id="closeRouletteBackdrop"></div>
+    <div class="modal-content modal-content-wide">
+      <div class="modal-header">
+        <div>
+          <h3 id="modalTitle">Открытие кейса</h3>
+          <p id="modalHint">Предмет выбирается случайно из наполнения этого кейса.</p>
+        </div>
+        <button id="closeModalBtn" class="icon-btn" aria-label="Закрыть">✕</button>
+      </div>
+
+      <div class="roulette-wrapper">
+        <div class="roulette-pointer"></div>
+        <div id="rouletteTrack" class="roulette-track"></div>
+      </div>
+
+      <div id="resultCard" class="result-card hidden"></div>
+      <div class="modal-actions">
+        <button id="resultCloseBtn">Закрыть</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="adminModal" class="modal hidden" aria-hidden="true">
+    <div class="modal-backdrop" id="closeAdminBackdrop"></div>
+    <div class="modal-content admin-modal-content">
+      <div class="modal-header admin-header">
+        <div>
+          <h3>Админ-панель</h3>
+          <p id="adminHint">Здесь сохраняется всё наполнение этапов. После обновления страницы сбрасываются только открытые кейсы, а не настройки.</p>
+        </div>
+        <div class="modal-header-actions">
+          <button id="importConfigBtn" class="ghost-btn">Импорт config.json</button>
+          <button id="saveConfigBtn" class="ghost-btn">Скачать config.json</button>
+          <button id="closeAdminBtn" class="icon-btn" aria-label="Закрыть">✕</button>
+        </div>
+      </div>
+
+      <div class="admin-tabs">
+        <button id="regularTabBtn" class="tab-btn active" type="button">Обычные этапы</button>
+        <button id="extraTabBtn" class="tab-btn" type="button">Экстра-этапы</button>
+      </div>
+
+      <section class="editor-section embedded-editor">
+        <div class="editor-toolbar">
+          <label>
+            Этап:
+            <select id="stageSelector"></select>
+          </label>
+          <label>
+            Кейс:
+            <select id="caseSelector"></select>
+          </label>
+          <label class="force-pick-wrap">
+            Следующее выпадение:
+            <select id="forcePickSelector"></select>
+          </label>
+          <button id="addItemBtn">Добавить предмет</button>
+          <button id="copyToAllBtn" class="ghost-btn">Кейс → во все кейсы этапа</button>
+          <button id="copyStageTypeBtn" class="ghost-btn">Этап → во все этапы этого типа</button>
+          <button id="resetCurrentStageBtn" class="ghost-btn">Закрыть кейсы этапа</button>
+          <button id="resetAllStagesBtn" class="ghost-btn danger">Сбросить всю игру</button>
+        </div>
+
+        <div class="admin-note">
+          Выбери предмет в поле «Следующее выпадение», если хочешь вручную задать, что выпадет в следующем открытии. После одного открытия принудительный выбор автоматически сбрасывается обратно на случайный режим.
+        </div>
+
+        <div id="itemsEditor" class="items-editor"></div>
+      </section>
+    </div>
+  </div>
+
+  <input id="configInput" type="file" accept="application/json" hidden />
+
+  <template id="caseCardTemplate">
+    <button class="case-card" type="button">
+      <div class="case-badge"></div>
+      <div class="case-visual" aria-hidden="true">
+        <div class="case-glow"></div>
+        <div class="case-handle"></div>
+        <div class="case-lid"></div>
+        <div class="case-body"></div>
+        <div class="case-side case-side-left"></div>
+        <div class="case-side case-side-right"></div>
+        <div class="case-lock"></div>
+      </div>
+      <div class="case-name"></div>
+      <div class="case-meta"></div>
+    </button>
+  </template>
+
+  <template id="editorItemTemplate">
+    <div class="editor-item">
+      <div class="editor-item-grid">
+        <label>
+          Предмет
+          <input data-field="name" type="text" placeholder="Например: Манго" />
+        </label>
+        <label>
+          Фото / путь к картинке
+          <input data-field="image" type="text" placeholder="assets/item.jpg или https://..." />
+        </label>
+        <label>
+          JPG / JPEG / PNG / WebP
+          <input data-field="file" type="file" accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp" />
+        </label>
+        <label>
+          Шанс / вес
+          <input data-field="weight" type="number" min="1" step="1" value="1" />
+        </label>
+        <label>
+          Редкость
+          <select data-field="rarity">
+            <option value="consumer">Белая</option>
+            <option value="industrial">Голубая</option>
+            <option value="mil-spec">Синяя</option>
+            <option value="restricted">Фиолетовая</option>
+            <option value="classified">Розовая</option>
+            <option value="covert">Красная</option>
+            <option value="rare">Золотая</option>
+          </select>
+        </label>
+        <label>
+          Подпись для зрителей
+          <select data-field="effect">
+            <option value="empty">Пустой вкус</option>
+            <option value="plus">Плюс одно очко</option>
+            <option value="auto">Авто плюс 1 — плюс одно очко</option>
+            <option value="bomb">Бомба — сброс всех очков</option>
+          </select>
+        </label>
+      </div>
+      <div class="editor-item-footer">
+        <div class="editor-preview">
+          <div class="preview-thumb"></div>
+          <div class="preview-copy">
+            <div class="preview-text">Фон предмета</div>
+            <div class="preview-effect"></div>
+          </div>
+        </div>
+        <button class="ghost-btn danger remove-item-btn" type="button">Удалить</button>
+      </div>
+    </div>
+  </template>
+
+  <script src="app.js"></script>
+</body>
+</html>
