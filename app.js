@@ -1,15 +1,17 @@
 const STAGE_DEFS = [
-  { id: 'round-1', type: 'regular', label: 'Раунд 1', shortLabel: 'R1', description: 'Обычный этап · Выбирай кейс по номеру · Призовой вкус — пиши в чат.' },
-  { id: 'round-2', type: 'regular', label: 'Раунд 2', shortLabel: 'R2', description: 'Обычный этап · Выбирай кейс по номеру · Призовой вкус — пиши в чат.' },
-  { id: 'extra-1', type: 'extra', label: 'Экстра Раунд 1', shortLabel: 'EX1', description: 'Экстра этап · Выбирай кейс по номеру · Призовой вкус — пиши в чат.' },
-  { id: 'round-3', type: 'regular', label: 'Раунд 3', shortLabel: 'R3', description: 'Обычный этап · Выбирай кейс по номеру · Призовой вкус — пиши в чат.' },
-  { id: 'round-4', type: 'regular', label: 'Раунд 4', shortLabel: 'R4', description: 'Обычный этап · Выбирай кейс по номеру · Призовой вкус — пиши в чат.' },
-  { id: 'round-5', type: 'regular', label: 'Раунд 5', shortLabel: 'R5', description: 'Обычный этап · Выбирай кейс по номеру · Призовой вкус — пиши в чат.' },
-  { id: 'extra-2', type: 'extra', label: 'Экстра Раунд 2', shortLabel: 'EX2', description: 'Экстра этап · Выбирай кейс по номеру · Призовой вкус — пиши в чат.' },
+  { id: 'round-1', type: 'regular', label: 'Раунд 1', shortLabel: 'R1', description: 'Обычный этап · Выбирай кейс по номеру и призовой вкус. Пиши в чат и получай промик.' },
+  { id: 'round-2', type: 'regular', label: 'Раунд 2', shortLabel: 'R2', description: 'Обычный этап · Выбирай кейс по номеру и призовой вкус. Пиши в чат и получай промик.' },
+  { id: 'extra-1', type: 'extra', label: 'Экстра Раунд 1', shortLabel: 'EX1', description: 'Экстра этап · Выбирай кейс по номеру и призовой вкус. Пиши в чат и получай промик.' },
+  { id: 'round-3', type: 'regular', label: 'Раунд 3', shortLabel: 'R3', description: 'Обычный этап · Выбирай кейс по номеру и призовой вкус. Пиши в чат и получай промик.' },
+  { id: 'round-4', type: 'regular', label: 'Раунд 4', shortLabel: 'R4', description: 'Обычный этап · Выбирай кейс по номеру и призовой вкус. Пиши в чат и получай промик.' },
+  { id: 'round-5', type: 'regular', label: 'Раунд 5', shortLabel: 'R5', description: 'Обычный этап · Выбирай кейс по номеру и призовой вкус. Пиши в чат и получай промик.' },
+  { id: 'extra-2', type: 'extra', label: 'Экстра Раунд 2', shortLabel: 'EX2', description: 'Экстра этап · Выбирай кейс по номеру и призовой вкус. Пиши в чат и получай промик.' },
 ];
 
-const PERSIST_KEY = 'stream_case_game_v12_config';
-const SESSION_KEY = 'stream_case_game_v12_session';
+const PERSIST_KEY = 'stream_case_game_v13_config';
+const SESSION_KEY = 'stream_case_game_v13_session';
+const LEGACY_CONFIG_KEYS = ['stream_case_game_v12_config', 'stream_case_game_v11_config', 'stream_case_game_v10_config', 'stream_case_game_v9_config', 'stream_case_game_v8_config', 'stream_case_game_v7_config'];
+const LEGACY_SESSION_KEYS = ['stream_case_game_v12_session'];
 
 const rarityLabelMap = {
   consumer: 'Белая',
@@ -21,25 +23,32 @@ const rarityLabelMap = {
   rare: 'Золотая',
 };
 
-const effectLabelMap = {
+const effectSelectLabelMap = {
   empty: 'Пустой вкус',
   plus: 'Призовой вкус',
   auto: 'АВТО +1',
   bomb: 'Бомба',
 };
 
+const effectPreviewLineMap = {
+  empty: 'Пустой вкус',
+  plus: 'ПРИЗОВОЙ ВКУС',
+  auto: 'ПЛЮС ОДНО ОЧКО',
+  bomb: 'СБРОС ВСЕХ ОЧКОВ',
+};
+
 const effectResultLineMap = {
   empty: 'Нет победы',
-  plus: '+1 очко',
-  auto: 'АВТО +1',
+  plus: 'Плюс одно очко',
+  auto: 'Плюс одно очко автоматически',
   bomb: 'Сброс всех очков',
 };
 
 const effectHeadlineMap = {
   empty: 'Пустой вкус',
-  plus: 'Победа',
+  plus: 'ПРИЗОВОЙ ВКУС',
   auto: 'АВТО +1',
-  bomb: 'Бомба',
+  bomb: 'БОМБА',
 };
 
 const elements = {
@@ -96,7 +105,6 @@ let spinState = {
   caseId: 0,
   winningItem: null,
   timerId: null,
-  finalizer: null,
 };
 
 init();
@@ -141,13 +149,10 @@ function bindEvents() {
   elements.importConfigBtn.addEventListener('click', () => elements.configInput.click());
   elements.configInput.addEventListener('change', importConfig);
 
-  elements.stageJumpSelect.addEventListener('change', (event) => {
-    setCurrentStage(event.target.value);
-  });
-
+  elements.stageJumpSelect.addEventListener('change', (event) => setCurrentStage(event.target.value));
   elements.prevStageBtn.addEventListener('click', goToPrevStage);
   elements.nextStageBtn.addEventListener('click', goToNextStage);
-  elements.finishStageBtn.addEventListener('click', finishCurrentStage);
+  elements.finishStageBtn.addEventListener('click', () => finishCurrentStage(true));
   elements.newGameBtn.addEventListener('click', startNewGame);
 
   elements.closeModalBtn.addEventListener('click', handleRouletteCloseButton);
@@ -229,8 +234,7 @@ function renderPoolPreview() {
     card.innerHTML = `
       <div class="pool-thumb"></div>
       <div class="pool-name">${escapeHtml(item.name)}</div>
-      <div class="pool-effect effect-${item.effect}">${escapeHtml(effectLabelMap[item.effect])}</div>
-      <div class="pool-rarity">${escapeHtml(rarityLabelMap[item.rarity])}</div>
+      <div class="pool-effect effect-${item.effect}">${escapeHtml(effectPreviewLineMap[item.effect])}</div>
     `;
     setArtBackground(card.querySelector('.pool-thumb'), item.image);
     elements.poolPreview.appendChild(card);
@@ -309,7 +313,7 @@ function renderForcePickSelector() {
   items.forEach((item) => {
     const option = document.createElement('option');
     option.value = itemSignature(item);
-    option.textContent = `${item.name} — ${effectLabelMap[item.effect]}`;
+    option.textContent = `${item.name} — ${effectSelectLabelMap[item.effect]}`;
     option.selected = stage.forcedNextItemSignature === option.value;
     elements.forcePickSelector.appendChild(option);
   });
@@ -329,7 +333,7 @@ function renderItemsEditor() {
 
     setArtBackground(previewThumb, item.image);
     previewText.textContent = item.name;
-    previewEffect.textContent = effectLabelMap[item.effect];
+    previewEffect.textContent = effectSelectLabelMap[item.effect];
 
     node.querySelectorAll('[data-field]').forEach((field) => {
       const fieldName = field.dataset.field;
@@ -340,7 +344,10 @@ function renderItemsEditor() {
           const dataUrl = await fileToDataUrl(file);
           item.image = dataUrl;
           saveConfigState();
-          renderAll();
+          setArtBackground(previewThumb, item.image);
+          renderPoolPreview();
+          renderCasesGrid();
+          renderForcePickSelector();
         });
         return;
       }
@@ -355,8 +362,9 @@ function renderItemsEditor() {
         saveConfigState();
         if (fieldName === 'image') setArtBackground(previewThumb, item.image);
         if (fieldName === 'name') previewText.textContent = item.name;
-        if (fieldName === 'effect') previewEffect.textContent = effectLabelMap[item.effect];
+        if (fieldName === 'effect') previewEffect.textContent = effectSelectLabelMap[item.effect];
         renderPoolPreview();
+        renderCasesGrid();
         renderForcePickSelector();
       });
     });
@@ -378,7 +386,10 @@ function addItemToSelectedCase() {
   const targetCase = getSelectedAdminCase();
   targetCase.items.push(makeDefaultItem('Новый предмет'));
   saveConfigState();
-  renderAll();
+  renderItemsEditor();
+  renderPoolPreview();
+  renderCasesGrid();
+  renderForcePickSelector();
   requestAnimationFrame(() => {
     const lastInput = elements.itemsEditor.querySelector('.editor-item:last-child input[data-field="name"]');
     if (lastInput) lastInput.focus();
@@ -469,12 +480,11 @@ function openCase(stage, caseData) {
       const itemWidth = 182;
       const winnerIndex = 40;
       const wrapperWidth = elements.rouletteTrack.parentElement.clientWidth;
-      const targetOffset = (winnerIndex * itemWidth) - (wrapperWidth / 2) + (itemWidth / 2) + randomInt(-12, 12);
-      elements.rouletteTrack.style.transition = 'transform 10.5s cubic-bezier(0.08, 0.76, 0.14, 1)';
+      const targetOffset = (winnerIndex * itemWidth) - (wrapperWidth / 2) + (itemWidth / 2) + randomInt(-10, 10);
+      elements.rouletteTrack.style.transition = 'transform 8.6s cubic-bezier(0.08, 0.76, 0.14, 1)';
       elements.rouletteTrack.style.transform = `translateX(-${targetOffset}px)`;
-      spinState.finalizer = () => finalizeSpin(false);
       window.clearTimeout(spinState.timerId);
-      spinState.timerId = window.setTimeout(spinState.finalizer, 10650);
+      spinState.timerId = window.setTimeout(() => finalizeSpin(false), 8700);
     });
   });
 }
@@ -500,12 +510,11 @@ function finalizeSpin(fromFastForward) {
   saveSessionState();
 
   if (fromFastForward) {
-    elements.rouletteTrack.style.transition = 'transform 0.22s ease-out';
+    elements.rouletteTrack.style.transition = 'transform 0.18s ease-out';
   }
 
   renderCasesGrid();
   showResult(spinState.winningItem, false);
-  spinState.finalizer = null;
 }
 
 function fastForwardSpin() {
@@ -525,7 +534,7 @@ function showExistingResult(stage, caseData, item) {
 }
 
 function showResult(item, alreadyOpened) {
-  const normalized = normalizeItem(item);
+  const normalized = cloneItem(item);
   const rarityText = rarityLabelMap[normalized.rarity] || normalized.rarity;
   elements.resultCard.className = `result-card effect-${normalized.effect}`;
   elements.resultCard.classList.remove('hidden');
@@ -697,23 +706,33 @@ function cloneItem(item) {
 }
 
 function loadConfigState() {
-  const raw = localStorage.getItem(PERSIST_KEY);
-  if (!raw) return makeInitialConfigState();
-  try {
-    return normalizeConfigState(JSON.parse(raw));
-  } catch {
-    return makeInitialConfigState();
+  const sources = [localStorage.getItem(PERSIST_KEY), ...LEGACY_CONFIG_KEYS.map((key) => localStorage.getItem(key))].filter(Boolean);
+  if (!sources.length) return makeInitialConfigState();
+  for (const raw of sources) {
+    try {
+      const normalized = normalizeConfigState(JSON.parse(raw));
+      localStorage.setItem(PERSIST_KEY, JSON.stringify(normalized));
+      return normalized;
+    } catch {
+      // ignore broken legacy payloads
+    }
   }
+  return makeInitialConfigState();
 }
 
 function loadSessionState() {
-  const raw = sessionStorage.getItem(SESSION_KEY);
-  if (!raw) return makeInitialSessionState();
-  try {
-    return normalizeSessionState(JSON.parse(raw));
-  } catch {
-    return makeInitialSessionState();
+  const sources = [sessionStorage.getItem(SESSION_KEY), ...LEGACY_SESSION_KEYS.map((key) => sessionStorage.getItem(key))].filter(Boolean);
+  if (!sources.length) return makeInitialSessionState();
+  for (const raw of sources) {
+    try {
+      const normalized = normalizeSessionState(JSON.parse(raw));
+      sessionStorage.setItem(SESSION_KEY, JSON.stringify(normalized));
+      return normalized;
+    } catch {
+      // ignore broken legacy payloads
+    }
   }
+  return makeInitialSessionState();
 }
 
 function saveConfigState() {
@@ -836,9 +855,7 @@ function itemSignature(item) {
 }
 
 function normalizeRarity(rarity) {
-  return ['consumer', 'industrial', 'mil-spec', 'restricted', 'classified', 'covert', 'rare'].includes(rarity)
-    ? rarity
-    : 'consumer';
+  return ['consumer', 'industrial', 'mil-spec', 'restricted', 'classified', 'covert', 'rare'].includes(rarity) ? rarity : 'consumer';
 }
 
 function normalizeEffect(effect) {
@@ -852,7 +869,7 @@ function createRouletteCard(item) {
   card.innerHTML = `
     <div class="item-art"></div>
     <div class="item-name">${escapeHtml(normalized.name)}</div>
-    <div class="item-rarity">${escapeHtml(effectLabelMap[normalized.effect])}</div>
+    <div class="item-rarity">${escapeHtml(effectSelectLabelMap[normalized.effect])}</div>
   `;
   setArtBackground(card.querySelector('.item-art'), normalized.image);
   return card;
@@ -863,18 +880,8 @@ function setArtBackground(element, image) {
 }
 
 function makePlaceholderImage(label, effect) {
-  const bg = {
-    empty: '1c273b',
-    plus: '5b4314',
-    auto: '5c520d',
-    bomb: '5a1620',
-  }[effect] || '1c273b';
-  const accent = {
-    empty: 'd5e6ff',
-    plus: 'ffd96d',
-    auto: 'fff1b7',
-    bomb: 'ff9baa',
-  }[effect] || 'ffffff';
+  const bg = { empty: '1c273b', plus: '5b4314', auto: '5c520d', bomb: '5a1620' }[effect] || '1c273b';
+  const accent = { empty: 'd5e6ff', plus: 'ffd96d', auto: 'fff1b7', bomb: 'ff9baa' }[effect] || 'ffffff';
   const safe = String(label || 'Item').replace(/[&<>]/g, '');
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512"><defs><linearGradient id="g" x1="0" x2="1" y1="0" y2="1"><stop offset="0%" stop-color="#${bg}"/><stop offset="100%" stop-color="#0b1220"/></linearGradient></defs><rect width="100%" height="100%" fill="url(#g)"/><circle cx="256" cy="170" r="110" fill="#${accent}" fill-opacity="0.14"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="#${accent}" font-size="44" font-family="Arial, sans-serif" font-weight="700">${safe}</text></svg>`;
   return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
@@ -979,7 +986,7 @@ function escapeHtml(value) {
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#39;');
+    .replace(/'/g, '&#039;');
 }
 
 function escapeCssUrl(value) {

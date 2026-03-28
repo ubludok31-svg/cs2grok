@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Stream Case Game v12</title>
+  <title>Stream Case Game v13</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -18,9 +18,8 @@
   <div class="app-shell">
     <header class="topbar">
       <div class="brand-copy">
-        <div class="brand-kicker">ZALIVA.PL</div>
         <h1 class="brand-title">
-          <span class="brand-line">ZALIVA.PL — ХОЧЕШЬ ПРИЗЫ ПО 🇵🇱 🇪🇺 ?</span>
+          <span class="brand-line">ZALIVA.PL — ХОЧЕШЬ ЖИЖОБУ ИЛИ РАСКИ ПО ВСЕЙ 🇵🇱 🇪🇺 ?</span>
           <span class="brand-line">ЗАХОДИ В ОПИСАНИЕ ПРОФИЛЯ</span>
         </h1>
       </div>
@@ -29,14 +28,12 @@
       </div>
     </header>
 
-    <section class="round-panel" id="roundPanel">
+    <section class="round-panel">
       <div class="round-header-center">
         <div class="stage-badge" id="stageTypeBadge">Обычный этап</div>
-        <div class="round-title-block">
-          <h2 id="currentStageTitle">Раунд 1</h2>
-          <div id="stageCounter" class="stage-counter">1 / 7</div>
-        </div>
-        <p id="stageDescription" class="stage-description">Обычный этап · Выбирай кейс по номеру · Призовой вкус — пиши в чат.</p>
+        <h2 id="currentStageTitle" class="round-title">Раунд 1</h2>
+        <div id="stageCounter" class="stage-counter">1 / 7</div>
+        <p id="stageDescription" class="stage-description">Обычный этап · Выбирай кейс по номеру и призовой вкус. Пиши в чат и получай промик.</p>
       </div>
 
       <div class="stage-tools-row">
@@ -45,10 +42,10 @@
           <select id="stageJumpSelect"></select>
         </label>
         <div class="round-controls">
-          <button id="newGameBtn" class="ghost-btn small-btn" type="button">Новая игра</button>
-          <button id="finishStageBtn" class="ghost-btn small-btn" type="button">Завершить этап</button>
-          <button id="prevStageBtn" class="ghost-btn small-btn" type="button">Назад</button>
-          <button id="nextStageBtn" class="small-btn" type="button">Следующий этап</button>
+          <button id="newGameBtn" class="ghost-btn small-btn control-btn" type="button">Новая игра</button>
+          <button id="finishStageBtn" class="ghost-btn small-btn control-btn" type="button">Завершить этап</button>
+          <button id="prevStageBtn" class="ghost-btn small-btn control-btn" type="button">Назад</button>
+          <button id="nextStageBtn" class="small-btn control-btn" type="button">Следующий этап</button>
         </div>
       </div>
     </section>
@@ -74,7 +71,7 @@
       <div class="modal-header">
         <div>
           <h3 id="modalTitle">Открытие кейса</h3>
-          <p id="modalHint">Нажми пробел, чтобы сразу докрутить до результата.</p>
+          <p id="modalHint">Нажми пробел, крестик или кнопку ниже, чтобы сразу показать результат.</p>
         </div>
         <button id="closeModalBtn" class="icon-btn" type="button" aria-label="Закрыть">✕</button>
       </div>
@@ -98,7 +95,7 @@
       <div class="modal-header admin-header">
         <div>
           <h3>Админ-панель</h3>
-          <p>После обновления страницы сбрасываются только открытые кейсы. Все настройки этапов и предметов сохраняются.</p>
+          <p>После обновления страницы сбрасываются только открытые кейсы. Все этапы и предметы сохраняются.</p>
         </div>
         <div class="modal-header-actions">
           <button id="importConfigBtn" class="ghost-btn" type="button">Импорт config.json</button>
@@ -185,7 +182,7 @@
           </select>
         </label>
         <label>
-          Подпись для зрителей
+          Тип
           <select data-field="effect">
             <option value="empty">Пустой вкус</option>
             <option value="plus">Призовой вкус</option>
