@@ -1,17 +1,33 @@
+const BASE_REGULAR_DESCRIPTION = 'Обычный этап · Выбирай кейс по номеру и призовой вкус. Пиши в чат и получай промик.';
+const BASE_EXTRA_DESCRIPTION = 'Экстра этап · Выбирай кейс по номеру и призовой вкус. Пиши в чат и получай промик.';
+
 const STAGE_DEFS = [
-  { id: 'round-1', type: 'regular', label: 'Раунд 1', shortLabel: 'R1', description: 'Обычный этап · Выбирай кейс по номеру и призовой вкус. Пиши в чат и получай промик.' },
-  { id: 'round-2', type: 'regular', label: 'Раунд 2', shortLabel: 'R2', description: 'Обычный этап · Выбирай кейс по номеру и призовой вкус. Пиши в чат и получай промик.' },
-  { id: 'extra-1', type: 'extra', label: 'Экстра Раунд 1', shortLabel: 'EX1', description: 'Экстра этап · Выбирай кейс по номеру и призовой вкус. Пиши в чат и получай промик.' },
-  { id: 'round-3', type: 'regular', label: 'Раунд 3', shortLabel: 'R3', description: 'Обычный этап · Выбирай кейс по номеру и призовой вкус. Пиши в чат и получай промик.' },
-  { id: 'round-4', type: 'regular', label: 'Раунд 4', shortLabel: 'R4', description: 'Обычный этап · Выбирай кейс по номеру и призовой вкус. Пиши в чат и получай промик.' },
-  { id: 'round-5', type: 'regular', label: 'Раунд 5', shortLabel: 'R5', description: 'Обычный этап · Выбирай кейс по номеру и призовой вкус. Пиши в чат и получай промик.' },
-  { id: 'extra-2', type: 'extra', label: 'Экстра Раунд 2', shortLabel: 'EX2', description: 'Экстра этап · Выбирай кейс по номеру и призовой вкус. Пиши в чат и получай промик.' },
+  { id: 'round-1', type: 'regular', label: 'Раунд 1', shortLabel: 'R1', description: BASE_REGULAR_DESCRIPTION },
+  { id: 'round-2', type: 'regular', label: 'Раунд 2', shortLabel: 'R2', description: BASE_REGULAR_DESCRIPTION },
+  { id: 'extra-1', type: 'extra', label: 'Экстра Раунд 1', shortLabel: 'EX1', description: BASE_EXTRA_DESCRIPTION },
+  { id: 'round-3', type: 'regular', label: 'Раунд 3', shortLabel: 'R3', description: BASE_REGULAR_DESCRIPTION },
+  { id: 'round-4', type: 'regular', label: 'Раунд 4', shortLabel: 'R4', description: BASE_REGULAR_DESCRIPTION },
+  { id: 'round-5', type: 'regular', label: 'Раунд 5', shortLabel: 'R5', description: BASE_REGULAR_DESCRIPTION },
+  { id: 'extra-2', type: 'extra', label: 'Экстра Раунд 2', shortLabel: 'EX2', description: BASE_EXTRA_DESCRIPTION },
 ];
 
-const PERSIST_KEY = 'stream_case_game_v13_config';
-const SESSION_KEY = 'stream_case_game_v13_session';
-const LEGACY_CONFIG_KEYS = ['stream_case_game_v12_config', 'stream_case_game_v11_config', 'stream_case_game_v10_config', 'stream_case_game_v9_config', 'stream_case_game_v8_config', 'stream_case_game_v7_config'];
-const LEGACY_SESSION_KEYS = ['stream_case_game_v12_session'];
+const PERSIST_KEY = 'stream_case_game_v14_config';
+const SESSION_KEY = 'stream_case_game_v14_session';
+const LEGACY_CONFIG_KEYS = [
+  'stream_case_game_v13_config',
+  'stream_case_game_v12_config',
+  'stream_case_game_v11_config',
+  'stream_case_game_v10_config',
+  'stream_case_game_v9_config',
+  'stream_case_game_v8_config',
+  'stream_case_game_v7_config',
+];
+const LEGACY_SESSION_KEYS = [
+  'stream_case_game_v13_session',
+  'stream_case_game_v12_session',
+  'stream_case_game_v11_session',
+  'stream_case_game_v10_session',
+];
 
 const rarityLabelMap = {
   consumer: 'Белая',
@@ -40,12 +56,12 @@ const effectPreviewLineMap = {
 const effectResultLineMap = {
   empty: 'Нет победы',
   plus: 'Плюс одно очко',
-  auto: 'Плюс одно очко автоматически',
+  auto: 'Плюс одно очко',
   bomb: 'Сброс всех очков',
 };
 
 const effectHeadlineMap = {
-  empty: 'Пустой вкус',
+  empty: 'ПУСТОЙ ВКУС',
   plus: 'ПРИЗОВОЙ ВКУС',
   auto: 'АВТО +1',
   bomb: 'БОМБА',
@@ -105,6 +121,7 @@ let spinState = {
   caseId: 0,
   winningItem: null,
   timerId: null,
+  targetOffset: 0,
 };
 
 init();
@@ -130,12 +147,13 @@ function bindEvents() {
   });
 
   elements.caseSelector.addEventListener('change', (event) => {
-    selectedCaseId = Number(event.target.value);
+    selectedCaseId = Number(event.target.value || 1);
     renderItemsEditor();
   });
 
   elements.forcePickSelector.addEventListener('change', (event) => {
     const stage = getStageById(selectedStageId);
+    if (!stage) return;
     stage.forcedNextItemSignature = String(event.target.value || '');
     saveConfigState();
   });
@@ -161,8 +179,11 @@ function bindEvents() {
 
   window.addEventListener('keydown', (event) => {
     if (event.key === 'Escape') {
-      if (!elements.adminModal.classList.contains('hidden')) closeAdminModal();
-      else if (!elements.rouletteModal.classList.contains('hidden')) handleRouletteCloseButton();
+      if (!elements.adminModal.classList.contains('hidden')) {
+        closeAdminModal();
+      } else if (!elements.rouletteModal.classList.contains('hidden')) {
+        handleRouletteCloseButton();
+      }
       return;
     }
     if (event.code === 'Space' && spinState.active && !elements.rouletteModal.classList.contains('hidden')) {
@@ -192,6 +213,7 @@ function renderRoundPanel() {
   elements.prevStageBtn.disabled = stageIndex === 0;
   elements.nextStageBtn.disabled = stageIndex === STAGE_DEFS.length - 1;
   elements.finishStageBtn.textContent = sessionState.finishedStageIds.includes(stage.id) ? 'Этап завершён' : 'Завершить этап';
+  elements.stageJumpSelect.value = stage.id;
   renderStageJump();
 }
 
@@ -226,7 +248,7 @@ function renderStageStrip() {
 
 function renderPoolPreview() {
   const stage = getCurrentStage();
-  const previewItems = getUniquePreviewItems(stage).slice(0, 5);
+  const previewItems = getUniquePreviewItems(stage);
   elements.poolPreview.innerHTML = '';
   previewItems.forEach((item) => {
     const card = document.createElement('div');
@@ -250,10 +272,11 @@ function renderCasesGrid() {
   stage.cases.forEach((caseData) => {
     const node = template.content.firstElementChild.cloneNode(true);
     const openedItem = openedMap[String(caseData.id)];
-    node.querySelector('.case-name').textContent = caseData.name;
     const badge = node.querySelector('.case-badge');
+    const name = node.querySelector('.case-name');
     const meta = node.querySelector('.case-meta');
 
+    name.textContent = caseData.name;
     if (openedItem) {
       node.classList.add('is-opened');
       badge.textContent = 'ОТКРЫТ';
@@ -288,6 +311,7 @@ function renderAdmin() {
   });
 
   const stage = getStageById(selectedStageId);
+  if (!stage) return;
   elements.caseSelector.innerHTML = '';
   stage.cases.forEach((caseData) => {
     const option = document.createElement('option');
@@ -304,6 +328,7 @@ function renderAdmin() {
 
 function renderForcePickSelector() {
   const stage = getStageById(selectedStageId);
+  if (!stage) return;
   const items = getUniquePreviewItems(stage);
   elements.forcePickSelector.innerHTML = '';
   const autoOption = document.createElement('option');
@@ -317,11 +342,12 @@ function renderForcePickSelector() {
     option.selected = stage.forcedNextItemSignature === option.value;
     elements.forcePickSelector.appendChild(option);
   });
-  if (!stage.forcedNextItemSignature) elements.forcePickSelector.value = '';
+  elements.forcePickSelector.value = stage.forcedNextItemSignature || '';
 }
 
 function renderItemsEditor() {
   const currentCase = getSelectedAdminCase();
+  if (!currentCase) return;
   elements.itemsEditor.innerHTML = '';
 
   currentCase.items.forEach((item) => {
@@ -351,6 +377,7 @@ function renderItemsEditor() {
         });
         return;
       }
+
       field.value = item[fieldName];
       const eventName = field.tagName === 'SELECT' ? 'change' : 'input';
       field.addEventListener(eventName, (event) => {
@@ -360,9 +387,11 @@ function renderItemsEditor() {
         if (fieldName === 'effect') value = normalizeEffect(value);
         item[fieldName] = value;
         saveConfigState();
+
         if (fieldName === 'image') setArtBackground(previewThumb, item.image);
         if (fieldName === 'name') previewText.textContent = item.name;
         if (fieldName === 'effect') previewEffect.textContent = effectSelectLabelMap[item.effect];
+
         renderPoolPreview();
         renderCasesGrid();
         renderForcePickSelector();
@@ -384,6 +413,7 @@ function renderItemsEditor() {
 
 function addItemToSelectedCase() {
   const targetCase = getSelectedAdminCase();
+  if (!targetCase) return;
   targetCase.items.push(makeDefaultItem('Новый предмет'));
   saveConfigState();
   renderItemsEditor();
@@ -399,6 +429,7 @@ function addItemToSelectedCase() {
 function copyCaseToAllCases() {
   const stage = getStageById(selectedStageId);
   const sourceCase = getSelectedAdminCase();
+  if (!stage || !sourceCase) return;
   const copiedItems = sourceCase.items.map(cloneItem);
   stage.cases.forEach((caseData) => {
     caseData.items = copiedItems.map(cloneItem);
@@ -409,6 +440,7 @@ function copyCaseToAllCases() {
 
 function copyStageToAllSameTypeStages() {
   const sourceStage = getStageById(selectedStageId);
+  if (!sourceStage) return;
   const sourceCases = sourceStage.cases.map((caseData) => ({
     id: caseData.id,
     name: caseData.name,
@@ -434,7 +466,7 @@ function resetOpenedCasesForSelectedStage() {
 }
 
 function resetEverything() {
-  if (!confirm('Сбросить конфиг и открыть базовую версию?')) return;
+  if (!confirm('Сбросить всю игру и вернуть базовые настройки?')) return;
   configState = makeInitialConfigState();
   sessionState = makeInitialSessionState();
   adminStageType = 'regular';
@@ -448,9 +480,10 @@ function resetEverything() {
 
 function handleCaseClick(stageId, caseId) {
   if (spinState.active) return;
-  const openedItem = getOpenedStageMap(stageId)[String(caseId)];
   const stage = getStageById(stageId);
-  const caseData = getCaseById(stage, caseId);
+  const caseData = stage ? getCaseById(stage, caseId) : null;
+  if (!stage || !caseData) return;
+  const openedItem = getOpenedStageMap(stageId)[String(caseId)];
   if (openedItem) {
     showExistingResult(stage, caseData, openedItem);
     return;
@@ -459,6 +492,8 @@ function handleCaseClick(stageId, caseId) {
 }
 
 function openCase(stage, caseData) {
+  if (!caseData.items.length) return;
+
   spinState.stageId = stage.id;
   spinState.caseId = caseData.id;
   spinState.winningItem = resolveWinningItem(stage, caseData);
@@ -471,21 +506,21 @@ function openCase(stage, caseData) {
   elements.rouletteTrack.style.transform = 'translateX(0px)';
   elements.resultCard.className = 'result-card hidden';
   elements.resultCard.innerHTML = '';
-  openRouletteModal();
+
   populateRouletteTrack(caseData, spinState.winningItem);
+  openRouletteModal();
   playSpinStartSound();
 
   requestAnimationFrame(() => {
-    requestAnimationFrame(() => {
-      const itemWidth = 182;
-      const winnerIndex = 40;
-      const wrapperWidth = elements.rouletteTrack.parentElement.clientWidth;
-      const targetOffset = (winnerIndex * itemWidth) - (wrapperWidth / 2) + (itemWidth / 2) + randomInt(-10, 10);
-      elements.rouletteTrack.style.transition = 'transform 8.6s cubic-bezier(0.08, 0.76, 0.14, 1)';
-      elements.rouletteTrack.style.transform = `translateX(-${targetOffset}px)`;
-      window.clearTimeout(spinState.timerId);
-      spinState.timerId = window.setTimeout(() => finalizeSpin(false), 8700);
-    });
+    const cardWidth = 182;
+    const winnerIndex = 40;
+    const wrapperWidth = elements.rouletteTrack.parentElement.clientWidth || 900;
+    const targetOffset = (winnerIndex * cardWidth) - (wrapperWidth / 2) + (cardWidth / 2) + randomInt(-10, 10);
+    spinState.targetOffset = targetOffset;
+    elements.rouletteTrack.style.transition = 'transform 7.4s cubic-bezier(0.08, 0.76, 0.14, 1)';
+    elements.rouletteTrack.style.transform = `translateX(-${targetOffset}px)`;
+    window.clearTimeout(spinState.timerId);
+    spinState.timerId = window.setTimeout(() => finalizeSpin(false), 7450);
   });
 }
 
@@ -508,18 +543,22 @@ function finalizeSpin(fromFastForward) {
   const openedMap = getOpenedStageMap(spinState.stageId);
   openedMap[String(spinState.caseId)] = cloneItem(spinState.winningItem);
   saveSessionState();
+  renderCasesGrid();
 
   if (fromFastForward) {
-    elements.rouletteTrack.style.transition = 'transform 0.18s ease-out';
+    elements.rouletteTrack.style.transition = 'transform 0.2s ease-out';
+    elements.rouletteTrack.style.transform = `translateX(-${spinState.targetOffset}px)`;
   }
 
-  renderCasesGrid();
   showResult(spinState.winningItem, false);
 }
 
 function fastForwardSpin() {
   if (!spinState.active) return;
-  finalizeSpin(true);
+  elements.rouletteTrack.style.transition = 'transform 0.2s ease-out';
+  elements.rouletteTrack.style.transform = `translateX(-${spinState.targetOffset}px)`;
+  window.clearTimeout(spinState.timerId);
+  spinState.timerId = window.setTimeout(() => finalizeSpin(true), 220);
 }
 
 function showExistingResult(stage, caseData, item) {
@@ -542,7 +581,7 @@ function showResult(item, alreadyOpened) {
     <div class="result-card-inner rarity-${normalized.rarity}">
       <div class="result-art"></div>
       <div class="result-copy">
-        <div class="result-headline">${escapeHtml(alreadyOpened ? 'Уже открыт' : effectHeadlineMap[normalized.effect])}</div>
+        <div class="result-headline">${escapeHtml(alreadyOpened ? 'УЖЕ ОТКРЫТ' : effectHeadlineMap[normalized.effect])}</div>
         <h3>${escapeHtml(normalized.name)}</h3>
         <div class="result-meta">
           <div class="result-effect-line">${escapeHtml(effectResultLineMap[normalized.effect])}</div>
@@ -594,12 +633,14 @@ function switchAdminTab(type) {
 }
 
 function goToPrevStage() {
+  if (spinState.active) return;
   const index = STAGE_DEFS.findIndex((entry) => entry.id === configState.currentStageId);
   if (index <= 0) return;
   setCurrentStage(STAGE_DEFS[index - 1].id);
 }
 
 function goToNextStage() {
+  if (spinState.active) return;
   const index = STAGE_DEFS.findIndex((entry) => entry.id === configState.currentStageId);
   if (index >= STAGE_DEFS.length - 1) return;
   finishCurrentStage(false);
@@ -625,12 +666,15 @@ function startNewGame() {
 }
 
 function setCurrentStage(stageId) {
-  if (!getStageById(stageId)) return;
+  if (spinState.active) return;
+  const stage = getStageById(stageId);
+  if (!stage) return;
   configState.currentStageId = stageId;
   selectedStageId = stageId;
   selectedCaseId = 1;
-  adminStageType = getStageById(stageId).type;
+  adminStageType = stage.type;
   saveConfigState();
+  closeRouletteModal(true);
   renderAll();
 }
 
@@ -696,12 +740,12 @@ function makeDefaultItem(name, effect = 'empty', rarity = 'consumer') {
 
 function cloneItem(item) {
   return {
-    id: String(item.id || makeId()),
-    name: String(item.name || 'Предмет'),
-    image: String(item.image || makePlaceholderImage('Item', 'empty')),
-    weight: Math.max(1, Number(item.weight) || 1),
-    rarity: normalizeRarity(item.rarity),
-    effect: normalizeEffect(item.effect),
+    id: String(item?.id || makeId()),
+    name: String(item?.name || 'Предмет'),
+    image: String(item?.image || makePlaceholderImage('Item', 'empty')),
+    weight: Math.max(1, Number(item?.weight) || 1),
+    rarity: normalizeRarity(item?.rarity),
+    effect: normalizeEffect(item?.effect),
   };
 }
 
@@ -714,7 +758,7 @@ function loadConfigState() {
       localStorage.setItem(PERSIST_KEY, JSON.stringify(normalized));
       return normalized;
     } catch {
-      // ignore broken legacy payloads
+      // ignore broken payloads
     }
   }
   return makeInitialConfigState();
@@ -729,7 +773,7 @@ function loadSessionState() {
       sessionStorage.setItem(SESSION_KEY, JSON.stringify(normalized));
       return normalized;
     } catch {
-      // ignore broken legacy payloads
+      // ignore broken payloads
     }
   }
   return makeInitialSessionState();
@@ -744,8 +788,10 @@ function saveSessionState() {
 }
 
 function normalizeConfigState(raw) {
-  const fallback = makeInitialConfigState();
-  const currentStageId = STAGE_DEFS.some((stage) => stage.id === raw?.currentStageId) ? raw.currentStageId : fallback.currentStageId;
+  const currentStageId = STAGE_DEFS.some((stage) => stage.id === raw?.currentStageId)
+    ? raw.currentStageId
+    : STAGE_DEFS[0].id;
+
   const stages = STAGE_DEFS.map((def) => {
     const source = Array.isArray(raw?.stages) ? raw.stages.find((entry) => entry?.id === def.id) : null;
     const sourceCases = Array.isArray(source?.cases) ? source.cases : [];
@@ -757,16 +803,19 @@ function normalizeConfigState(raw) {
       description: def.description,
       forcedNextItemSignature: String(source?.forcedNextItemSignature || ''),
       cases: Array.from({ length: 16 }, (_, index) => {
-        const sourceCase = sourceCases.find((entry) => Number(entry?.id) === index + 1) || sourceCases[index];
-        const items = Array.isArray(sourceCase?.items) && sourceCase.items.length ? sourceCase.items.map(cloneItem) : makeDefaultItems(def.type).map(cloneItem);
+        const sourceCase = sourceCases.find((entry) => Number(entry?.id) === index + 1) || sourceCases[index] || {};
+        const items = Array.isArray(sourceCase.items) && sourceCase.items.length
+          ? sourceCase.items.map(cloneItem)
+          : makeDefaultItems(def.type).map(cloneItem);
         return {
           id: index + 1,
-          name: String(sourceCase?.name || `Кейс ${String(index + 1).padStart(2, '0')}`),
+          name: String(sourceCase.name || `Кейс ${String(index + 1).padStart(2, '0')}`),
           items,
         };
       }),
     };
   });
+
   return { currentStageId, stages };
 }
 
@@ -798,7 +847,7 @@ function getStageById(stageId) {
 }
 
 function getCaseById(stage, caseId) {
-  return stage.cases.find((caseData) => caseData.id === caseId);
+  return stage?.cases.find((caseData) => caseData.id === Number(caseId));
 }
 
 function getSelectedAdminCase() {
@@ -826,6 +875,7 @@ function resolveWinningItem(stage, caseData) {
 function pickWeighted(items) {
   const normalized = items.map(cloneItem);
   const total = normalized.reduce((sum, item) => sum + item.weight, 0);
+  if (!total) return normalized[0] || makeDefaultItem('Предмет');
   let roll = Math.random() * total;
   for (const item of normalized) {
     roll -= item.weight;
@@ -855,7 +905,9 @@ function itemSignature(item) {
 }
 
 function normalizeRarity(rarity) {
-  return ['consumer', 'industrial', 'mil-spec', 'restricted', 'classified', 'covert', 'rare'].includes(rarity) ? rarity : 'consumer';
+  return ['consumer', 'industrial', 'mil-spec', 'restricted', 'classified', 'covert', 'rare'].includes(rarity)
+    ? rarity
+    : 'consumer';
 }
 
 function normalizeEffect(effect) {
