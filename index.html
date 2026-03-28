@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Stream Case Game v9</title>
+  <title>Stream Case Game v10</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -19,7 +19,7 @@
     <header class="topbar">
       <div class="hero-copy">
         <div class="eyebrow">Zaliva.PL</div>
-        <h1>Zaliva.PL — ХОЧЕШЬ ЖИЖОБУ ИЛИ РАЗКИ ПО ВСЕЙ 🇵🇱 🇪🇺 ? — ЗАХОДИ В ОПИСАНИЕ ПРОФИЛЯ 🎵</h1>
+        <h1>Zaliva.PL — ХОЧЕШЬ ЖИЖОБУ ИЛИ РАСКИ ПО ВСЕЙ 🇵🇱 🇪🇺 ? — ЗАХОДИ В ОПИСАНИЕ ПРОФИЛЯ</h1>
       </div>
       <div class="topbar-actions">
         <button id="openAdminBtn" class="ghost-btn">Админ-панель</button>
@@ -33,7 +33,7 @@
           <h2 id="currentStageTitle">Раунд 1</h2>
           <span id="stageCounter" class="stage-counter">1 / 7</span>
         </div>
-        <p id="stageDescription" class="round-subtitle">Открой кейс по номеру, который выбрали зрители.</p>
+        <p id="stageDescription" class="round-subtitle">Обычный этап · Выбирай кейс по номеру · Призовой вкус — пиши в чат.</p>
       </div>
 
       <div class="round-controls">
@@ -75,7 +75,7 @@
           <h3 id="modalTitle">Открытие кейса</h3>
           <p id="modalHint">Предмет выбирается случайно из наполнения этого кейса.</p>
         </div>
-        <button id="closeModalBtn" class="icon-btn" aria-label="Закрыть">X</button>
+        <button id="closeModalBtn" class="icon-btn" aria-label="Закрыть">✕</button>
       </div>
 
       <div class="roulette-wrapper">
@@ -101,7 +101,7 @@
         <div class="modal-header-actions">
           <button id="importConfigBtn" class="ghost-btn">Импорт config.json</button>
           <button id="saveConfigBtn" class="ghost-btn">Скачать config.json</button>
-          <button id="closeAdminBtn" class="icon-btn" aria-label="Закрыть">X</button>
+          <button id="closeAdminBtn" class="icon-btn" aria-label="Закрыть">✕</button>
         </div>
       </div>
 
@@ -162,10 +162,24 @@
   <template id="editorItemTemplate">
     <div class="editor-item">
       <div class="editor-item-grid">
-        <label>Предмет <input data-field="name" type="text" placeholder="Например: Манго" /></label>
-        <label>Фото / путь к картинке <input data-field="image" type="text" placeholder="https://... или base64" /></label>
-        <label>Вес <input data-field="weight" type="number" value="1" min="1" /></label>
-        <label>Rarity 
+        <label>
+          Предмет
+          <input data-field="name" type="text" placeholder="Например: Манго" />
+        </label>
+        <label>
+          Фото / путь к картинке
+          <input data-field="image" type="text" placeholder="assets/item.jpg или https://..." />
+        </label>
+        <label>
+          JPG / JPEG / PNG / WebP
+          <input data-field="file" type="file" accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp" />
+        </label>
+        <label>
+          Шанс / вес
+          <input data-field="weight" type="number" min="1" step="1" value="1" />
+        </label>
+        <label>
+          Редкость
           <select data-field="rarity">
             <option value="consumer">Белая</option>
             <option value="industrial">Голубая</option>
@@ -176,24 +190,28 @@
             <option value="rare">Золотая</option>
           </select>
         </label>
-        <label>Эффект 
+        <label>
+          Подпись для зрителей
           <select data-field="effect">
             <option value="empty">Пустой вкус</option>
-            <option value="plus">+1 очко</option>
-            <option value="auto">Авто +1</option>
-            <option value="bomb">Бомба</option>
+            <option value="plus">Плюс одно очко</option>
+            <option value="auto">Авто плюс 1 — плюс одно очко</option>
+            <option value="bomb">Бомба — сброс всех очков</option>
           </select>
         </label>
       </div>
-      <button type="button" class="delete-item-btn">Удалить</button>
+      <div class="editor-item-footer">
+        <div class="editor-preview">
+          <div class="preview-thumb"></div>
+          <div class="preview-copy">
+            <div class="preview-text">Фон предмета</div>
+            <div class="preview-effect"></div>
+          </div>
+        </div>
+        <button class="ghost-btn danger remove-item-btn" type="button">Удалить</button>
+      </div>
     </div>
   </template>
-
-  <!-- ЗВУКИ -->
-  <audio id="sound-plus" src="https://assets.mixkit.co/sfx/preview/296/296-preview.mp3" preload="auto"></audio>
-  <audio id="sound-auto" src="https://assets.mixkit.co/sfx/preview/2757/2757-preview.mp3" preload="auto"></audio>
-  <audio id="sound-empty" src="https://assets.mixkit.co/sfx/preview/143/143-preview.mp3" preload="auto"></audio>
-  <audio id="sound-bomb" src="https://assets.mixkit.co/sfx/preview/295/295-preview.mp3" preload="auto"></audio>
 
   <script src="app.js"></script>
 </body>
