@@ -32,6 +32,11 @@ const effectLabels = {
   bomb: 'СБРОС ВСЕХ ОЧКОВ',
 };
 
+const poolEffectLabels = {
+  ...effectLabels,
+  plus: 'ПРИЗОВОЙ ВКУС +2 ОЧКА',
+};
+
 const resultHeadlines = {
   empty: 'ПУСТОЙ ВКУС',
   plus: 'ПРИЗОВОЙ ВКУС',
@@ -231,7 +236,7 @@ function renderPool() {
       <div class="pool-art"></div>
       <div class="pool-name">${escapeHtml(item.name)}</div>
       <div class="pool-rarity">${escapeHtml(subtitle)}</div>
-      <div class="pool-effect">${escapeHtml(effectLabels[item.effect])}</div>
+      <div class="pool-effect">${escapeHtml(poolEffectLabels[item.effect] || effectLabels[item.effect])}</div>
     `;
     setBg(card.querySelector('.pool-art'), item.image);
     el.poolPreview.appendChild(card);
