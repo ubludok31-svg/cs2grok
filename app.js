@@ -75,6 +75,7 @@ const el = {
   nextStageBtn: document.getElementById('nextStageBtn'),
   stageJumpSelect: document.getElementById('stageJumpSelect'),
   stageStrip: document.getElementById('stageStrip'),
+  poolPanel: document.querySelector('.pool-panel'),
   poolPreview: document.getElementById('poolPreview'),
   casesGrid: document.getElementById('casesGrid'),
   spinModal: document.getElementById('spinModal'),
@@ -92,17 +93,20 @@ async function init() {
   bindEvents();
   await hydrateState();
   renderAll();
+  updateStickyPool();
 }
 
 async function hydrateState() {
   try {
     const [dbConfig, dbSession] = await Promise.all([idbGet(STORAGE_CONFIG), idbGet(STORAGE_SESSION)]);
-    if (dbConfig) config = normalizeConfig(dbConfig);
-    else await idbSet(STORAGE_CONFIG, config);
-    if (dbSession) session = normalizeSession(dbSession);
-    else await idbSet(STORAGE_SESSION, session);
+    config = dbConfig ? normalizeConfig(dbConfig) : loadConfig();
+    session = dbSession ? normalizeSession(dbSession) : loadSession();
+    if (!dbConfig) await idbSet(STORAGE_CONFIG, config);
+    if (!dbSession) await idbSet(STORAGE_SESSION, session);
   } catch (error) {
     console.error(error);
+    config = loadConfig();
+    session = loadSession();
   }
   adminType = getCurrentStage().type;
   adminStageId = config.currentStageId;
@@ -157,6 +161,9 @@ function bindEvents() {
     if (target instanceof HTMLElement && target.dataset.closeSpin) onSpinCloseRequest();
   });
 
+  window.addEventListener('scroll', updateStickyPool, { passive: true });
+  window.addEventListener('resize', updateStickyPool);
+
   window.addEventListener('keydown', (event) => {
     if (event.key === 'Escape') {
       if (!el.adminModal.classList.contains('hidden')) toggleAdmin(false);
@@ -175,6 +182,14 @@ function renderAll() {
   renderPool();
   renderCases();
   renderAdmin();
+  updateStickyPool();
+}
+
+function updateStickyPool() {
+  if (!el.poolPanel) return;
+  const rect = el.poolPanel.getBoundingClientRect();
+  const shouldStick = window.scrollY > 40 && rect.top <= 10;
+  el.poolPanel.classList.toggle('is-sticky-active', shouldStick);
 }
 
 function renderHeader() {
@@ -285,7 +300,7 @@ function renderItemsEditor() {
           if (!file) return;
           item.image = await fileToDataUrl(file);
           syncEditorPreview(item, thumb, nameCopy, effectCopy);
-          saveConfig();
+          await saveConfig();
           renderPool();
           renderCases();
           updateForcePickOptions();
@@ -536,12 +551,12 @@ function markStageFinished(stageId) {
   saveSession();
 }
 
-function newGame() {
+async function newGame() {
   localStorage.removeItem(STORAGE_SESSION);
   session = makeSession();
   config.currentStageId = STAGE_DEFS[0].id;
-  saveConfig();
-  saveSession();
+  await saveConfig();
+  await saveSession();
   location.reload();
 }
 
@@ -702,24 +717,27 @@ function loadSession() {
   return makeSession();
 }
 
-function saveConfig() {
-  persistState(STORAGE_CONFIG, config);
+async function saveConfig() {
+  return persistState(STORAGE_CONFIG, config);
 }
 
-function saveSession() {
-  persistState(STORAGE_SESSION, session);
+async function saveSession() {
+  return persistState(STORAGE_SESSION, session);
 }
 
 async function persistState(key, value) {
-  try {
-    await idbSet(key, value);
-  } catch (error) {
-    console.error(error);
+  if ('indexedDB' in window) {
+    try {
+      await idbSet(key, value);
+      return;
+    } catch (error) {
+      console.error(error);
+    }
   }
   try {
     localStorage.setItem(key, JSON.stringify(value));
   } catch (error) {
-    // ignore quota errors; IndexedDB remains the primary storage for images
+    // localStorage is only a fallback when IndexedDB is unavailable
   }
 }
 
@@ -884,7 +902,7 @@ async function fileToDataUrl(file) {
   if (typeof createImageBitmap === 'function' && file.type.startsWith('image/')) {
     try {
       const bitmap = await createImageBitmap(file);
-      const maxSide = 480;
+      const maxSide = 360;
       const scale = Math.min(1, maxSide / Math.max(bitmap.width, bitmap.height));
       const width = Math.max(1, Math.round(bitmap.width * scale));
       const height = Math.max(1, Math.round(bitmap.height * scale));
@@ -893,7 +911,7 @@ async function fileToDataUrl(file) {
       canvas.height = height;
       const ctx = canvas.getContext('2d');
       ctx.drawImage(bitmap, 0, 0, width, height);
-      return canvas.toDataURL('image/jpeg', 0.72);
+      return canvas.toDataURL('image/jpeg', 0.64);
     } catch {}
   }
   return new Promise((resolve, reject) => {
@@ -981,7 +999,7 @@ function playSound(kind) {
       osc.type = kind === 'bomb' ? 'sawtooth' : 'triangle';
       osc.frequency.value = freq;
       gain.gain.setValueAtTime(0.0001, now + index * 0.06);
-      gain.gain.exponentialRampToValueAtTime(kind === 'spin' ? 0.015 : 0.04, now + index * 0.06 + 0.01);
+      gain.gain.exponentialRampToValueAtTime(kind === 'spin' ? 0.0225 : 0.06, now + index * 0.06 + 0.01);
       gain.gain.exponentialRampToValueAtTime(0.0001, now + index * 0.06 + len);
       osc.connect(gain).connect(audioCtx.destination);
       osc.start(now + index * 0.06);
