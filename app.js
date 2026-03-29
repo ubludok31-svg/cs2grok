@@ -999,7 +999,7 @@ function playSound(kind) {
       osc.type = kind === 'bomb' ? 'sawtooth' : 'triangle';
       osc.frequency.value = freq;
       gain.gain.setValueAtTime(0.0001, now + index * 0.06);
-      gain.gain.exponentialRampToValueAtTime(kind === 'spin' ? 0.0225 : 0.06, now + index * 0.06 + 0.01);
+      gain.gain.exponentialRampToValueAtTime(kind === 'spin' ? 0.045 : 0.12, now + index * 0.06 + 0.01);
       gain.gain.exponentialRampToValueAtTime(0.0001, now + index * 0.06 + len);
       osc.connect(gain).connect(audioCtx.destination);
       osc.start(now + index * 0.06);
