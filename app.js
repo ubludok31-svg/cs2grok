@@ -379,7 +379,7 @@ function onCaseClick(caseId) {
 
 function startSpin(stage, box) {
   const winner = resolveWinner(stage, box);
-  const winnerIndex = 24;
+  const winnerIndex = 28;
   const items = buildTrackItems(box.items, winner, winnerIndex);
   spinState = {
     active: true,
@@ -411,18 +411,18 @@ function startSpin(stage, box) {
     const center = wrap.clientWidth / 2;
     const offset = trackPaddingLeft + winnerIndex * (itemWidth + gap) - center + itemWidth / 2;
     spinState.targetX = Math.max(0, offset);
-    el.rouletteTrack.style.transition = 'transform 4.4s cubic-bezier(0.08, 0.78, 0.18, 1)';
+    el.rouletteTrack.style.transition = 'transform 5.8s cubic-bezier(0.08, 0.78, 0.18, 1)';
     el.rouletteTrack.style.transform = `translateX(-${spinState.targetX}px)`;
     clearTimeout(spinState.timer);
     clearTimeout(spinState.fallbackTimer);
-    spinState.timer = setTimeout(finalizeSpin, 4440);
-    spinState.fallbackTimer = setTimeout(finalizeSpin, 4900);
+    spinState.timer = setTimeout(finalizeSpin, 5860);
+    spinState.fallbackTimer = setTimeout(finalizeSpin, 6400);
   });
 }
 
 function buildTrackItems(sourceItems, winner, winnerIndex) {
   const arr = [];
-  for (let i = 0; i < 32; i += 1) arr.push(i === winnerIndex ? cloneItem(winner) : weightedPick(sourceItems));
+  for (let i = 0; i < 38; i += 1) arr.push(i === winnerIndex ? cloneItem(winner) : weightedPick(sourceItems));
   return arr;
 }
 
