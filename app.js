@@ -162,8 +162,6 @@ function bindEvents() {
     if (target instanceof HTMLElement && target.dataset.closeSpin) onSpinCloseRequest();
   });
 
-  window.addEventListener('scroll', updateStickyPool, { passive: true });
-  window.addEventListener('resize', updateStickyPool);
 
   window.addEventListener('keydown', (event) => {
     if (event.key === 'Escape') {
@@ -187,12 +185,8 @@ function renderAll() {
 }
 
 function updateStickyPool() {
-  if (!el.poolPanel || !el.casesPanel) return;
-  const panelStart = el.poolPanel.offsetTop - 8;
-  const casesBottom = el.casesPanel.offsetTop + el.casesPanel.offsetHeight;
-  const viewportBottom = window.scrollY + window.innerHeight;
-  const shouldStick = window.scrollY >= panelStart && viewportBottom < casesBottom + 140;
-  el.poolPanel.classList.toggle('is-sticky-active', shouldStick);
+  if (!el.poolPanel) return;
+  el.poolPanel.classList.add('is-sticky-active');
 }
 
 function renderHeader() {
