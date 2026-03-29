@@ -94,7 +94,7 @@ label { display: grid; gap: 6px; font-size: 13px; color: var(--muted); }
   transform: translateY(-50%);
 }
 .brand-wrap { text-align: center; min-width: 0; }
-.brand-inner { display: inline-flex; align-items: center; gap: 16px; max-width: 100%; }
+.brand-inner { display: inline-flex; align-items: center; gap: 16px; max-width: 100%; margin-left: 28px; }
 .brand-copy { min-width: 0; }
 .brand-logo { width: 76px; height: 76px; object-fit: cover; border-radius: 18px; box-shadow: 0 12px 28px rgba(0,0,0,0.28); border: 1px solid rgba(255,255,255,0.18); flex: 0 0 auto; }
 .brand-title {
@@ -189,20 +189,21 @@ body.extra-theme .stage-chip.is-active { border-color: rgba(255, 217, 124, 0.7);
   position: sticky;
   top: 8px;
   z-index: 26;
+  overflow-anchor: none;
   transition: padding 0.24s ease, transform 0.24s ease, box-shadow 0.24s ease, background 0.24s ease, border-color 0.24s ease;
 }
 .pool-panel.is-sticky-active {
-  padding: 7px 10px;
+  padding: 5px 8px;
   background: rgba(8, 14, 24, 0.97);
   border-color: rgba(255, 214, 132, 0.24);
-  box-shadow: 0 16px 34px rgba(0,0,0,0.32);
+  box-shadow: 0 12px 26px rgba(0,0,0,0.28);
   transform: translateY(0);
 }
 .pool-head { text-align: center; }
 .pool-head h3 { margin: 0; font-size: 26px; transition: font-size 0.22s ease; }
-.pool-panel.is-sticky-active .pool-head h3 { font-size: 13px; line-height: 1.1; }
+.pool-panel.is-sticky-active .pool-head h3 { font-size: 12px; line-height: 1.05; }
 .pool-note { margin: 8px 0 0; font-size: 18px; font-weight: 900; color: #ffe8ad; transition: margin 0.22s ease, font-size 0.22s ease; }
-.pool-panel.is-sticky-active .pool-note { margin-top: 2px; font-size: 8px; line-height: 1.15; }
+.pool-panel.is-sticky-active .pool-note { margin-top: 1px; font-size: 7px; line-height: 1.1; }
 .pool-grid {
   margin-top: 18px;
   display: flex;
@@ -218,8 +219,8 @@ body.extra-theme .stage-chip.is-active { border-color: rgba(255, 217, 124, 0.7);
 }
 .pool-grid::-webkit-scrollbar { display: none; }
 .pool-panel.is-sticky-active .pool-grid {
-  margin-top: 5px;
-  gap: 5px;
+  margin-top: 4px;
+  gap: 4px;
 }
 .pool-card {
   width: auto;
@@ -238,10 +239,10 @@ body.extra-theme .stage-chip.is-active { border-color: rgba(255, 217, 124, 0.7);
   transition: max-width 0.22s ease, min-height 0.22s ease, padding 0.22s ease, gap 0.22s ease, border-radius 0.22s ease;
 }
 .pool-panel.is-sticky-active .pool-card {
-  min-height: 70px;
-  padding: 4px;
-  gap: 2px;
-  border-radius: 10px;
+  min-height: 56px;
+  padding: 3px;
+  gap: 1px;
+  border-radius: 9px;
 }
 .pool-art {
   border-radius: 16px;
@@ -252,9 +253,9 @@ body.extra-theme .stage-chip.is-active { border-color: rgba(255, 217, 124, 0.7);
   border: 1px solid rgba(255,255,255,0.08);
 }
 .pool-name { font-weight: 900; text-align: center; font-size: 15px; line-height: 1.08; transition: font-size 0.22s ease; }
-.pool-panel.is-sticky-active .pool-name { font-size: 9px; }
+.pool-panel.is-sticky-active .pool-name { font-size: 8px; }
 .pool-rarity { text-align: center; font-size: 11px; color: var(--muted); font-weight: 800; min-height: 14px; transition: font-size 0.22s ease, min-height 0.22s ease; }
-.pool-panel.is-sticky-active .pool-rarity { font-size: 7px; min-height: 7px; }
+.pool-panel.is-sticky-active .pool-rarity { font-size: 6px; min-height: 6px; }
 .pool-effect {
   text-align: center;
   font-weight: 900;
@@ -264,7 +265,7 @@ body.extra-theme .stage-chip.is-active { border-color: rgba(255, 217, 124, 0.7);
   background: rgba(255,255,255,0.06);
   transition: font-size 0.22s ease, padding 0.22s ease;
 }
-.pool-panel.is-sticky-active .pool-effect { font-size: 7px; padding: 2px 3px; }
+.pool-panel.is-sticky-active .pool-effect { font-size: 6px; padding: 1px 3px; }
 .pool-card.effect-plus .pool-effect { color: #ffe6a2; text-shadow: 0 0 14px rgba(255, 206, 92, 0.6); border: 1px solid rgba(255, 207, 115, 0.55); }
 .pool-card.effect-auto .pool-effect { color: #fff0b7; border: 1px solid rgba(255, 232, 154, 0.38); }
 .pool-card.effect-bomb .pool-effect { color: #ff9ca5; border: 1px solid rgba(255, 120, 136, 0.34); }
@@ -272,61 +273,61 @@ body.extra-theme .stage-chip.is-active { border-color: rgba(255, 217, 124, 0.7);
 
 
 .pool-panel.is-sticky-active .pool-art {
-  aspect-ratio: 1 / 0.38;
-  border-radius: 8px;
+  aspect-ratio: 1 / 0.24;
+  border-radius: 7px;
 }
 
 .pool-panel.is-sticky-active + .cases-panel {
-  padding: 8px;
+  padding: 6px;
 }
 
 .pool-panel.is-sticky-active + .cases-panel .cases-grid {
-  gap: 8px;
+  gap: 6px;
 }
 
 .pool-panel.is-sticky-active + .cases-panel .case-card {
-  min-height: 112px;
-  padding: 8px;
-  gap: 5px;
+  min-height: 98px;
+  padding: 6px;
+  gap: 4px;
 }
 
 .pool-panel.is-sticky-active + .cases-panel .case-top {
-  font-size: 10px;
+  font-size: 9px;
 }
 
 .pool-panel.is-sticky-active + .cases-panel .case-icon {
-  height: 34px;
+  height: 28px;
   margin-top: 0;
 }
 
 .pool-panel.is-sticky-active + .cases-panel .case-body,
 .pool-panel.is-sticky-active + .cases-panel .case-lid {
-  width: 62px;
-  border-radius: 10px;
+  width: 54px;
+  border-radius: 9px;
 }
 
 .pool-panel.is-sticky-active + .cases-panel .case-lid {
-  height: 14px;
+  height: 11px;
 }
 
 .pool-panel.is-sticky-active + .cases-panel .case-body {
-  top: 10px;
-  height: 22px;
+  top: 8px;
+  height: 18px;
 }
 
 .pool-panel.is-sticky-active + .cases-panel .case-lock {
-  top: 13px;
-  width: 10px;
-  height: 9px;
+  top: 10px;
+  width: 8px;
+  height: 7px;
 }
 
 .pool-panel.is-sticky-active + .cases-panel .case-name {
-  font-size: 12px;
+  font-size: 11px;
 }
 
 .pool-panel.is-sticky-active + .cases-panel .case-text {
-  font-size: 10px;
-  min-height: 20px;
+  font-size: 9px;
+  min-height: 18px;
 }
 
 .rarity-consumer { box-shadow: inset 0 0 0 1px rgba(207,216,230,0.18); }
@@ -514,7 +515,7 @@ body.extra-theme .stage-chip.is-active { border-color: rgba(255, 217, 124, 0.7);
 @media (max-width: 920px) {
   .topbar { padding: 18px 20px 72px; }
   .topbar #openAdminBtn { right: 50%; top: auto; bottom: 18px; transform: translateX(50%); }
-  .brand-inner { flex-direction: column; gap: 10px; }
+  .brand-inner { flex-direction: column; gap: 10px; margin-left: 0; }
   .brand-logo { width: 64px; height: 64px; }
   .hero { min-height: auto; }
   .hero-controls { justify-content: center; flex-wrap: wrap; }
@@ -529,7 +530,7 @@ body.extra-theme .stage-chip.is-active { border-color: rgba(255, 217, 124, 0.7);
   .app { max-width: 560px; }
   .topbar { padding: 18px 18px 76px; }
   .topbar #openAdminBtn { right: 50%; top: auto; bottom: 18px; transform: translateX(50%); }
-  .brand-inner { flex-direction: column; gap: 10px; }
+  .brand-inner { flex-direction: column; gap: 10px; margin-left: 0; }
   .brand-logo { width: 60px; height: 60px; }
   .brand-title { font-size: clamp(18px, 5.5vw, 28px); }
   .brand-subtitle { font-size: clamp(14px, 4.4vw, 20px); }

@@ -77,6 +77,7 @@ const el = {
   stageStrip: document.getElementById('stageStrip'),
   poolPanel: document.querySelector('.pool-panel'),
   poolPreview: document.getElementById('poolPreview'),
+  casesPanel: document.querySelector('.cases-panel'),
   casesGrid: document.getElementById('casesGrid'),
   spinModal: document.getElementById('spinModal'),
   spinTitle: document.getElementById('spinTitle'),
@@ -186,9 +187,11 @@ function renderAll() {
 }
 
 function updateStickyPool() {
-  if (!el.poolPanel) return;
-  const rect = el.poolPanel.getBoundingClientRect();
-  const shouldStick = window.scrollY > 40 && rect.top <= 10;
+  if (!el.poolPanel || !el.casesPanel) return;
+  const panelStart = el.poolPanel.offsetTop - 8;
+  const casesBottom = el.casesPanel.offsetTop + el.casesPanel.offsetHeight;
+  const viewportBottom = window.scrollY + window.innerHeight;
+  const shouldStick = window.scrollY >= panelStart && viewportBottom < casesBottom + 140;
   el.poolPanel.classList.toggle('is-sticky-active', shouldStick);
 }
 
