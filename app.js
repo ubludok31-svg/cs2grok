@@ -652,17 +652,14 @@ function resolveWinner(stage, box) {
 }
 
 function getPreviewItems(stage) {
-  const out = [];
-  const seen = new Set();
+  const map = new Map();
   stage.cases.forEach((box) => {
     box.items.forEach((item) => {
-      const sig = itemSignature(item);
-      if (seen.has(sig)) return;
-      seen.add(sig);
-      out.push(cloneItem(item));
+      const key = previewItemKey(item);
+      map.set(key, cloneItem(item));
     });
   });
-  return out;
+  return [...map.values()];
 }
 
 function weightedPick(items) {
@@ -868,6 +865,11 @@ function maybeRarityText(item) {
   const lowerName = String(item.name || '').toLowerCase();
   if (lowerName.includes(label.toLowerCase())) return '';
   return label;
+}
+
+
+function previewItemKey(item) {
+  return `${normalizeEffect(item?.effect)}::${String(item?.name || '').trim().toLowerCase()}`;
 }
 
 function itemSignature(item) {
