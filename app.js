@@ -1,11 +1,11 @@
 const STAGE_DEFS = [
-  { id: 'round1', type: 'regular', label: 'Раунд 1', short: 'R1', description: 'Обычный этап · Выбирай кейс по номеру и призовой вкус · Пиши в чат и получай промик.' },
-  { id: 'round2', type: 'regular', label: 'Раунд 2', short: 'R2', description: 'Обычный этап · Выбирай кейс по номеру и призовой вкус · Пиши в чат и получай промик.' },
-  { id: 'extra1', type: 'extra', label: 'Экстра Раунд 1', short: 'EX1', description: 'Экстра этап · Выбирай кейс по номеру и призовой вкус · Пиши в чат и получай промик.' },
-  { id: 'round3', type: 'regular', label: 'Раунд 3', short: 'R3', description: 'Обычный этап · Выбирай кейс по номеру и призовой вкус · Пиши в чат и получай промик.' },
-  { id: 'round4', type: 'regular', label: 'Раунд 4', short: 'R4', description: 'Обычный этап · Выбирай кейс по номеру и призовой вкус · Пиши в чат и получай промик.' },
-  { id: 'round5', type: 'regular', label: 'Раунд 5', short: 'R5', description: 'Обычный этап · Выбирай кейс по номеру и призовой вкус · Пиши в чат и получай промик.' },
-  { id: 'extra2', type: 'extra', label: 'Экстра Раунд 2', short: 'EX2', description: 'Экстра этап · Выбирай кейс по номеру и призовой вкус · Пиши в чат и получай промик.' },
+  { id: 'round1', type: 'regular', label: 'Раунд 1', short: 'R1', description: 'Обычный этап · Выбирай кейс по номеру и угадывай вкус · Пиши в чат.' },
+  { id: 'round2', type: 'regular', label: 'Раунд 2', short: 'R2', description: 'Обычный этап · Выбирай кейс по номеру и угадывай вкус · Пиши в чат.' },
+  { id: 'extra1', type: 'extra', label: 'Экстра Раунд 1', short: 'EX1', description: 'Экстра этап · Выбирай кейс по номеру и угадывай вкус · Пиши в чат.' },
+  { id: 'round3', type: 'regular', label: 'Раунд 3', short: 'R3', description: 'Обычный этап · Выбирай кейс по номеру и угадывай вкус · Пиши в чат.' },
+  { id: 'round4', type: 'regular', label: 'Раунд 4', short: 'R4', description: 'Обычный этап · Выбирай кейс по номеру и угадывай вкус · Пиши в чат.' },
+  { id: 'round5', type: 'regular', label: 'Раунд 5', short: 'R5', description: 'Обычный этап · Выбирай кейс по номеру и угадывай вкус · Пиши в чат.' },
+  { id: 'extra2', type: 'extra', label: 'Экстра Раунд 2', short: 'EX2', description: 'Экстра этап · Выбирай кейс по номеру и угадывай вкус · Пиши в чат.' },
 ];
 
 const STORAGE_CONFIG = 'stream-case-game-v17-config';
