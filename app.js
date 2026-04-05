@@ -227,7 +227,7 @@ function renderStageStrip() {
 
 function renderPool() {
   const items = getPreviewItems(getCurrentStage());
-  el.poolPreview.innerHTML = '';
+  el.poolPreview.replaceChildren();
   items.forEach((item) => {
     const card = document.createElement('div');
     card.className = `pool-card effect-${item.effect} rarity-${item.rarity}`;
@@ -652,12 +652,12 @@ function resolveWinner(stage, box) {
 }
 
 function getPreviewItems(stage) {
+  const sourceCase = Array.isArray(stage?.cases) ? stage.cases.find((box) => Array.isArray(box?.items) && box.items.length) : null;
+  const sourceItems = Array.isArray(sourceCase?.items) ? sourceCase.items : [];
   const map = new Map();
-  stage.cases.forEach((box) => {
-    box.items.forEach((item) => {
-      const key = previewItemKey(item);
-      map.set(key, cloneItem(item));
-    });
+  sourceItems.forEach((item) => {
+    const key = previewItemKey(item);
+    if (!map.has(key)) map.set(key, cloneItem(item));
   });
   return [...map.values()];
 }
@@ -869,7 +869,8 @@ function maybeRarityText(item) {
 
 
 function previewItemKey(item) {
-  return `${normalizeEffect(item?.effect)}::${String(item?.name || '').trim().toLowerCase()}`;
+  const normalizedName = String(item?.name || '').replace(/\s+/g, ' ').trim().toLowerCase();
+  return `${normalizeEffect(item?.effect)}::${normalizedName}`;
 }
 
 function itemSignature(item) {
