@@ -227,7 +227,7 @@ function renderStageStrip() {
 
 function renderPool() {
   const items = getPreviewItems(getCurrentStage());
-  el.poolPreview.replaceChildren();
+  el.poolPreview.innerHTML = '';
   items.forEach((item) => {
     const card = document.createElement('div');
     card.className = `pool-card effect-${item.effect} rarity-${item.rarity}`;
@@ -652,12 +652,12 @@ function resolveWinner(stage, box) {
 }
 
 function getPreviewItems(stage) {
-  const sourceCase = Array.isArray(stage?.cases) ? stage.cases.find((box) => Array.isArray(box?.items) && box.items.length) : null;
-  const sourceItems = Array.isArray(sourceCase?.items) ? sourceCase.items : [];
   const map = new Map();
-  sourceItems.forEach((item) => {
-    const key = previewItemKey(item);
-    if (!map.has(key)) map.set(key, cloneItem(item));
+  stage.cases.forEach((box) => {
+    box.items.forEach((item) => {
+      const key = previewItemKey(item);
+      map.set(key, cloneItem(item));
+    });
   });
   return [...map.values()];
 }
@@ -869,8 +869,7 @@ function maybeRarityText(item) {
 
 
 function previewItemKey(item) {
-  const normalizedName = String(item?.name || '').replace(/\s+/g, ' ').trim().toLowerCase();
-  return `${normalizeEffect(item?.effect)}::${normalizedName}`;
+  return `${normalizeEffect(item?.effect)}::${String(item?.name || '').trim().toLowerCase()}`;
 }
 
 function itemSignature(item) {
@@ -907,16 +906,21 @@ async function fileToDataUrl(file) {
   if (typeof createImageBitmap === 'function' && file.type.startsWith('image/')) {
     try {
       const bitmap = await createImageBitmap(file);
-      const maxSide = 360;
-      const scale = Math.min(1, maxSide / Math.max(bitmap.width, bitmap.height));
+      const longestSide = Math.max(bitmap.width, bitmap.height);
+      const maxSide = longestSide > 1800 ? 1280 : 1024;
+      const scale = Math.min(1, maxSide / longestSide);
       const width = Math.max(1, Math.round(bitmap.width * scale));
       const height = Math.max(1, Math.round(bitmap.height * scale));
       const canvas = document.createElement('canvas');
       canvas.width = width;
       canvas.height = height;
-      const ctx = canvas.getContext('2d');
-      ctx.drawImage(bitmap, 0, 0, width, height);
-      return canvas.toDataURL('image/jpeg', 0.64);
+      const ctx = canvas.getContext('2d', { alpha: false });
+      if (ctx) {
+        ctx.imageSmoothingEnabled = true;
+        ctx.imageSmoothingQuality = 'high';
+        ctx.drawImage(bitmap, 0, 0, width, height);
+        return canvas.toDataURL('image/jpeg', 0.9);
+      }
     } catch {}
   }
   return new Promise((resolve, reject) => {
